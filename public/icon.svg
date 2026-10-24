@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="30" fill="#123D2B"/>
+  <!-- Evergreen Tree Icon in Leaf Green -->
+  <path d="M32 10 L44 26 L38 26 L48 40 L35 40 L35 52 L29 52 L29 40 L16 40 L26 26 L20 26 Z" fill="#78B83D"/>
+  <circle cx="32" cy="18" r="2.5" fill="#F7F5EE"/>
+</svg>

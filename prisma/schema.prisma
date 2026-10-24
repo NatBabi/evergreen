@@ -1,0 +1,228 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum StockStatus {
+  in_stock
+  ask
+  seasonal
+  out
+}
+
+enum PreferredContact {
+  call
+  telegram
+  whatsapp
+  sms
+  email
+}
+
+enum RequestStatus {
+  new
+  contacted
+  confirmed
+  closed
+  spam
+}
+
+enum NotifyState {
+  pending
+  sent
+  failed
+}
+
+enum OutboxKind {
+  order_request
+  project_inquiry
+}
+
+enum NotificationChannel {
+  telegram
+  email
+  whatsapp
+}
+
+enum AdminRole {
+  owner
+  staff
+}
+
+model Category {
+  id      Int     @id @default(autoincrement())
+  slug    String  @unique
+  nameEn  String  @map("name_en")
+  nameAm  String? @map("name_am")
+  sort    Int     @default(0)
+  plants  Plant[]
+
+  @@map("categories")
+}
+
+model Plant {
+  id            Int                @id @default(autoincrement())
+  slug          String             @unique
+  nameEn        String             @map("name_en")
+  nameAm        String?            @map("name_am")
+  botanicalName String?            @map("botanical_name")
+  categoryId    Int                @map("category_id")
+  category      Category           @relation(fields: [categoryId], references: [id])
+  priceEtb      Decimal?           @map("price_etb") @db.Decimal(10, 2)
+  stockStatus   StockStatus        @default(ask) @map("stock_status")
+  sizeNote      String?            @map("size_note")
+  light         String?
+  water         String?
+  difficulty    String?
+  descriptionEn String?            @map("description_en")
+  descriptionAm String?            @map("description_am")
+  isSample      Boolean            @default(false) @map("is_sample")
+  published     Boolean            @default(false)
+  updatedAt     DateTime           @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  images        PlantImage[]
+  guides        PlantGuide[]
+  orderItems    OrderRequestItem[]
+
+  @@index([categoryId, published], name: "plants_cat_pub")
+  @@map("plants")
+}
+
+model PlantImage {
+  id      Int     @id @default(autoincrement())
+  plantId Int     @map("plant_id")
+  plant   Plant   @relation(fields: [plantId], references: [id], onDelete: Cascade)
+  url     String
+  altEn   String? @map("alt_en")
+  altAm   String? @map("alt_am")
+  sort    Int     @default(0)
+
+  @@index([plantId, sort], name: "plant_images_plant")
+  @@map("plant_images")
+}
+
+model CareGuide {
+  id        Int          @id @default(autoincrement())
+  slug      String       @unique
+  titleEn   String       @map("title_en")
+  titleAm   String?      @map("title_am")
+  bodyEn    String       @map("body_en")
+  bodyAm    String?      @map("body_am")
+  topic     String?
+  tiktokUrl String?      @map("tiktok_url")
+  reviewed  Boolean      @default(false)
+  published Boolean      @default(false)
+  plants    PlantGuide[]
+
+  @@map("care_guides")
+}
+
+model PlantGuide {
+  plantId Int       @map("plant_id")
+  guideId Int       @map("guide_id")
+  plant   Plant     @relation(fields: [plantId], references: [id], onDelete: Cascade)
+  guide   CareGuide @relation(fields: [guideId], references: [id], onDelete: Cascade)
+
+  @@id([plantId, guideId])
+  @@map("plant_guides")
+}
+
+model OrderRequest {
+  id               BigInt             @id @default(autoincrement())
+  idempotencyKey   String             @unique @map("idempotency_key") @db.Uuid
+  name             String
+  phone            String
+  city             String
+  deliveryAddress  String?            @map("delivery_address")
+  preferredContact PreferredContact   @map("preferred_contact")
+  note             String?
+  source           String?
+  status           RequestStatus      @default(new)
+  notifyState      NotifyState        @default(pending) @map("notify_state")
+  createdAt        DateTime           @default(now()) @map("created_at") @db.Timestamptz
+  items            OrderRequestItem[]
+
+  @@index([status, createdAt(sort: Desc)], name: "order_requests_status_created")
+  @@map("order_requests")
+}
+
+model OrderRequestItem {
+  requestId BigInt       @map("request_id")
+  plantId   Int          @map("plant_id")
+  quantity  Int
+  request   OrderRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  plant     Plant        @relation(fields: [plantId], references: [id])
+
+  @@id([requestId, plantId])
+  @@index([plantId], name: "items_plant")
+  @@map("order_request_items")
+}
+
+model ProjectInquiry {
+  id               BigInt           @id @default(autoincrement())
+  idempotencyKey   String           @unique @map("idempotency_key") @db.Uuid
+  name             String
+  phone            String
+  preferredContact PreferredContact? @map("preferred_contact")
+  projectType      String?          @map("project_type")
+  location         String?
+  sizeNote         String?          @map("size_note")
+  details          String?
+  source           String?
+  status           RequestStatus    @default(new)
+  notifyState      NotifyState      @default(pending) @map("notify_state")
+  createdAt        DateTime         @default(now()) @map("created_at") @db.Timestamptz
+
+  @@index([status, createdAt(sort: Desc)], name: "project_inquiries_status_created")
+  @@map("project_inquiries")
+}
+
+model NotificationOutbox {
+  id        BigInt              @id @default(autoincrement())
+  kind      OutboxKind
+  refId     BigInt              @map("ref_id")
+  channel   NotificationChannel
+  attempts  Int                 @default(0)
+  state     NotifyState         @default(pending)
+  lastError String?             @map("last_error")
+  createdAt DateTime            @default(now()) @map("created_at") @db.Timestamptz
+
+  @@index([state, createdAt], name: "outbox_state")
+  @@map("notification_outbox")
+}
+
+model AdminUser {
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  passwordHash String     @map("password_hash")
+  role         AdminRole
+  active       Boolean    @default(true)
+  auditLogs    AuditLog[]
+
+  @@map("admin_users")
+}
+
+model AuditLog {
+  id        BigInt     @id @default(autoincrement())
+  adminId   Int?       @map("admin_id")
+  admin     AdminUser? @relation(fields: [adminId], references: [id])
+  action    String
+  entity    String
+  entityId  String?    @map("entity_id")
+  createdAt DateTime   @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("audit_log")
+}
+
+model DailyStat {
+  day     DateTime @db.Date
+  source  String
+  plantId Int      @default(0) @map("plant_id")
+  views   Int      @default(0)
+
+  @@id([day, source, plantId])
+  @@map("daily_stats")
+}
