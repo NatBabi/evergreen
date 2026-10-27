@@ -51,7 +51,6 @@ export function WordmarkFooter() {
                   width={40}
                   height={40}
                   className="w-full h-full object-contain rounded-full"
-                  unoptimized
                 />
               </div>
               <div className="flex flex-col text-left">

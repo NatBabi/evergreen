@@ -88,7 +88,6 @@ export function FloatingNav() {
                 width={36}
                 height={36}
                 className="w-full h-full object-contain rounded-full"
-                unoptimized
                 priority
               />
             </div>

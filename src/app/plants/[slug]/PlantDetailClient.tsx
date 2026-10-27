@@ -31,15 +31,20 @@ import {
   starPlantsEN,
 } from "@/data/content";
 import { useTheme } from "@/context/ThemeContext";
+import dynamic from "next/dynamic";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { WordmarkFooter } from "@/components/WordmarkFooter";
-import { InquirySheet } from "@/components/InquirySheet";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
 import { PlantCard } from "@/components/PlantCard";
 import {
   PlantFilterBar,
   FilterId,
 } from "@/components/PlantFilterBar";
+
+const InquirySheet = dynamic(
+  () => import("@/components/InquirySheet").then((mod) => mod.InquirySheet),
+  { ssr: false }
+);
 
 interface PlantDetailClientProps {
   plant: PlantItem;
@@ -289,7 +294,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                       src={imgSrc}
                       alt={`${plant.commonName} thumbnail ${idx + 1}`}
                       fill
-                      unoptimized
+                      quality={60}
                       sizes="80px"
                       className="object-cover object-center"
                     />
@@ -307,7 +312,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 alt={plant.imageAlt}
                 fill
                 priority
-                unoptimized
+                quality={85}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover object-center transition-all duration-300"
               />

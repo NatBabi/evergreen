@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useTheme } from "@/context/ThemeContext";
 import { FloatingNav } from "@/components/FloatingNav";
 import { HeroSection } from "@/components/HeroSection";
@@ -13,8 +14,12 @@ import { ThreePathsCards } from "@/components/ThreePathsCards";
 import { TikTokAudiencePanel } from "@/components/TikTokAudiencePanel";
 import { FAQSection } from "@/components/FAQSection";
 import { WordmarkFooter } from "@/components/WordmarkFooter";
-import { InquirySheet } from "@/components/InquirySheet";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
+
+const InquirySheet = dynamic(
+  () => import("@/components/InquirySheet").then((mod) => mod.InquirySheet),
+  { ssr: false }
+);
 
 export default function Home() {
   const { isDark } = useTheme();
@@ -52,10 +57,11 @@ export default function Home() {
           {/* Background Continuous Tropical Canopy Photo */}
           <div className="absolute inset-0 z-0 pointer-events-none">
             <Image
-              src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2200&q=85"
+              src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1600&q=75"
               alt="Lush green tropical leaves canopy in natural light"
               fill
-              unoptimized
+              loading="lazy"
+              quality={75}
               sizes="100vw"
               className="object-cover object-center scale-105"
             />

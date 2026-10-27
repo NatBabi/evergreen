@@ -56,7 +56,7 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
             alt={plant.imageAlt}
             fill
             priority={priorityImage}
-            unoptimized
+            quality={80}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className={`object-cover object-center transition-all duration-500 ease-out ${
               lifestyleImage && isHovered
@@ -71,7 +71,8 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
               src={lifestyleImage}
               alt={`${plant.commonName} in Addis Ababa home context`}
               fill
-              unoptimized
+              loading="lazy"
+              quality={80}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               className={`object-cover object-center transition-all duration-500 ease-out ${
                 isHovered ? "opacity-100 scale-105" : "opacity-0 scale-100"

@@ -81,8 +81,8 @@ export function HeroSection() {
           loop
           muted
           playsInline
-          preload="auto"
-          poster="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=2400&q=88"
+          preload="metadata"
+          poster="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1600&q=75"
           className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none scale-[1.01]"
         >
           <source src="/video/natural_warm_image.mp4" type="video/mp4" />

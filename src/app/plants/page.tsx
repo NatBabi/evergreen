@@ -12,15 +12,20 @@ import {
 } from "lucide-react";
 import { starPlantsEN, PlantItem } from "@/data/content";
 import { useTheme } from "@/context/ThemeContext";
+import dynamic from "next/dynamic";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { WordmarkFooter } from "@/components/WordmarkFooter";
-import { InquirySheet } from "@/components/InquirySheet";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
 import { PlantCard } from "@/components/PlantCard";
 import {
   PlantFilterBar,
   FilterId,
 } from "@/components/PlantFilterBar";
+
+const InquirySheet = dynamic(
+  () => import("@/components/InquirySheet").then((mod) => mod.InquirySheet),
+  { ssr: false }
+);
 
 function SearchParamSync({
   onQuery,
