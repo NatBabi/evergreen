@@ -23,12 +23,12 @@ export const metadata: Metadata = {
     "trees delivered Addis Ababa",
   ],
   authors: [{ name: "Evergreen Ethiopia" }],
-  metadataBase: new URL("https://evergreenethiopia.com"),
+  metadataBase: new URL("https://evergreen-ethiopia.vercel.app"),
   openGraph: {
     title: "Evergreen Ethiopia · Botanical Nursery & Plants in Addis Ababa",
     description:
       "Indoor and outdoor plants, native and ornamental trees acclimatized to Ethiopian highland conditions. Order requests via phone and WhatsApp with doorstep delivery.",
-    url: "https://evergreenethiopia.com",
+    url: "https://evergreen-ethiopia.vercel.app",
     siteName: "Evergreen Ethiopia",
     locale: "en_US",
     alternateLocale: ["am_ET"],

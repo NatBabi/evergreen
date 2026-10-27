@@ -10,6 +10,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
 [![Neon Postgres](https://img.shields.io/badge/Neon-PostgreSQL-00E599?style=for-the-badge&logo=postgresql&logoColor=white)](https://neon.tech/)
+[![Live Production](https://img.shields.io/badge/Live_Site-evergreen--ethiopia.vercel.app-2F9E66?style=for-the-badge&logo=vercel&logoColor=white)](https://evergreen-ethiopia.vercel.app/)
 
 <p align="center">
   <b>Plants for every space.</b> Acclimatized to 2,350m elevation in Bishoftu (Debrezeit) with doorstep delivery across Addis Ababa and throughout Ethiopia.
