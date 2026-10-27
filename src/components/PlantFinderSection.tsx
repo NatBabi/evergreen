@@ -45,7 +45,7 @@ export function PlantFinderSection() {
   // Filter curated showcase items by active category
   const filteredPlants = useMemo(() => {
     return plantsShowcase.items.filter((item) =>
-      item.categories?.includes(activeFilter as any)
+      item.categories?.includes(activeFilter as PlantItem["categories"][number])
     );
   }, [activeFilter, plantsShowcase.items]);
 

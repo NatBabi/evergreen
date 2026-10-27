@@ -10,7 +10,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { MessageCircle, Menu, X, Globe, Leaf, Phone, Mail } from "lucide-react";
 
 export function FloatingNav() {
-  const { content, lang, toggleLang } = useLanguage();
+  const { content, toggleLang } = useLanguage();
   const { openInquiry } = useInquiry();
   const { isDark } = useTheme();
   const [scrolled, setScrolled] = useState(false);

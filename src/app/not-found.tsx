@@ -1,15 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Home, MessageCircle, Phone, Mail, Sparkles, Sprout } from "lucide-react";
+import { Home, MessageCircle, Phone, Mail, Sparkles, Sprout } from "lucide-react";
 
 export default function NotFound() {
-  const [year, setYear] = useState<number>(2026);
-  useEffect(() => {
-    setYear(new Date().getFullYear());
-  }, []);
+  const year = 2026;
   return (
     <div className="min-h-screen bg-ivory text-forest flex flex-col justify-between selection:bg-leaf selection:text-ivory">
       {/* Top Bar with Logo */}

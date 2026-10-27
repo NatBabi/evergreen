@@ -12,7 +12,6 @@ import {
   Video,
   MessageCircle,
   Star,
-  MapPin,
   Check,
 } from "lucide-react";
 import { getWhatsAppPlantUrl } from "@/data/content";

@@ -72,7 +72,7 @@ export default function PlantsCatalogPage() {
 
     if (activeFilter !== "all") {
       result = result.filter((item) =>
-        item.categories?.includes(activeFilter as any)
+        item.categories?.includes(activeFilter as PlantItem["categories"][number])
       );
     }
 

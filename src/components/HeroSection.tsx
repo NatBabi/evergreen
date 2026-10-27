@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useLanguage } from "@/context/LanguageContext";
-import { useInquiry } from "@/context/InquiryContext";
 import { useTheme } from "@/context/ThemeContext";
 import {
   ArrowDown,
@@ -19,7 +18,6 @@ import {
 
 export function HeroSection() {
   const { content, lang } = useLanguage();
-  const { openInquiry } = useInquiry();
   const { isDark } = useTheme();
   const heroRef = useRef<HTMLElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -70,7 +68,9 @@ export function HeroSection() {
     <section
       id="top"
       ref={heroRef}
-      className="relative w-full min-h-[92vh] lg:min-h-[94vh] flex flex-col justify-between bg-transparent pt-28 sm:pt-36 pb-12 sm:pb-16 text-ivory transition-colors duration-300"
+      className={`relative w-full min-h-[92vh] lg:min-h-[94vh] flex flex-col justify-between bg-transparent pt-28 sm:pt-36 pb-12 sm:pb-16 transition-colors duration-300 ${
+        isDark ? "text-ivory" : "text-forest"
+      }`}
       aria-label="Evergreen Ethiopia Hero"
     >
       {/* Background Cinematic Video: Highland yellow blossoms, stone aperture & sky contrail extended halfway into SplitIntro */}
@@ -89,9 +89,8 @@ export function HeroSection() {
         </video>
 
         {/* Sophisticated botanical atmosphere gradient:
-            Darkens the video in both modes for deep cinematic contrast.
-            Dark Mode: fades into #071B14 at the bottom.
-            Light Mode: fades seamlessly into #F7F5EE at the bottom to meet SplitIntro.
+            Dark Mode: Untouched deep highland forest vignette (#071B14)
+            Light Mode: Dimmer white / muted warm ivory veil that gently tones down the bright video and smoothly melts into #F7F5EE
         */}
         <div
           className="absolute inset-0 z-10 pointer-events-none transition-all duration-500"
@@ -103,9 +102,9 @@ export function HeroSection() {
                 radial-gradient(circle at 75% 25%, rgba(250, 204, 21, 0.16) 0%, transparent 60%)
               `
               : `
-                linear-gradient(90deg, rgba(7, 27, 20, 0.88) 0%, rgba(7, 27, 20, 0.72) 48%, rgba(7, 27, 20, 0.38) 78%, rgba(7, 27, 20, 0.60) 100%),
-                linear-gradient(180deg, rgba(7, 27, 20, 0.65) 0%, rgba(7, 27, 20, 0.15) 20%, rgba(7, 27, 20, 0.40) 55%, rgba(7, 27, 20, 0.68) 70%, rgba(247, 245, 238, 0.85) 90%, #F7F5EE 100%),
-                radial-gradient(circle at 75% 25%, rgba(250, 204, 21, 0.16) 0%, transparent 60%)
+                linear-gradient(90deg, rgba(247, 245, 238, 0.88) 0%, rgba(247, 245, 238, 0.72) 48%, rgba(247, 245, 238, 0.35) 78%, rgba(247, 245, 238, 0.55) 100%),
+                linear-gradient(180deg, rgba(235, 231, 222, 0.55) 0%, rgba(240, 237, 228, 0.40) 20%, rgba(247, 245, 238, 0.55) 55%, rgba(247, 245, 238, 0.82) 75%, #F7F5EE 100%),
+                radial-gradient(circle at 75% 25%, rgba(250, 204, 21, 0.12) 0%, transparent 60%)
               `,
           }}
         />
@@ -115,7 +114,11 @@ export function HeroSection() {
       <div className="relative z-20 w-full max-w-[1128px] mx-auto px-4 sm:px-8 lg:px-12 flex-1 flex flex-col justify-center">
         <div className="max-w-[720px]">
           {/* Status Badge Above Headline */}
-          <div className="hero-stagger inline-flex items-center gap-3 px-4 py-2 rounded-full backdrop-blur-md mb-6 shadow-sm border bg-forest-deep/85 border-ivory/20 text-ivory/95">
+          <div className={`hero-stagger inline-flex items-center gap-3 px-4 py-2 rounded-full backdrop-blur-md mb-6 shadow-sm border ${
+            isDark
+              ? "bg-forest-deep/85 border-ivory/20 text-ivory/95"
+              : "bg-white/90 border-forest/15 text-forest shadow-sm"
+          }`}>
             <span className="flex h-2 w-2 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-leaf opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-leaf" />
@@ -124,14 +127,16 @@ export function HeroSection() {
               <Sprout className="w-4 h-4 text-leaf shrink-0" />
               <span>{content.hero.badgeAboveHeadline}</span>
             </span>
-            <span className="text-ivory/30">|</span>
+            <span className={isDark ? "text-ivory/30" : "text-forest/30"}>|</span>
             <span className="text-xs font-sans text-leaf font-semibold leading-4">
               {content.brand.handle}
             </span>
           </div>
 
           {/* Stately Botanical Headline */}
-          <h1 className="hero-stagger font-heading font-extrabold text-4xl sm:text-5xl md:text-[56px] lg:text-[64px] leading-[44px] sm:leading-[56px] md:leading-[64px] lg:leading-[72px] tracking-tight mb-6 text-ivory">
+          <h1 className={`hero-stagger font-heading font-extrabold text-4xl sm:text-5xl md:text-[56px] lg:text-[64px] leading-[44px] sm:leading-[56px] md:leading-[64px] lg:leading-[72px] tracking-tight mb-6 ${
+            isDark ? "text-ivory" : "text-forest"
+          }`}>
             <span>{content.hero.headlineMain}</span>
             <span className="font-serif italic font-normal text-leaf tracking-normal px-1">
               {content.hero.headlineItalic}
@@ -140,7 +145,9 @@ export function HeroSection() {
           </h1>
 
           {/* Subheadline: altitude grown, delivered to door */}
-          <p className="hero-stagger font-sans text-base sm:text-xl leading-6 sm:leading-[28px] font-normal mb-8 max-w-[720px] text-ivory/90">
+          <p className={`hero-stagger font-sans text-base sm:text-xl leading-6 sm:leading-[28px] font-normal mb-8 max-w-[720px] ${
+            isDark ? "text-ivory/90" : "text-forest/85"
+          }`}>
             {content.hero.subheadline}
           </p>
 
@@ -158,7 +165,11 @@ export function HeroSection() {
               href={whatsappDirectUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 rounded-full backdrop-blur-md font-semibold text-base leading-6 tracking-wide transition-all duration-200 flex items-center gap-2 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px] border bg-ivory/12 hover:bg-ivory/20 text-ivory border-ivory/25"
+              className={`px-6 py-3 rounded-full backdrop-blur-md font-semibold text-base leading-6 tracking-wide transition-all duration-200 flex items-center gap-2 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px] border ${
+                isDark
+                  ? "bg-ivory/12 hover:bg-ivory/20 text-ivory border-ivory/25"
+                  : "bg-white/90 hover:bg-white text-forest border-forest/15 shadow-sm"
+              }`}
             >
               <MessageCircle className="w-4 h-4 text-leaf" />
               <span>{content.hero.secondaryCta}</span>
@@ -166,7 +177,9 @@ export function HeroSection() {
           </div>
 
           {/* Micro-reassurance directly under the CTA */}
-          <div className="hero-stagger flex items-center gap-2 text-xs font-sans leading-4 mb-8 text-ivory/80">
+          <div className={`hero-stagger flex items-center gap-2 text-xs font-sans leading-4 mb-8 ${
+            isDark ? "text-ivory/80" : "text-forest/80"
+          }`}>
             <HeartHandshake className="w-4 h-4 text-leaf shrink-0" />
             <span>{content.hero.microReassurance}</span>
           </div>
@@ -175,9 +188,17 @@ export function HeroSection() {
 
       {/* Specific Social Proof Strip along the base: follower, like, delivery metrics */}
       <div className="relative z-20 w-full max-w-[1128px] mx-auto px-4 sm:px-8 lg:px-12 pt-4">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-sans leading-4 text-ivory/90">
-          <div className="flex items-center gap-3 p-2 rounded-xl backdrop-blur-sm bg-forest-deep/40 border border-ivory/10">
-            <div className="p-2 rounded-lg shrink-0 bg-ivory/10 text-leaf border border-leaf/20">
+        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-sans leading-4 ${
+          isDark ? "text-ivory/90" : "text-forest/90"
+        }`}>
+          <div className={`flex items-center gap-3 p-2 rounded-xl backdrop-blur-sm ${
+            isDark
+              ? "bg-forest-deep/40 border border-ivory/10"
+              : "bg-white/60 border border-forest/10 shadow-xs"
+          }`}>
+            <div className={`p-2 rounded-lg shrink-0 ${
+              isDark ? "bg-ivory/10 text-leaf border border-leaf/20" : "bg-leaf/15 text-leaf border border-leaf/20"
+            }`}>
               <Sparkles className="w-4 h-4" />
             </div>
             <span className="font-mono font-medium">
@@ -185,15 +206,27 @@ export function HeroSection() {
             </span>
           </div>
 
-          <div className="flex items-center gap-3 p-2 rounded-xl backdrop-blur-sm bg-forest-deep/40 border border-ivory/10">
-            <div className="p-2 rounded-lg shrink-0 bg-ivory/10 text-leaf border border-leaf/20">
+          <div className={`flex items-center gap-3 p-2 rounded-xl backdrop-blur-sm ${
+            isDark
+              ? "bg-forest-deep/40 border border-ivory/10"
+              : "bg-white/60 border border-forest/10 shadow-xs"
+          }`}>
+            <div className={`p-2 rounded-lg shrink-0 ${
+              isDark ? "bg-ivory/10 text-leaf border border-leaf/20" : "bg-leaf/15 text-leaf border border-leaf/20"
+            }`}>
               <ShieldCheck className="w-4 h-4" />
             </div>
             <span>850+ plants delivered in Addis · 7-day guarantee</span>
           </div>
 
-          <div className="flex items-center gap-3 p-2 rounded-xl backdrop-blur-sm bg-forest-deep/40 border border-ivory/10">
-            <div className="p-2 rounded-lg shrink-0 bg-ivory/10 text-leaf border border-leaf/20">
+          <div className={`flex items-center gap-3 p-2 rounded-xl backdrop-blur-sm ${
+            isDark
+              ? "bg-forest-deep/40 border border-ivory/10"
+              : "bg-white/60 border border-forest/10 shadow-xs"
+          }`}>
+            <div className={`p-2 rounded-lg shrink-0 ${
+              isDark ? "bg-ivory/10 text-leaf border border-leaf/20" : "bg-leaf/15 text-leaf border border-leaf/20"
+            }`}>
               <Truck className="w-4 h-4" />
             </div>
             <span>Carefully packed delivery in Addis in 24–48h</span>
@@ -206,7 +239,11 @@ export function HeroSection() {
         type="button"
         onClick={toggleVideoPlayback}
         aria-label={isPlaying ? "Pause ambient background video" : "Play ambient background video"}
-        className="absolute bottom-4 right-4 sm:bottom-6 sm:right-8 z-20 w-8 h-8 rounded-full backdrop-blur-md flex items-center justify-center transition-all shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf active:scale-95 border bg-forest-deep/80 border-ivory/20 text-ivory/70 hover:text-ivory hover:bg-forest"
+        className={`absolute bottom-4 right-4 sm:bottom-6 sm:right-8 z-20 w-8 h-8 rounded-full backdrop-blur-md flex items-center justify-center transition-all shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf active:scale-95 border ${
+          isDark
+            ? "bg-forest-deep/80 border-ivory/20 text-ivory/70 hover:text-ivory hover:bg-forest"
+            : "bg-white/90 border-forest/20 text-forest/80 hover:text-forest hover:bg-white"
+        }`}
       >
         {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
       </button>

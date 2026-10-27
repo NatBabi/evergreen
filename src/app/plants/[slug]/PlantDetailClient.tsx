@@ -135,7 +135,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
       return otherPlants;
     }
     return otherPlants.filter((item) =>
-      item.categories?.includes(exploreFilter as any)
+      item.categories?.includes(exploreFilter as PlantItem["categories"][number])
     );
   }, [exploreFilter, otherPlants]);
 

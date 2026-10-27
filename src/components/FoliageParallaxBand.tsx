@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { useInquiry } from "@/context/InquiryContext";
 import { useTheme } from "@/context/ThemeContext";
-import { MessageCircle, Sparkles } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 export function FoliageParallaxBand() {
   const { content } = useLanguage();
