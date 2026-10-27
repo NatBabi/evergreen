@@ -6,17 +6,14 @@ import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { useInquiry } from "@/context/InquiryContext";
 import { useTheme } from "@/context/ThemeContext";
-import { Phone, Mail, MessageCircle, ArrowUpRight, ShieldCheck, Truck, Sparkles, MapPin } from "lucide-react";
+import { Phone, Mail, MessageCircle, ArrowUpRight, ShieldCheck, Truck, MapPin } from "lucide-react";
 
 export function WordmarkFooter() {
   const { content, toggleLang } = useLanguage();
   const { openInquiry } = useInquiry();
   const { isDark } = useTheme();
   const { footer, brand, nav } = content;
-  const [currentYear, setCurrentYear] = React.useState<number>(2026);
-  React.useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
+  const currentYear = 2026;
 
   const navLinks = [
     { label: nav.plants, href: "#plants" },

@@ -9,7 +9,6 @@ import {
   Layers,
   ArrowUpRight,
   HelpCircle,
-  Sprout,
   Compass,
 } from "lucide-react";
 
@@ -177,7 +176,7 @@ export function CareAccordions() {
             return (
               <div
                 key={panel.id}
-                role="region"
+                role="button"
                 aria-expanded={isActive}
                 tabIndex={0}
                 onMouseEnter={() => setActiveIndex(idx)}
@@ -295,7 +294,7 @@ export function CareAccordions() {
             return (
               <div
                 key={panel.id}
-                role="region"
+                role="button"
                 aria-expanded={isActive}
                 onClick={() => setActiveIndex(idx)}
                 style={{

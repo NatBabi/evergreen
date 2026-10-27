@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useLanguage } from "@/context/LanguageContext";
-import { useInquiry } from "@/context/InquiryContext";
 import { useTheme } from "@/context/ThemeContext";
 import {
   ArrowDown,
@@ -19,7 +18,6 @@ import {
 
 export function HeroSection() {
   const { content, lang } = useLanguage();
-  const { openInquiry } = useInquiry();
   const { isDark } = useTheme();
   const heroRef = useRef<HTMLElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);

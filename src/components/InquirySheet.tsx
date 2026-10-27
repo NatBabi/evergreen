@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useInquiry } from "@/context/InquiryContext";
 import { useTheme } from "@/context/ThemeContext";
-import { X, Phone, Mail, Copy, Check, Sparkles, Send, ShieldCheck, AlertCircle, CheckCircle2 } from "lucide-react";
+import { X, Phone, Mail, Copy, Sparkles, Send, ShieldCheck, AlertCircle, CheckCircle2 } from "lucide-react";
 
 export function InquirySheet() {
   const { content, lang } = useLanguage();
@@ -29,12 +29,16 @@ export function InquirySheet() {
 
     if (isOpen) {
       window.addEventListener("keydown", handleKeyDown);
-      setStatusMsg(null);
-      setErrors({});
-      // Focus name input on open after animation
-      setTimeout(() => {
+      // Focus name input and reset transient state on open after animation
+      const timer = setTimeout(() => {
+        setStatusMsg(null);
+        setErrors({});
         nameInputRef.current?.focus();
       }, 100);
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+        clearTimeout(timer);
+      };
     }
 
     return () => window.removeEventListener("keydown", handleKeyDown);
