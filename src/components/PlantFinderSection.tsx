@@ -61,15 +61,6 @@ export function PlantFinderSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-12">
           <div>
-            <div className={`inline-flex items-center gap-2 px-4 py-1 rounded-full text-xs font-mono font-medium tracking-wide mb-3 border leading-4 ${
-              isDark
-                ? "bg-ivory/10 text-ivory border-ivory/15"
-                : "bg-forest/5 text-forest border-forest/15"
-            }`}>
-              <Sparkles className="w-4 h-4 text-leaf" />
-              <span>{plantsShowcase.eyebrow}</span>
-            </div>
-
             <h2 className={`font-heading font-extrabold text-[32px] sm:text-4xl md:text-5xl tracking-tight leading-[40px] sm:leading-[44px] md:leading-[56px] ${
               isDark ? "text-ivory" : "text-forest"
             }`}>

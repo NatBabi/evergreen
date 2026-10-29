@@ -24,16 +24,6 @@ export function SplitIntro() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Botanical Narrative & 3 Resilience Pillars (7 cols) */}
           <div className="lg:col-span-7 flex flex-col">
-            {/* Eyebrow */}
-            <div className={`inline-flex items-center gap-2 px-4 py-1 rounded-full text-xs font-mono font-medium tracking-wide w-fit mb-6 border leading-4 ${
-              isDark
-                ? "bg-ivory/10 text-ivory border-ivory/15"
-                : "bg-forest/5 text-forest border-forest/15"
-            }`}>
-              <Sparkles className="w-4 h-4 text-leaf" />
-              <span>{companion.eyebrow}</span>
-            </div>
-
             {/* Headline with italic serif emphasis */}
             <h2 className={`font-heading font-extrabold text-[32px] sm:text-4xl md:text-5xl leading-[40px] sm:leading-[44px] md:leading-[56px] tracking-tight mb-6 ${
               isDark ? "text-ivory" : "text-forest"

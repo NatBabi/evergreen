@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
-import { Plus, Minus, HelpCircle, AlertCircle } from "lucide-react";
+import { Plus, Minus, AlertCircle } from "lucide-react";
 
 export function FAQSection() {
   const { content } = useLanguage();
@@ -27,15 +27,6 @@ export function FAQSection() {
       <div className="max-w-[936px] mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-[720px] mx-auto mb-12 sm:mb-16">
-          <div className={`inline-flex items-center gap-2 px-4 py-1 rounded-full text-xs font-mono font-medium tracking-wide mb-3 border leading-4 ${
-            isDark
-              ? "bg-forest/60 border-ivory/15 text-ivory"
-              : "bg-forest/5 border-forest/15 text-forest"
-          }`}>
-            <HelpCircle className="w-4 h-4 text-leaf" />
-            <span>{faq.eyebrow}</span>
-          </div>
-
           <h2 className={`font-heading font-extrabold text-[32px] sm:text-4xl md:text-5xl tracking-tight leading-[40px] sm:leading-[44px] md:leading-[56px] mb-4 ${
             isDark ? "text-ivory" : "text-forest"
           }`}>

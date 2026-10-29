@@ -36,15 +36,6 @@ export function ThreePathsCards() {
       <div className="max-w-[1128px] mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-[720px] mx-auto mb-12 sm:mb-16">
-          <div className={`inline-flex items-center gap-2 px-4 py-1 rounded-full text-xs font-mono font-medium tracking-wide mb-3 border leading-4 ${
-            isDark
-              ? "bg-forest/60 border-ivory/15 text-ivory"
-              : "bg-forest/5 border-forest/15 text-forest"
-          }`}>
-            <Sparkles className="w-4 h-4 text-leaf" />
-            <span>{threePaths.eyebrow}</span>
-          </div>
-
           <h2 className={`font-heading font-extrabold text-[32px] sm:text-4xl md:text-5xl tracking-tight leading-[40px] sm:leading-[44px] md:leading-[56px] mb-4 ${
             isDark ? "text-ivory" : "text-forest"
           }`}>
