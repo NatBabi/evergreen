@@ -31,7 +31,9 @@ export function FAQSection() {
             isDark ? "text-ivory" : "text-forest"
           }`}>
             <span>{faq.headlineSans}</span>
-            <span className="font-serif italic font-normal text-leaf px-1">
+            <span className={`font-serif italic font-normal px-1 ${
+              isDark ? "text-sage" : "text-forest/85"
+            }`}>
               {faq.headlineItalic}
             </span>
           </h2>

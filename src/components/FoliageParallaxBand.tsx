@@ -53,7 +53,9 @@ export function FoliageParallaxBand() {
           isDark ? "text-ivory" : "text-forest"
         }`}>
           <span>{foliageBand.headlineSans}</span>
-          <span className="font-serif italic font-normal text-leaf">
+          <span className={`font-serif italic font-normal ${
+            isDark ? "text-sage" : "text-forest/85"
+          }`}>
             {foliageBand.headlineItalic}
           </span>
           <span>{foliageBand.headlineEnd}</span>

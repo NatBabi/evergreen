@@ -42,7 +42,9 @@ export function FourStepsProcess() {
             isDark ? "text-ivory" : "text-forest"
           }`}>
             <span>{fourSteps.headlineSans}</span>
-            <span className="font-serif italic font-normal text-leaf px-1">
+            <span className={`font-serif italic font-normal px-1 ${
+              isDark ? "text-sage" : "text-forest/85"
+            }`}>
               {fourSteps.headlineItalic}
             </span>
           </h2>

@@ -8,6 +8,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { Leaf, Sparkles, MessageCircle } from "lucide-react";
 import { PlantItem } from "@/data/content";
 import { PlantCard } from "@/components/PlantCard";
+import { PlantMatcher } from "@/components/PlantMatcher";
 import {
   PlantFilterBar,
   FilterId,
@@ -65,7 +66,9 @@ export function PlantFinderSection() {
               isDark ? "text-ivory" : "text-forest"
             }`}>
               <span>{filters.sectionHeadlineSans}</span>
-              <span className="font-serif italic font-normal text-leaf px-1">
+              <span className={`font-serif italic font-normal px-1 ${
+                isDark ? "text-sage" : "text-forest/85"
+              }`}>
                 {filters.sectionHeadlineItalic}
               </span>
             </h2>
@@ -74,25 +77,37 @@ export function PlantFinderSection() {
           {/* Specimen Counter Badge */}
           <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono font-medium leading-4 border ${
             isDark
-              ? "bg-ivory/10 text-ivory border-ivory/15"
-              : "bg-forest/5 text-forest border-forest/15"
+              ? "bg-ivory/10 text-ivory/90 border-ivory/15"
+              : "bg-forest/5 text-forest/90 border-forest/15"
           }`}>
-            <Leaf className="w-4 h-4 text-leaf" />
+            <Leaf className="w-4 h-4 opacity-75" />
             <span>Curated {filteredPlants.length} specimens</span>
           </div>
         </div>
 
-        {/* Curated Visual Category Filter Pills (No search console on landing page) */}
-        <PlantFilterBar
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
-          totalCount={plantsShowcase.items.length}
-          filteredCount={filteredPlants.length}
-          categoryCounts={categoryCounts}
-          hideSearch={true}
-          hideAllCategory={true}
-          defaultFilter="beginner"
-        />
+        {/* Free Sample: Interactive 2-Step Room & Light Matcher */}
+        <PlantMatcher plants={plantsShowcase.items} />
+
+        {/* Curated Visual Category Filter Pills */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-4 px-1">
+            <span className={`text-xs font-mono font-semibold tracking-wider uppercase ${
+              isDark ? "text-ivory/70" : "text-forest/70"
+            }`}>
+              Or browse by botanical trait:
+            </span>
+          </div>
+          <PlantFilterBar
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+            totalCount={plantsShowcase.items.length}
+            filteredCount={filteredPlants.length}
+            categoryCounts={categoryCounts}
+            hideSearch={true}
+            hideAllCategory={true}
+            defaultFilter="beginner"
+          />
+        </div>
 
         {/* Empty State when category has no plants */}
         {filteredPlants.length === 0 ? (

@@ -29,7 +29,9 @@ export function SplitIntro() {
               isDark ? "text-ivory" : "text-forest"
             }`}>
               <span>{companion.headlineSans}</span>
-              <span className="font-serif italic font-normal text-leaf px-1">
+              <span className={`font-serif italic font-normal px-1 ${
+                isDark ? "text-sage" : "text-forest/85"
+              }`}>
                 {companion.headlineItalic}
               </span>
               <span>{companion.headlineEnd}</span>
@@ -112,21 +114,25 @@ export function SplitIntro() {
             </div>
           </div>
 
-          {/* Right Column: Featured Specimen Showcase Card (5 cols) */}
-          <div className="lg:col-span-5">
+          {/* Right Column: Featured Specimen Showcase Card (5 cols) with edge-break layering */}
+          <div className="lg:col-span-5 lg:-mt-14 xl:-mt-20 relative z-20">
             <div className="relative">
               <div className="flex items-center justify-between mb-3 px-1">
                 <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 leading-4 ${
-                  isDark ? "text-ivory/70" : "text-forest/70"
+                  isDark ? "text-ivory/80" : "text-forest/80"
                 }`}>
                   <Sparkles className="w-4 h-4 text-leaf" />
                   <span>{companion.featuredCardTitle || "Featured Nursery Specimen"}</span>
                 </span>
-                <span className="text-xs font-mono text-leaf font-semibold leading-4">
+                <span className={`text-xs font-mono font-semibold leading-4 px-2.5 py-0.5 rounded-full border ${
+                  isDark ? "bg-forest-deep text-sage border-ivory/15" : "bg-white text-forest border-forest/15 shadow-xs"
+                }`}>
                   {content.brand.name} Choice
                 </span>
               </div>
-              <PlantCard plant={plant} priorityImage />
+              <div className="shadow-2xl rounded-[32px] overflow-hidden">
+                <PlantCard plant={plant} priorityImage />
+              </div>
             </div>
           </div>
         </div>

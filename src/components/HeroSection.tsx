@@ -138,7 +138,9 @@ export function HeroSection() {
             isDark ? "text-ivory" : "text-forest"
           }`}>
             <span>{content.hero.headlineMain}</span>
-            <span className="font-serif italic font-normal text-leaf tracking-normal px-1">
+            <span className={`font-serif italic font-normal tracking-normal px-1 ${
+              isDark ? "text-sage" : "text-forest/85"
+            }`}>
               {content.hero.headlineItalic}
             </span>
             <span>{content.hero.headlineEnd}</span>
@@ -151,11 +153,11 @@ export function HeroSection() {
             {content.hero.subheadline}
           </p>
 
-          {/* Primary Action CTAs - streamlined to 2 high-converting actions */}
+          {/* Primary Action CTAs - clear primary elevation with secondary ghost */}
           <div className="hero-stagger flex flex-wrap items-center gap-4 mb-4">
             <a
               href="#plants"
-              className="px-6 py-3 rounded-full bg-leaf text-ivory font-semibold text-base leading-6 tracking-wide hover:bg-leaf/90 transition-all duration-200 shadow-lg flex items-center gap-2 group active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px]"
+              className="px-7 py-3.5 rounded-full bg-leaf text-ivory font-semibold text-base leading-6 tracking-wide hover:bg-leaf/90 transition-all duration-200 shadow-xl shadow-leaf/25 flex items-center gap-2 group active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px]"
             >
               <span>{content.hero.primaryCta}</span>
               <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-1" />
@@ -165,10 +167,10 @@ export function HeroSection() {
               href={whatsappDirectUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`px-6 py-3 rounded-full backdrop-blur-md font-semibold text-base leading-6 tracking-wide transition-all duration-200 flex items-center gap-2 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px] border ${
+              className={`px-5 py-3 rounded-full backdrop-blur-md font-medium text-sm sm:text-base leading-6 tracking-wide transition-all duration-200 flex items-center gap-2 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px] ${
                 isDark
-                  ? "bg-ivory/12 hover:bg-ivory/20 text-ivory border-ivory/25"
-                  : "bg-white/90 hover:bg-white text-forest border-forest/15 shadow-sm"
+                  ? "bg-ivory/8 hover:bg-ivory/15 text-ivory/85 hover:text-ivory border border-ivory/15"
+                  : "bg-white/80 hover:bg-white text-forest/85 hover:text-forest border border-forest/15 shadow-xs"
               }`}
             >
               <MessageCircle className="w-4 h-4 text-leaf" />
@@ -197,7 +199,7 @@ export function HeroSection() {
               : "bg-white/60 border border-forest/10 shadow-xs"
           }`}>
             <div className={`p-2 rounded-lg shrink-0 ${
-              isDark ? "bg-ivory/10 text-leaf border border-leaf/20" : "bg-leaf/15 text-leaf border border-leaf/20"
+              isDark ? "bg-ivory/10 text-ivory/90 border border-ivory/15" : "bg-forest/5 text-forest/90 border border-forest/10"
             }`}>
               <Sparkles className="w-4 h-4" />
             </div>
@@ -212,7 +214,7 @@ export function HeroSection() {
               : "bg-white/60 border border-forest/10 shadow-xs"
           }`}>
             <div className={`p-2 rounded-lg shrink-0 ${
-              isDark ? "bg-ivory/10 text-leaf border border-leaf/20" : "bg-leaf/15 text-leaf border border-leaf/20"
+              isDark ? "bg-ivory/10 text-ivory/90 border border-ivory/15" : "bg-forest/5 text-forest/90 border border-forest/10"
             }`}>
               <ShieldCheck className="w-4 h-4" />
             </div>
@@ -225,7 +227,7 @@ export function HeroSection() {
               : "bg-white/60 border border-forest/10 shadow-xs"
           }`}>
             <div className={`p-2 rounded-lg shrink-0 ${
-              isDark ? "bg-ivory/10 text-leaf border border-leaf/20" : "bg-leaf/15 text-leaf border border-leaf/20"
+              isDark ? "bg-ivory/10 text-ivory/90 border border-ivory/15" : "bg-forest/5 text-forest/90 border border-forest/10"
             }`}>
               <Truck className="w-4 h-4" />
             </div>
