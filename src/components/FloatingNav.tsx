@@ -52,12 +52,8 @@ export function FloatingNav() {
 
   const navLinks = [
     { label: content.nav.plants, href: "#plants" },
-    { label: content.nav.companion, href: "#companion" },
     { label: content.nav.care, href: "#care" },
     { label: content.nav.fourSteps, href: "#steps" },
-    { label: content.nav.paths, href: "#paths" },
-    { label: content.nav.fromTiktok, href: "#tiktok" },
-    { label: content.nav.faq, href: "#faq" },
   ];
 
   return (

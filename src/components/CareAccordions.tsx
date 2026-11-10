@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
 import {
@@ -140,9 +141,7 @@ export function CareAccordions() {
               isDark ? "text-ivory" : "text-forest"
             }`}>
               <span>{careSection.headlineSans}</span>
-              <span className={`font-serif italic font-normal px-1 ${
-                isDark ? "text-sage" : "text-forest/85"
-              }`}>
+              <span className="font-serif italic font-normal text-leaf px-1">
                 {careSection.headlineItalic}
               </span>
               <span> plants</span>
@@ -240,13 +239,11 @@ export function CareAccordions() {
                       </p>
                     </div>
 
-                    {/* Bottom Split Layout: Vector Visual on Left + Technical Advice on Right */}
+                    {/* Bottom Split Layout: Real Photo Visual on Left + Technical Advice on Right */}
                     <div className="grid grid-cols-12 gap-6 items-end pt-4 border-t border-ivory/15">
-                      {/* Left: Custom Architectural Botanical SVG Visual (5 cols) */}
-                      <div className="col-span-5 rounded-2xl overflow-hidden bg-forest-deep/60 border border-ivory/15 shadow-inner">
-                        {panel.id === "light" && <LightDiagramSvg />}
-                        {panel.id === "water" && <WaterDiagramSvg />}
-                        {panel.id === "soil" && <SoilDiagramSvg />}
+                      {/* Left: Authentic Botanical Photo Visual (5 cols) */}
+                      <div className="col-span-5">
+                        <CarePhotoVisual panelId={panel.id} />
                       </div>
 
                       {/* Right: Technical Micro-Advice & TikTok Video Guide (7 cols) */}
@@ -338,11 +335,9 @@ export function CareAccordions() {
                       {panel.heading}
                     </h4>
 
-                    {/* SVG Visual */}
-                    <div className="rounded-xl overflow-hidden bg-forest-deep/60 border border-ivory/15 mb-4">
-                      {panel.id === "light" && <LightDiagramSvg />}
-                      {panel.id === "water" && <WaterDiagramSvg />}
-                      {panel.id === "soil" && <SoilDiagramSvg />}
+                    {/* Real Photo Visual */}
+                    <div className="mb-4">
+                      <CarePhotoVisual panelId={panel.id} />
                     </div>
 
                     {/* Problem Solved Badge */}
@@ -402,183 +397,64 @@ export function CareAccordions() {
 }
 
 // ---------------------------------------------------------------------------
-// Bespoke Architectural SVG Visuals (viewBox 0 0 540 360, Dark Botanical Theme)
+// Authentic Botanical Photo Visuals for Highland Plant Care
 // ---------------------------------------------------------------------------
 
-function LightDiagramSvg() {
+function CarePhotoVisual({ panelId }: { panelId: string }) {
+  const meta = {
+    light: {
+      src: "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1000&q=80",
+      alt: "Lush indoor foliage in gentle morning sunlight",
+      tag: "East Window Exposure",
+      caption: "Filtered morning sun · Zero scorching highland midday UV",
+    },
+    water: {
+      src: "https://images.unsplash.com/photo-1520412099551-62b6bafeb5bb?auto=format&fit=crop&w=1000&q=80",
+      alt: "Checking indoor plant potting mix moisture with finger",
+      tag: "2-Inch Hydration Test",
+      caption: "Feel topsoil depth first · Oxygen is as vital as water",
+    },
+    soil: {
+      src: "https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=1000&q=80",
+      alt: "Rich volcanic pumice aerated potting mix",
+      tag: "40% Volcanic Pumice",
+      caption: "Porous aeration pockets · Guaranteed zero root suffocation",
+    },
+  }[panelId] || {
+    src: "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1000&q=80",
+    alt: "Plant care guide",
+    tag: "Highland Plant Care",
+    caption: "Acclimatized for 2,350m elevation in Addis",
+  };
+
   return (
-    <svg
-      viewBox="0 0 540 360"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-auto block select-none"
-      role="img"
-      aria-label="Highland sunlight exposure and window aperture diagram"
-    >
-      {/* Background Grid */}
-      <rect width="540" height="360" fill="#071B14" fillOpacity="0.6" />
-      <path d="M40 60h460M40 120h460M40 180h460M40 240h460M40 300h460" stroke="#F7F5EE" strokeOpacity="0.1" strokeDasharray="3 3" />
-      <path d="M100 40v280M180 40v280M260 40v280M340 40v280M420 40v280" stroke="#F7F5EE" strokeOpacity="0.1" strokeDasharray="3 3" />
+    <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-forest-deep shadow-md border border-ivory/15 group">
+      <Image
+        src={meta.src}
+        alt={meta.alt}
+        fill
+        sizes="(max-width: 768px) 100vw, 40vw"
+        className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+      />
+      {/* Subtle botanical dark vignette */}
+      <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-forest-deep/25 to-transparent pointer-events-none" />
 
-      {/* Architectural Window Aperture */}
-      <rect x="70" y="55" width="220" height="250" rx="12" fill="#123D2B" fillOpacity="0.8" stroke="#F7F5EE" strokeWidth="1.5" strokeOpacity="0.3" />
-      <line x1="180" y1="55" x2="180" y2="305" stroke="#F7F5EE" strokeWidth="1.5" strokeOpacity="0.2" />
-      <line x1="70" y1="180" x2="290" y2="180" stroke="#F7F5EE" strokeWidth="1.5" strokeOpacity="0.2" />
+      {/* Floating tag pill in top-left */}
+      <div className="absolute top-3 left-3 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold backdrop-blur-md bg-forest-deep/85 text-ivory border border-ivory/20 shadow-sm leading-tight">
+        <span className="w-1.5 h-1.5 rounded-full bg-leaf" />
+        <span>{meta.tag}</span>
+      </div>
 
-      {/* Sheer Linen Curtain Filter Indicator */}
-      <path d="M70 55 C 100 120, 100 240, 70 305" stroke="#78B83D" strokeWidth="2" strokeDasharray="4 4" fill="none" />
-      <text x="80" y="75" fill="#78B83D" fontFamily="monospace" fontSize="11" fontWeight="bold">SHEER FILTER</text>
-
-      {/* Sun Position: Morning 45 deg (Soft Gold) */}
-      <circle cx="390" cy="100" r="32" fill="#E5BA69" stroke="#F7F5EE" strokeWidth="1.5" />
-      <circle cx="390" cy="100" r="42" stroke="#E5BA69" strokeWidth="1.5" strokeDasharray="3 3" strokeOpacity="0.6" />
-      <path d="M390 50v-10M390 160v-10M330 100h-10M450 100h-10M345 55l-8-8M435 145l-8-8M345 145l-8 8M435 55l-8 8" stroke="#E5BA69" strokeWidth="2" />
-
-      {/* Light Rays reaching Plant */}
-      <path d="M360 125 L 230 220" stroke="#E5BA69" strokeWidth="2" strokeDasharray="6 4" />
-      <polygon points="225,223 235,215 233,227" fill="#E5BA69" />
-
-      {/* Plant Specimen Silhouette */}
-      <path d="M210 280 Q 230 240 240 210 Q 245 225 250 280 Z" fill="#071B14" />
-      <circle cx="230" cy="205" r="14" fill="#78B83D" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.5" />
-      <circle cx="255" cy="195" r="18" fill="#78B83D" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.5" />
-      <circle cx="215" cy="225" r="12" fill="#78B83D" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.5" />
-      <rect x="220" y="275" width="30" height="30" rx="4" fill="#071B14" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.3" />
-
-      {/* Lux Meter Readout Box */}
-      <rect x="330" y="195" width="165" height="110" rx="10" fill="#071B14" stroke="#F7F5EE" strokeWidth="1.5" strokeOpacity="0.3" />
-      <rect x="342" y="210" width="141" height="18" rx="4" fill="#F7F5EE" fillOpacity="0.08" />
-      <text x="350" y="223" fill="#F7F5EE" fontFamily="monospace" fontSize="10" fontWeight="bold">LUX SPECTRUM</text>
-      <text x="350" y="252" fill="#F7F5EE" fontFamily="monospace" fontSize="14" fontWeight="bold">3,500 LUX</text>
-      <text x="350" y="272" fill="#78B83D" fontFamily="monospace" fontSize="11" fontWeight="bold">● OPTIMAL INDIRECT</text>
-      <text x="350" y="292" fill="#F7F5EE" fillOpacity="0.6" fontFamily="monospace" fontSize="10">EAST APERTURE 45°</text>
-    </svg>
+      {/* Caption at bottom */}
+      <div className="absolute bottom-3 inset-x-3 z-10 text-xs font-sans text-ivory/95 font-medium leading-tight">
+        {meta.caption}
+      </div>
+    </div>
   );
 }
 
-function WaterDiagramSvg() {
-  return (
-    <svg
-      viewBox="0 0 540 360"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-auto block select-none"
-      role="img"
-      aria-label="Highland two-inch soil finger hydration test diagram"
-    >
-      {/* Background Grid */}
-      <rect width="540" height="360" fill="#071B14" fillOpacity="0.6" />
-      <path d="M40 70h460M40 140h460M40 210h460M40 280h460" stroke="#F7F5EE" strokeOpacity="0.1" strokeDasharray="3 3" />
 
-      {/* Soil Strata Vessel / Pot */}
-      <rect x="80" y="50" width="220" height="260" rx="16" fill="#123D2B" fillOpacity="0.75" stroke="#F7F5EE" strokeWidth="1.5" strokeOpacity="0.3" />
 
-      {/* Strata 1: 0–2 inch top soil (Check Zone) */}
-      <rect x="82" y="52" width="216" height="75" rx="14" fill="#78B83D" fillOpacity="0.2" stroke="#78B83D" strokeWidth="1.5" strokeDasharray="3 3" />
-      <text x="96" y="78" fill="#F7F5EE" fontFamily="monospace" fontSize="11" fontWeight="bold">0 – 2 IN (5 CM) ZONE</text>
-      <text x="96" y="98" fill="#78B83D" fontFamily="monospace" fontSize="10" fontWeight="bold">TEST WITH FINGER HERE</text>
 
-      {/* Strata 2: 2–6 inch active root hydration zone */}
-      <rect x="82" y="127" width="216" height="120" fill="#071B14" fillOpacity="0.4" />
-      <text x="96" y="152" fill="#F7F5EE" fillOpacity="0.8" fontFamily="monospace" fontSize="11" fontWeight="bold">ROOT MOISTURE ZONE</text>
 
-      {/* Root graphics branching down */}
-      <path d="M190 120 Q 180 160 160 210 Q 150 230 140 240" stroke="#78B83D" strokeWidth="2.5" fill="none" />
-      <path d="M190 140 Q 210 180 220 220 Q 230 235 240 245" stroke="#78B83D" strokeWidth="2" fill="none" />
-      <path d="M180 170 Q 160 190 150 205" stroke="#78B83D" strokeWidth="1.5" fill="none" />
 
-      {/* Strata 3: Bottom pumice aeration layer */}
-      <rect x="82" y="247" width="216" height="61" rx="14" fill="#071B14" fillOpacity="0.7" />
-      <circle cx="115" cy="275" r="7" fill="#DCE5D3" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.3" />
-      <circle cx="145" cy="285" r="9" fill="#DCE5D3" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.3" />
-      <circle cx="180" cy="272" r="8" fill="#DCE5D3" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.3" />
-      <circle cx="215" cy="284" r="10" fill="#DCE5D3" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.3" />
-      <circle cx="250" cy="273" r="8" fill="#DCE5D3" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.3" />
-      <text x="96" y="302" fill="#DCE5D3" fontFamily="monospace" fontSize="9" fontWeight="bold">VOLCANIC PUMICE BASE</text>
-
-      {/* 2-Inch Calibrated Depth Callout Gauge */}
-      <line x1="45" y1="52" x2="45" y2="127" stroke="#78B83D" strokeWidth="2" />
-      <line x1="38" y1="52" x2="52" y2="52" stroke="#78B83D" strokeWidth="2" />
-      <line x1="38" y1="127" x2="52" y2="127" stroke="#78B83D" strokeWidth="2" />
-      <text x="25" y="95" fill="#78B83D" fontFamily="monospace" fontSize="12" fontWeight="bold" transform="rotate(-90 25 95)">2.0 IN</text>
-
-      {/* Right Moisture Decision Gauge Card */}
-      <rect x="330" y="60" width="165" height="240" rx="12" fill="#071B14" stroke="#F7F5EE" strokeWidth="1.5" strokeOpacity="0.3" />
-      <rect x="342" y="75" width="141" height="22" rx="4" fill="#F7F5EE" fillOpacity="0.08" />
-      <text x="352" y="90" fill="#F7F5EE" fontFamily="monospace" fontSize="10" fontWeight="bold">HYDRATION STATUS</text>
-
-      {/* State 1: Dry */}
-      <rect x="342" y="110" width="141" height="50" rx="8" fill="#E5BA69" fillOpacity="0.15" stroke="#E5BA69" strokeWidth="1" />
-      <text x="352" y="128" fill="#E5BA69" fontFamily="monospace" fontSize="11" fontWeight="bold">TOP 2&quot; DRY</text>
-      <text x="352" y="146" fill="#F7F5EE" fontFamily="monospace" fontSize="10" fontWeight="bold">→ WATER THOROUGHLY</text>
-
-      {/* State 2: Moist */}
-      <rect x="342" y="170" width="141" height="50" rx="8" fill="#78B83D" fillOpacity="0.2" stroke="#78B83D" strokeWidth="1.5" />
-      <text x="352" y="188" fill="#78B83D" fontFamily="monospace" fontSize="11" fontWeight="bold">TOP 2&quot; MOIST</text>
-      <text x="352" y="206" fill="#F7F5EE" fontFamily="monospace" fontSize="10" fontWeight="bold">→ WAIT 3–4 DAYS</text>
-
-      <text x="352" y="255" fill="#F7F5EE" fillOpacity="0.6" fontFamily="monospace" fontSize="10">FREQUENCY: 7–10D</text>
-      <text x="352" y="275" fill="#78B83D" fontFamily="monospace" fontSize="10" fontWeight="bold">KIREMT: REDUCE 50%</text>
-    </svg>
-  );
-}
-
-function SoilDiagramSvg() {
-  return (
-    <svg
-      viewBox="0 0 540 360"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-auto block select-none"
-      role="img"
-      aria-label="Highland volcanic pumice and organic compost potting ratio diagram"
-    >
-      {/* Background Grid */}
-      <rect width="540" height="360" fill="#071B14" fillOpacity="0.6" />
-      <path d="M40 70h460M40 140h460M40 210h460M40 280h460" stroke="#F7F5EE" strokeOpacity="0.1" strokeDasharray="3 3" />
-
-      {/* Composition Ratio Bar Container */}
-      <rect x="70" y="55" width="230" height="250" rx="14" fill="#123D2B" fillOpacity="0.75" stroke="#F7F5EE" strokeWidth="1.5" strokeOpacity="0.3" />
-
-      {/* Layer 1: 40% Volcanic Pumice */}
-      <rect x="72" y="57" width="226" height="95" rx="12" fill="#DCE5D3" fillOpacity="0.2" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.2" />
-      <circle cx="105" cy="85" r="10" fill="#DCE5D3" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.4" />
-      <circle cx="145" cy="100" r="14" fill="#DCE5D3" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.4" />
-      <circle cx="195" cy="80" r="12" fill="#DCE5D3" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.4" />
-      <circle cx="240" cy="105" r="15" fill="#DCE5D3" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.4" />
-      <text x="85" y="135" fill="#DCE5D3" fontFamily="monospace" fontSize="11" fontWeight="bold">40% VOLCANIC PUMICE</text>
-
-      {/* Layer 2: 40% Organic Forest Compost */}
-      <rect x="72" y="152" width="226" height="95" fill="#78B83D" fillOpacity="0.15" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.2" />
-      <path d="M100 180 q 15 -10 30 0 t 30 0" stroke="#78B83D" strokeWidth="1.5" fill="none" />
-      <path d="M180 200 q 15 -10 30 0 t 30 0" stroke="#78B83D" strokeWidth="1.5" fill="none" />
-      <text x="85" y="230" fill="#78B83D" fontFamily="monospace" fontSize="11" fontWeight="bold">40% ORGANIC COMPOST</text>
-
-      {/* Layer 3: 20% Highland Loam */}
-      <rect x="72" y="247" width="226" height="56" rx="12" fill="#071B14" fillOpacity="0.5" stroke="#F7F5EE" strokeWidth="1" strokeOpacity="0.2" />
-      <text x="85" y="285" fill="#F7F5EE" fillOpacity="0.8" fontFamily="monospace" fontSize="11" fontWeight="bold">20% MOUNTAIN LOAM</text>
-
-      {/* Oxygen / Root Aeration Vector */}
-      <path d="M315 150 Q 325 105 340 100" stroke="#78B83D" strokeWidth="2" strokeDasharray="4 3" />
-
-      {/* Right Technical Specification Card */}
-      <rect x="330" y="55" width="165" height="250" rx="12" fill="#071B14" stroke="#F7F5EE" strokeWidth="1.5" strokeOpacity="0.3" />
-      <rect x="342" y="70" width="141" height="22" rx="4" fill="#F7F5EE" fillOpacity="0.08" />
-      <text x="350" y="85" fill="#F7F5EE" fontFamily="monospace" fontSize="10" fontWeight="bold">ROOT SPECIFICATION</text>
-
-      <text x="350" y="120" fill="#F7F5EE" fontFamily="monospace" fontSize="13" fontWeight="bold">DRAINAGE RATE</text>
-      <text x="350" y="138" fill="#78B83D" fontFamily="monospace" fontSize="11" fontWeight="bold">&lt; 15 SECONDS</text>
-
-      <line x1="342" y1="155" x2="483" y2="155" stroke="#F7F5EE" strokeOpacity="0.2" />
-
-      <text x="350" y="180" fill="#F7F5EE" fontFamily="monospace" fontSize="13" fontWeight="bold">ROOT AERATION</text>
-      <text x="350" y="198" fill="#78B83D" fontFamily="monospace" fontSize="11" fontWeight="bold">40% O₂ POCKETS</text>
-
-      <line x1="342" y1="215" x2="483" y2="215" stroke="#F7F5EE" strokeOpacity="0.2" />
-
-      <text x="350" y="240" fill="#F7F5EE" fontFamily="monospace" fontSize="13" fontWeight="bold">REPOT TIMELINE</text>
-      <text x="350" y="258" fill="#F7F5EE" fillOpacity="0.75" fontFamily="monospace" fontSize="11" fontWeight="bold">EVERY 12–18 MO</text>
-      <text x="350" y="285" fill="#78B83D" fontFamily="monospace" fontSize="9" fontWeight="bold">ZERO CLAY SUFFOCATION</text>
-    </svg>
-  );
-}

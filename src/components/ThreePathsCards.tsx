@@ -40,9 +40,7 @@ export function ThreePathsCards() {
             isDark ? "text-ivory" : "text-forest"
           }`}>
             <span>{threePaths.headlineSans}</span>
-            <span className={`font-serif italic font-normal px-1 ${
-              isDark ? "text-sage" : "text-forest/85"
-            }`}>
+            <span className="font-serif italic font-normal text-leaf px-1">
               {threePaths.headlineItalic}
             </span>
           </h2>

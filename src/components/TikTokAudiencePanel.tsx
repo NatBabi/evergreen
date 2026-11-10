@@ -7,9 +7,6 @@ import { useTheme } from "@/context/ThemeContext";
 import {
   Play,
   ArrowUpRight,
-  Heart,
-  Users,
-  Video,
   MessageCircle,
   Star,
   Check,
@@ -17,9 +14,10 @@ import {
 import { getWhatsAppPlantUrl } from "@/data/content";
 
 export function TikTokAudiencePanel() {
-  const { content } = useLanguage();
+  const { content, lang } = useLanguage();
   const { isDark } = useTheme();
   const { tiktokPanel, brand, customerStories } = content;
+  const isAmharic = lang === "am";
 
   return (
     <section
@@ -30,52 +28,77 @@ export function TikTokAudiencePanel() {
       aria-label="Real plants in real Addis homes and TikTok audience evidence"
     >
       <div className="max-w-[1128px] mx-auto">
-        {/* Header + Stats Badge */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
-          <div>
-            <h2 className={`font-heading font-extrabold text-[32px] sm:text-4xl md:text-5xl tracking-tight leading-[40px] sm:leading-[44px] md:leading-[56px] ${
-              isDark ? "text-ivory" : "text-forest"
-            }`}>
-              <span>Real plants in real </span>
-              <span className="font-serif italic font-normal text-leaf px-1">
-                Addis homes
-              </span>
-            </h2>
+        {/* Header */}
+        <div className="max-w-[720px] mb-8 sm:mb-12">
+          <h2 className={`font-heading font-extrabold text-[32px] sm:text-4xl md:text-5xl tracking-tight leading-[40px] sm:leading-[44px] md:leading-[56px] ${
+            isDark ? "text-ivory" : "text-forest"
+          }`}>
+            <span>Real plants in real </span>
+            <span className="font-serif italic font-normal text-leaf px-1">
+              Addis homes
+            </span>
+          </h2>
 
-            <p className={`font-sans text-base mt-3 max-w-[720px] leading-6 ${
-              isDark ? "text-ivory/75" : "text-forest/75"
-            }`}>
-              {tiktokPanel.subtitle}
-            </p>
-          </div>
+          <p className={`font-sans text-base mt-3 leading-relaxed ${
+            isDark ? "text-ivory/75" : "text-forest/75"
+          }`}>
+            {tiktokPanel.subtitle}
+          </p>
+        </div>
 
-          {/* Scraped TikTok Stats Strip */}
-          <div className="flex items-center gap-4 flex-wrap">
-            <div className={`px-4 py-3 rounded-2xl backdrop-blur-md border flex items-center gap-2 min-h-[48px] ${
-              isDark ? "bg-forest/40 border-ivory/12 text-ivory" : "bg-white/80 border-forest/12 text-forest shadow-sm"
-            }`}>
-              <Users className="w-4 h-4 text-leaf" />
-              <span className={`font-mono text-xs sm:text-base font-semibold leading-4 sm:leading-6 ${
-                isDark ? "text-ivory" : "text-forest"
+        {/* 3-Metric Proof Banner: Matching Reference UI with Vertical Dividers and Ambient Glow Numbers */}
+        <div className={`w-full rounded-2xl sm:rounded-3xl p-6 sm:p-8 backdrop-blur-md border mb-12 sm:mb-16 transition-all duration-300 ${
+          isDark
+            ? "bg-[#0A261B]/85 border-leaf/30 shadow-2xl shadow-black/40"
+            : "bg-white/95 border-forest/15 shadow-xl shadow-forest/5"
+        }`}>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-0 items-center">
+            {/* Metric 1: Followers */}
+            <div className="flex flex-col items-center text-center px-4 relative">
+              <div className={`font-heading font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight ${
+                isDark
+                  ? "bg-gradient-to-r from-emerald-400 via-leaf to-green-300 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(120,184,61,0.35)]"
+                  : "bg-gradient-to-r from-forest via-leaf to-emerald-600 bg-clip-text text-transparent"
               }`}>
-                {tiktokPanel.statFollowers}
-              </span>
-            </div>
-            <div className={`px-4 py-3 rounded-2xl backdrop-blur-md border flex items-center gap-2 min-h-[48px] ${
-              isDark ? "bg-forest/40 border-ivory/12 text-ivory" : "bg-white/80 border-forest/12 text-forest shadow-sm"
-            }`}>
-              <Heart className="w-4 h-4 text-leaf" />
-              <span className={`font-mono text-xs sm:text-base font-semibold leading-4 sm:leading-6 ${
-                isDark ? "text-ivory" : "text-forest"
+                13.4K
+              </div>
+              <div className={`text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase mt-2 ${
+                isDark ? "text-ivory/65" : "text-forest/65"
               }`}>
-                {tiktokPanel.statLikes}
-              </span>
+                {isAmharic ? "የቲክቶክ ተከታዮች" : "COMMUNITY FOLLOWERS"}
+              </div>
             </div>
-            <div className="px-4 py-3 rounded-2xl bg-forest/40 backdrop-blur-md border border-ivory/12 flex items-center gap-2 min-h-[48px]">
-              <Video className="w-4 h-4 text-leaf" />
-              <span className="font-mono text-xs sm:text-base font-semibold text-ivory leading-4 sm:leading-6">
-                {tiktokPanel.statVideos}
-              </span>
+
+            {/* Metric 2: Likes (with divider) */}
+            <div className="flex flex-col items-center text-center px-4 sm:border-l sm:border-leaf/20 relative">
+              <div className={`font-heading font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight ${
+                isDark
+                  ? "bg-gradient-to-r from-emerald-400 via-leaf to-green-300 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(120,184,61,0.35)]"
+                  : "bg-gradient-to-r from-forest via-leaf to-emerald-600 bg-clip-text text-transparent"
+              }`}>
+                81.1K
+              </div>
+              <div className={`text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase mt-2 ${
+                isDark ? "text-ivory/65" : "text-forest/65"
+              }`}>
+                {isAmharic ? "ጠቅላላ መውደዶች" : "TOTAL LIKES"}
+              </div>
+            </div>
+
+            {/* Metric 3: Videos (with divider) */}
+            <div className="flex flex-col items-center text-center px-4 sm:border-l sm:border-leaf/20 relative">
+              <div className={`font-heading font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight ${
+                isDark
+                  ? "bg-gradient-to-r from-emerald-400 via-leaf to-green-300 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(120,184,61,0.35)]"
+                  : "bg-gradient-to-r from-forest via-leaf to-emerald-600 bg-clip-text text-transparent"
+              }`}>
+                150+
+              </div>
+              <div className={`text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase mt-2 ${
+                isDark ? "text-ivory/65" : "text-forest/65"
+              }`}>
+                {isAmharic ? "የተክሎች ቪዲዮዎች" : "NURSERY REELS"}
+              </div>
             </div>
           </div>
         </div>
@@ -164,8 +187,8 @@ export function TikTokAudiencePanel() {
           })}
         </div>
 
-        {/* Real Plants in Real Addis Homes: Customer Testimonials Infinite Marquee (Image 2 style) */}
-        <div className="mb-16">
+        {/* Real Plants in Real Addis Homes: Customer Testimonials Infinite Marquee */}
+        <div className="mt-24 sm:mt-32 pt-16 sm:pt-24 border-t border-leaf/20 mb-16">
           {/* Header Row: Title & Subtitle (left) + Community Trust Badge (right) */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
             <div>

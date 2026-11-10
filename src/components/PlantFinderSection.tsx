@@ -8,7 +8,6 @@ import { useTheme } from "@/context/ThemeContext";
 import { Leaf, Sparkles, MessageCircle } from "lucide-react";
 import { PlantItem } from "@/data/content";
 import { PlantCard } from "@/components/PlantCard";
-import { PlantMatcher } from "@/components/PlantMatcher";
 import {
   PlantFilterBar,
   FilterId,
@@ -66,9 +65,7 @@ export function PlantFinderSection() {
               isDark ? "text-ivory" : "text-forest"
             }`}>
               <span>{filters.sectionHeadlineSans}</span>
-              <span className={`font-serif italic font-normal px-1 ${
-                isDark ? "text-sage" : "text-forest/85"
-              }`}>
+              <span className="font-serif italic font-normal text-leaf px-1">
                 {filters.sectionHeadlineItalic}
               </span>
             </h2>
@@ -77,37 +74,25 @@ export function PlantFinderSection() {
           {/* Specimen Counter Badge */}
           <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono font-medium leading-4 border ${
             isDark
-              ? "bg-ivory/10 text-ivory/90 border-ivory/15"
-              : "bg-forest/5 text-forest/90 border-forest/15"
+              ? "bg-ivory/10 text-ivory border-ivory/15"
+              : "bg-forest/5 text-forest border-forest/15"
           }`}>
-            <Leaf className="w-4 h-4 opacity-75" />
+            <Leaf className="w-4 h-4 text-leaf" />
             <span>Curated {filteredPlants.length} specimens</span>
           </div>
         </div>
 
-        {/* Free Sample: Interactive 2-Step Room & Light Matcher */}
-        <PlantMatcher plants={plantsShowcase.items} />
-
-        {/* Curated Visual Category Filter Pills */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-4 px-1">
-            <span className={`text-xs font-mono font-semibold tracking-wider uppercase ${
-              isDark ? "text-ivory/70" : "text-forest/70"
-            }`}>
-              Or browse by botanical trait:
-            </span>
-          </div>
-          <PlantFilterBar
-            activeFilter={activeFilter}
-            onFilterChange={setActiveFilter}
-            totalCount={plantsShowcase.items.length}
-            filteredCount={filteredPlants.length}
-            categoryCounts={categoryCounts}
-            hideSearch={true}
-            hideAllCategory={true}
-            defaultFilter="beginner"
-          />
-        </div>
+        {/* Curated Visual Category Filter Pills (No search console on landing page) */}
+        <PlantFilterBar
+          activeFilter={activeFilter}
+          onFilterChange={setActiveFilter}
+          totalCount={plantsShowcase.items.length}
+          filteredCount={filteredPlants.length}
+          categoryCounts={categoryCounts}
+          hideSearch={true}
+          hideAllCategory={true}
+          defaultFilter="beginner"
+        />
 
         {/* Empty State when category has no plants */}
         {filteredPlants.length === 0 ? (
@@ -164,7 +149,7 @@ export function PlantFinderSection() {
         )}
 
         {/* Prominent Rounded "Explore Full Catalog" Button below plant cards */}
-        <div className="text-center pt-4 pb-8">
+        <div className="text-center pt-4 pb-4">
           <Link
             href="/plants"
             className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-leaf text-ivory font-semibold text-base leading-6 hover:bg-leaf/90 transition-all duration-200 shadow-lg hover:shadow-2xl active:scale-95 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px]"
@@ -172,16 +157,6 @@ export function PlantFinderSection() {
             <Sparkles className="w-4 h-4 text-ivory transition-transform group-hover:rotate-12" />
             <span>{plantsShowcase.exploreCatalogBtn || "Explore Full Catalog (50+ Plants) →"}</span>
           </Link>
-          <p className={`text-xs font-mono mt-3 leading-4 ${isDark ? "text-ivory/60" : "text-forest/60"}`}>
-            Browse our full highland nursery inventory with live search & filters
-          </p>
-        </div>
-
-        {/* Illustrative Footer Note */}
-        <div className={`text-center text-xs font-mono max-w-[720px] mx-auto leading-4 ${
-          isDark ? "text-ivory/50" : "text-forest/50"
-        }`}>
-          {plantsShowcase.illustrativeFooterNote}
         </div>
       </div>
     </section>
