@@ -1,27 +1,22 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
 import {
   ArrowDown,
   MessageCircle,
+  HeartHandshake,
   Sparkles,
   ShieldCheck,
   Truck,
-  HeartHandshake,
-  Sprout,
-  Pause,
-  Play,
 } from "lucide-react";
 
 export function HeroSection() {
   const { content, lang } = useLanguage();
   const { isDark } = useTheme();
   const heroRef = useRef<HTMLElement | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -47,17 +42,6 @@ export function HeroSection() {
     return () => ctx.revert();
   }, [lang]);
 
-  const toggleVideoPlayback = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
   const whatsappDirectUrl =
     "https://wa.me/251942461641?text=" +
     encodeURIComponent(
@@ -68,7 +52,7 @@ export function HeroSection() {
     <section
       id="top"
       ref={heroRef}
-      className={`relative w-full min-h-[92vh] lg:min-h-[94vh] flex flex-col justify-between bg-transparent pt-28 sm:pt-36 pb-12 sm:pb-16 transition-colors duration-300 ${
+      className={`relative w-full min-h-screen flex flex-col justify-between bg-transparent pt-32 sm:pt-40 pb-8 sm:pb-12 transition-colors duration-300 ${
         isDark ? "text-ivory" : "text-forest"
       }`}
       aria-label="Evergreen Ethiopia Hero"
@@ -76,7 +60,6 @@ export function HeroSection() {
       {/* Background Cinematic Video: Highland yellow blossoms, stone aperture & sky contrail extended halfway into SplitIntro */}
       <div className="absolute inset-x-0 top-0 h-[145%] z-0 overflow-hidden pointer-events-none">
         <video
-          ref={videoRef}
           autoPlay
           loop
           muted
@@ -113,28 +96,8 @@ export function HeroSection() {
       {/* Main Hero Content */}
       <div className="relative z-20 w-full max-w-[1128px] mx-auto px-4 sm:px-8 lg:px-12 flex-1 flex flex-col justify-center">
         <div className="max-w-[720px]">
-          {/* Status Badge Above Headline */}
-          <div className={`hero-stagger inline-flex items-center gap-3 px-4 py-2 rounded-full backdrop-blur-md mb-6 shadow-sm border ${
-            isDark
-              ? "bg-forest-deep/85 border-ivory/20 text-ivory/95"
-              : "bg-white/90 border-forest/15 text-forest shadow-sm"
-          }`}>
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-leaf opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-leaf" />
-            </span>
-            <span className="text-xs font-mono font-medium tracking-wide flex items-center gap-2 leading-4">
-              <Sprout className="w-4 h-4 text-leaf shrink-0" />
-              <span>{content.hero.badgeAboveHeadline}</span>
-            </span>
-            <span className={isDark ? "text-ivory/30" : "text-forest/30"}>|</span>
-            <span className="text-xs font-sans text-leaf font-semibold leading-4">
-              {content.brand.handle}
-            </span>
-          </div>
-
           {/* Stately Botanical Headline */}
-          <h1 className={`hero-stagger font-heading font-extrabold text-4xl sm:text-5xl md:text-[56px] lg:text-[64px] leading-[44px] sm:leading-[56px] md:leading-[64px] lg:leading-[72px] tracking-tight mb-6 ${
+          <h1 className={`hero-stagger font-heading font-extrabold text-4xl sm:text-5xl md:text-[56px] lg:text-[64px] leading-[44px] sm:leading-[56px] md:leading-[64px] lg:leading-[72px] tracking-tight mb-10 sm:mb-14 lg:mb-16 ${
             isDark ? "text-ivory" : "text-forest"
           }`}>
             <span>{content.hero.headlineMain}</span>
@@ -145,7 +108,7 @@ export function HeroSection() {
           </h1>
 
           {/* Subheadline: altitude grown, delivered to door */}
-          <p className={`hero-stagger font-sans text-base sm:text-xl leading-6 sm:leading-[28px] font-normal mb-8 max-w-[720px] ${
+          <p className={`hero-stagger font-sans text-base sm:text-xl leading-relaxed sm:leading-[32px] font-normal mb-10 sm:mb-12 max-w-[720px] ${
             isDark ? "text-ivory/90" : "text-forest/85"
           }`}>
             {content.hero.subheadline}
@@ -177,7 +140,7 @@ export function HeroSection() {
           </div>
 
           {/* Micro-reassurance directly under the CTA */}
-          <div className={`hero-stagger flex items-center gap-2 text-xs font-sans leading-4 mb-8 ${
+          <div className={`hero-stagger flex items-center gap-2 text-xs font-sans leading-4 mb-10 sm:mb-12 ${
             isDark ? "text-ivory/80" : "text-forest/80"
           }`}>
             <HeartHandshake className="w-4 h-4 text-leaf shrink-0" />
@@ -186,67 +149,67 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Specific Social Proof Strip along the base: follower, like, delivery metrics */}
-      <div className="relative z-20 w-full max-w-[1128px] mx-auto px-4 sm:px-8 lg:px-12 pt-4">
-        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-sans leading-4 ${
-          isDark ? "text-ivory/90" : "text-forest/90"
-        }`}>
-          <div className={`flex items-center gap-3 p-2 rounded-xl backdrop-blur-sm ${
-            isDark
-              ? "bg-forest-deep/40 border border-ivory/10"
-              : "bg-white/60 border border-forest/10 shadow-xs"
-          }`}>
-            <div className={`p-2 rounded-lg shrink-0 ${
-              isDark ? "bg-ivory/10 text-leaf border border-leaf/20" : "bg-leaf/15 text-leaf border border-leaf/20"
-            }`}>
-              <Sparkles className="w-4 h-4" />
+      {/* Social Proof Stats along the base: matching requested layered-circle + accent-bar style in theme colors */}
+      <div className="hero-stagger relative z-20 w-full max-w-[1128px] mx-auto px-4 sm:px-8 lg:px-12 pt-12 sm:pt-20 pb-4 sm:pb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+          {/* Stat 1: Followers & Likes */}
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center -space-x-3">
+              <span className={`w-8 h-8 rounded-full border ${isDark ? "bg-leaf/20 border-leaf/30" : "bg-leaf/15 border-leaf/30"}`} />
+              <span className={`w-8 h-8 rounded-full border ${isDark ? "bg-leaf/40 border-leaf/40" : "bg-leaf/30 border-leaf/40"}`} />
+              <span className="w-8 h-8 rounded-full bg-leaf text-ivory flex items-center justify-center shadow-sm z-10">
+                <Sparkles className="w-4 h-4" />
+              </span>
             </div>
-            <span className="font-mono font-medium">
-              13.4K followers · 81.1K likes
-            </span>
+            <div className="border-l-[3px] border-leaf pl-3 py-0.5">
+              <div className={`font-heading font-extrabold text-2xl sm:text-3xl tracking-tight leading-none ${isDark ? "text-ivory" : "text-forest"}`}>
+                13.4K
+              </div>
+              <div className={`text-xs font-sans mt-1.5 font-medium leading-tight ${isDark ? "text-ivory/70" : "text-forest/70"}`}>
+                {lang === "am" ? "የቲክቶክ ማህበረሰብ · 81K+ መውደዶች" : "TikTok community · 81K+ likes"}
+              </div>
+            </div>
           </div>
 
-          <div className={`flex items-center gap-3 p-2 rounded-xl backdrop-blur-sm ${
-            isDark
-              ? "bg-forest-deep/40 border border-ivory/10"
-              : "bg-white/60 border border-forest/10 shadow-xs"
-          }`}>
-            <div className={`p-2 rounded-lg shrink-0 ${
-              isDark ? "bg-ivory/10 text-leaf border border-leaf/20" : "bg-leaf/15 text-leaf border border-leaf/20"
-            }`}>
-              <ShieldCheck className="w-4 h-4" />
+          {/* Stat 2: Delivered */}
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center -space-x-3">
+              <span className={`w-8 h-8 rounded-full border ${isDark ? "bg-leaf/20 border-leaf/30" : "bg-leaf/15 border-leaf/30"}`} />
+              <span className={`w-8 h-8 rounded-full border ${isDark ? "bg-leaf/40 border-leaf/40" : "bg-leaf/30 border-leaf/40"}`} />
+              <span className="w-8 h-8 rounded-full bg-leaf text-ivory flex items-center justify-center shadow-sm z-10">
+                <ShieldCheck className="w-4 h-4" />
+              </span>
             </div>
-            <span>850+ plants delivered in Addis · 7-day guarantee</span>
+            <div className="border-l-[3px] border-leaf pl-3 py-0.5">
+              <div className={`font-heading font-extrabold text-2xl sm:text-3xl tracking-tight leading-none ${isDark ? "text-ivory" : "text-forest"}`}>
+                850+
+              </div>
+              <div className={`text-xs font-sans mt-1.5 font-medium leading-tight ${isDark ? "text-ivory/70" : "text-forest/70"}`}>
+                {lang === "am" ? "የተላመዱ የተረከቡ ተክሎች" : "Acclimatized plants delivered"}
+              </div>
+            </div>
           </div>
 
-          <div className={`flex items-center gap-3 p-2 rounded-xl backdrop-blur-sm ${
-            isDark
-              ? "bg-forest-deep/40 border border-ivory/10"
-              : "bg-white/60 border border-forest/10 shadow-xs"
-          }`}>
-            <div className={`p-2 rounded-lg shrink-0 ${
-              isDark ? "bg-ivory/10 text-leaf border border-leaf/20" : "bg-leaf/15 text-leaf border border-leaf/20"
-            }`}>
-              <Truck className="w-4 h-4" />
+          {/* Stat 3: Speed */}
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center -space-x-3">
+              <span className={`w-8 h-8 rounded-full border ${isDark ? "bg-leaf/20 border-leaf/30" : "bg-leaf/15 border-leaf/30"}`} />
+              <span className={`w-8 h-8 rounded-full border ${isDark ? "bg-leaf/40 border-leaf/40" : "bg-leaf/30 border-leaf/40"}`} />
+              <span className="w-8 h-8 rounded-full bg-leaf text-ivory flex items-center justify-center shadow-sm z-10">
+                <Truck className="w-4 h-4" />
+              </span>
             </div>
-            <span>Carefully packed delivery in Addis in 24–48h</span>
+            <div className="border-l-[3px] border-leaf pl-3 py-0.5">
+              <div className={`font-heading font-extrabold text-2xl sm:text-3xl tracking-tight leading-none ${isDark ? "text-ivory" : "text-forest"}`}>
+                24–48h
+              </div>
+              <div className={`text-xs font-sans mt-1.5 font-medium leading-tight ${isDark ? "text-ivory/70" : "text-forest/70"}`}>
+                {lang === "am" ? "በአዲስ አበባ በጥንቃቄ ማድረስ" : "Careful doorstep delivery in Addis"}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Subtle Video Pause/Play Accessibility Pill */}
-      <button
-        type="button"
-        onClick={toggleVideoPlayback}
-        aria-label={isPlaying ? "Pause ambient background video" : "Play ambient background video"}
-        className={`absolute bottom-4 right-4 sm:bottom-6 sm:right-8 z-20 w-8 h-8 rounded-full backdrop-blur-md flex items-center justify-center transition-all shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf active:scale-95 border ${
-          isDark
-            ? "bg-forest-deep/80 border-ivory/20 text-ivory/70 hover:text-ivory hover:bg-forest"
-            : "bg-white/90 border-forest/20 text-forest/80 hover:text-forest hover:bg-white"
-        }`}
-      >
-        {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-      </button>
     </section>
   );
 }

@@ -149,7 +149,7 @@ export function PlantFinderSection() {
         )}
 
         {/* Prominent Rounded "Explore Full Catalog" Button below plant cards */}
-        <div className="text-center pt-4 pb-8">
+        <div className="text-center pt-4 pb-4">
           <Link
             href="/plants"
             className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-leaf text-ivory font-semibold text-base leading-6 hover:bg-leaf/90 transition-all duration-200 shadow-lg hover:shadow-2xl active:scale-95 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px]"
@@ -157,16 +157,6 @@ export function PlantFinderSection() {
             <Sparkles className="w-4 h-4 text-ivory transition-transform group-hover:rotate-12" />
             <span>{plantsShowcase.exploreCatalogBtn || "Explore Full Catalog (50+ Plants) →"}</span>
           </Link>
-          <p className={`text-xs font-mono mt-3 leading-4 ${isDark ? "text-ivory/60" : "text-forest/60"}`}>
-            Browse our full highland nursery inventory with live search & filters
-          </p>
-        </div>
-
-        {/* Illustrative Footer Note */}
-        <div className={`text-center text-xs font-mono max-w-[720px] mx-auto leading-4 ${
-          isDark ? "text-ivory/50" : "text-forest/50"
-        }`}>
-          {plantsShowcase.illustrativeFooterNote}
         </div>
       </div>
     </section>
