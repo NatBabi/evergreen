@@ -87,13 +87,9 @@ export function FloatingNav() {
                 priority
               />
             </div>
-            <div className="hidden sm:flex flex-col">
-              <span className="font-heading font-extrabold text-xs sm:text-base tracking-wider uppercase leading-4 sm:leading-6">
-                Evergreen
-              </span>
-              <span className="text-xs tracking-widest uppercase opacity-80 mt-1 font-mono font-semibold leading-4 hidden sm:block">
-                Ethiopia · 2,350m
-              </span>
+            <div className="flex items-center font-heading font-extrabold text-base sm:text-lg tracking-tight leading-none">
+              <span className={isDark ? "text-ivory" : "text-forest"}>ever</span>
+              <span className="font-serif italic font-normal text-leaf ml-0.5">green</span>
             </div>
           </Link>
 

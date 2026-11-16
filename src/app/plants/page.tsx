@@ -130,9 +130,9 @@ export default function PlantsCatalogPage() {
           {/* Center: Evergreen Brand Mark */}
           <Link
             href="/"
-            className={`flex items-center gap-2.5 font-heading font-extrabold text-xl tracking-tight leading-7 transition-all ${
+            className={`flex items-center gap-2 font-heading font-extrabold text-lg sm:text-xl tracking-tight leading-none transition-all ${
               isNavSearchOpen ? "hidden md:flex" : "flex"
-            } ${isDark ? "text-ivory" : "text-forest"}`}
+            }`}
             aria-label="Evergreen Ethiopia Home"
           >
             <div className="relative w-7 h-7 sm:w-8 sm:h-8 shrink-0 flex items-center justify-center">
@@ -145,8 +145,10 @@ export default function PlantsCatalogPage() {
                 priority
               />
             </div>
-            <span className="hidden sm:inline">evergreen</span>
-            <span className="hidden sm:inline font-serif italic font-normal text-leaf px-1">ethiopia</span>
+            <div className="flex items-center">
+              <span className={isDark ? "text-ivory" : "text-forest"}>ever</span>
+              <span className="font-serif italic font-normal text-leaf ml-0.5">green</span>
+            </div>
           </Link>
 
           {/* Right: Expanding Search + ThemeToggle + WhatsApp CTA */}

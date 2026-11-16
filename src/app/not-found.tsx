@@ -25,13 +25,9 @@ export default function NotFound() {
               className="w-full h-full object-contain"
             />
           </div>
-          <div className="flex flex-col">
-            <span className="font-heading font-extrabold text-base tracking-wider uppercase leading-6">
-              Evergreen
-            </span>
-            <span className="text-xs tracking-widest uppercase opacity-80 mt-1 font-mono font-semibold leading-4">
-              Ethiopia · 2,350m
-            </span>
+          <div className="flex items-center font-heading font-extrabold text-xl tracking-tight leading-none">
+            <span className="text-forest">ever</span>
+            <span className="font-serif italic font-normal text-leaf ml-0.5">green</span>
           </div>
         </Link>
 
