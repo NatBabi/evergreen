@@ -281,10 +281,37 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
 
         {/* 2-Column Product Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-16">
-          {/* LEFT COLUMN: Vertical thumbnail strip + Featured Image on Architectural Plinth */}
-          <div className="lg:col-span-6 flex flex-col-reverse sm:flex-row gap-4 items-start">
-            {/* Vertical Thumbnail Strip */}
-            <div className="flex sm:flex-col gap-3 overflow-x-auto sm:overflow-visible w-full sm:w-20 shrink-0 pb-2 sm:pb-0">
+          {/* LEFT COLUMN: Featured Image Plinth (Prominent on mobile & desktop) + Thumbnails Strip */}
+          <div className="lg:col-span-6 flex flex-col sm:flex-row gap-4 items-start w-full">
+            {/* 1. Featured Image Plinth View: Ordered 1st on mobile, 2nd on sm+ desktop */}
+            <div className={`order-1 sm:order-2 relative w-full h-[360px] sm:h-[480px] md:h-[540px] min-h-[340px] sm:flex-1 rounded-3xl overflow-hidden shadow-2xl border transition-all ${
+              isDark ? "bg-forest/40 border-ivory/15" : "bg-white border-forest/15"
+            }`}>
+              <Image
+                src={galleryImages[activeImageIndex]}
+                alt={plant.imageAlt}
+                fill
+                priority
+                quality={85}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center transition-all duration-300"
+              />
+
+              {/* Status Badge Tag */}
+              <div className="absolute top-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-forest-deep/90 backdrop-blur-xl text-ivory text-xs font-semibold leading-4 flex items-center gap-2 border border-ivory/20 shadow-md">
+                <Leaf className="w-3.5 h-3.5 text-leaf" />
+                <span className="tracking-tight">{plant.statusBadge}</span>
+              </div>
+
+              {/* Highland Acclimatized Watermark */}
+              <div className="absolute bottom-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-forest-deep/90 backdrop-blur-xl text-ivory text-xs font-mono font-medium leading-4 border border-ivory/20 shadow-sm flex items-center gap-2">
+                <Sprout className="w-3.5 h-3.5 text-leaf shrink-0" />
+                <span>Acclimatized to Addis (2,100m)</span>
+              </div>
+            </div>
+
+            {/* 2. Thumbnail Strip: Ordered 2nd on mobile (beneath large image), 1st on sm+ desktop (left vertical column) */}
+            <div className="order-2 sm:order-1 flex sm:flex-col gap-3 overflow-x-auto sm:overflow-visible w-full sm:w-20 shrink-0 pb-2 sm:pb-0">
               {galleryImages.map((imgSrc, idx) => {
                 const isActive = activeImageIndex === idx;
                 return (
@@ -312,33 +339,6 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                   </button>
                 );
               })}
-            </div>
-
-            {/* Featured Image Plinth View */}
-            <div className={`relative flex-1 w-full h-[380px] sm:h-[480px] md:h-[540px] rounded-3xl overflow-hidden shadow-2xl border ${
-              isDark ? "bg-forest/40 border-ivory/15" : "bg-white border-forest/15"
-            }`}>
-              <Image
-                src={galleryImages[activeImageIndex]}
-                alt={plant.imageAlt}
-                fill
-                priority
-                quality={85}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center transition-all duration-300"
-              />
-
-              {/* Status Badge Tag */}
-              <div className="absolute top-4 left-4 z-10 px-3 py-2 rounded-full bg-forest-deep/90 backdrop-blur-md text-ivory text-xs font-semibold leading-4 flex items-center gap-2 shadow-md border border-ivory/20">
-                <Leaf className="w-3 h-3 text-leaf" />
-                <span>{plant.statusBadge}</span>
-              </div>
-
-              {/* Highland Acclimatized Watermark */}
-              <div className="absolute bottom-4 left-4 z-10 px-3 py-2 rounded-full bg-forest-deep/90 backdrop-blur-md text-ivory text-xs font-mono font-medium leading-4 shadow-sm border border-ivory/20 flex items-center gap-2">
-                <Sprout className="w-4 h-4 text-leaf shrink-0" />
-                <span>Acclimatized to Addis (2,100m)</span>
-              </div>
             </div>
           </div>
 
