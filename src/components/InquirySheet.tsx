@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { useInquiry } from "@/context/InquiryContext";
 import { useTheme } from "@/context/ThemeContext";
-import { X, Phone, Mail, Copy, Sparkles, Send, ShieldCheck, AlertCircle, CheckCircle2 } from "lucide-react";
+import { X, Phone, Mail, Copy, Leaf, Send, ShieldCheck, AlertCircle, CheckCircle2 } from "lucide-react";
 
 export function InquirySheet() {
   const { content, lang } = useLanguage();
@@ -147,7 +148,15 @@ export function InquirySheet() {
                     : "bg-forest/10 border border-forest/15 text-forest"
                 }`}
               >
-                <Sparkles className="w-4 h-4 text-leaf" />
+                <div className="relative w-4 h-4 shrink-0 flex items-center justify-center">
+                  <Image
+                    src="/logo-evergreen.png"
+                    alt="Evergreen Ethiopia Logo"
+                    width={16}
+                    height={16}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
                 <span>Evergreen Ethiopia · Addis Ababa</span>
               </div>
               <h2

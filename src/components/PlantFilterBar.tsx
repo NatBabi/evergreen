@@ -6,7 +6,7 @@ import {
   Search,
   X,
   Sprout,
-  Sparkles,
+  Leaf,
   Moon,
   Sun,
   Flower2,
@@ -32,7 +32,7 @@ export interface CategoryOption {
 
 export const CATEGORY_OPTIONS: CategoryOption[] = [
   { id: "all", label: "All Plants", icon: Sprout },
-  { id: "beginner", label: "Total Beginners", icon: Sparkles },
+  { id: "beginner", label: "Total Beginners", icon: Leaf },
   { id: "low-light", label: "Low Light", icon: Moon },
   { id: "sunny", label: "Sunny Garden", icon: Sun },
   { id: "flowers", label: "Flowering", icon: Flower2 },
@@ -108,12 +108,12 @@ export function PlantFilterBar({
 
             {/* Search Input Field */}
             <input
-              type="search"
+              type="text"
               aria-label="Search plants by English or Amharic name, light, or care"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Search plant name (Monstera, ፒስ ሊሊ), room light, or care..."
-              className={`flex-1 bg-transparent px-4 py-2 text-xs sm:text-base leading-4 sm:leading-6 focus:outline-none ${
+              className={`flex-1 bg-transparent px-4 py-2 text-xs sm:text-base leading-4 sm:leading-6 border-none outline-none focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 shadow-none ${
                 isDark
                   ? "text-ivory placeholder:text-ivory/45"
                   : "text-forest placeholder:text-forest/45"

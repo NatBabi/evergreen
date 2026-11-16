@@ -8,7 +8,6 @@ import { HeroSection } from "@/components/HeroSection";
 import { SplitIntro } from "@/components/SplitIntro";
 import { PlantFinderSection } from "@/components/PlantFinderSection";
 import { CareAccordions } from "@/components/CareAccordions";
-import { FoliageParallaxBand } from "@/components/FoliageParallaxBand";
 import { FourStepsProcess } from "@/components/FourStepsProcess";
 import { ThreePathsCards } from "@/components/ThreePathsCards";
 import { TikTokAudiencePanel } from "@/components/TikTokAudiencePanel";
@@ -80,10 +79,7 @@ export default function Home() {
           </div>
 
           <div className="relative z-10">
-            {/* Section 7: Foliage Parallax Band ("Your spot is waiting. Let's fill it.") */}
-            <FoliageParallaxBand />
-
-            {/* Section 8: Four Steps (Ask, Confirm, Deliver, Grow) */}
+            {/* Section 7: Four Steps (Ask, Confirm, Deliver, Grow) */}
             <FourStepsProcess />
           </div>
         </div>

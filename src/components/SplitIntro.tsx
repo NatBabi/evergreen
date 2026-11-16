@@ -3,7 +3,7 @@
 import React from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
-import { Sun, Mountain, Sparkles, ShieldCheck } from "lucide-react";
+import { Sun, Mountain, Leaf, ShieldCheck } from "lucide-react";
 import { PlantCard } from "@/components/PlantCard";
 
 export function SplitIntro() {
@@ -119,7 +119,7 @@ export function SplitIntro() {
                 <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 leading-4 ${
                   isDark ? "text-ivory/70" : "text-forest/70"
                 }`}>
-                  <Sparkles className="w-4 h-4 text-leaf" />
+                  <Leaf className="w-4 h-4 text-leaf" />
                   <span>{companion.featuredCardTitle || "Featured Nursery Specimen"}</span>
                 </span>
                 <span className="text-xs font-mono text-leaf font-semibold leading-4">

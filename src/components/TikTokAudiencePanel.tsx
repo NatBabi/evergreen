@@ -46,59 +46,51 @@ export function TikTokAudiencePanel() {
           </p>
         </div>
 
-        {/* 3-Metric Proof Banner: Matching Reference UI with Vertical Dividers and Ambient Glow Numbers */}
-        <div className={`w-full rounded-2xl sm:rounded-3xl p-6 sm:p-8 backdrop-blur-md border mb-12 sm:mb-16 transition-all duration-300 ${
-          isDark
-            ? "bg-[#0A261B]/85 border-leaf/30 shadow-2xl shadow-black/40"
-            : "bg-white/95 border-forest/15 shadow-xl shadow-forest/5"
+        {/* Clean Social Proof Metrics (Clean text and numbers only - NO rectangle card) */}
+        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 items-start mb-12 sm:mb-16 py-6 border-y ${
+          isDark ? "border-ivory/15" : "border-forest/15"
         }`}>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-0 items-center">
-            {/* Metric 1: Followers */}
-            <div className="flex flex-col items-center text-center px-4 relative">
-              <div className={`font-heading font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight ${
-                isDark
-                  ? "bg-gradient-to-r from-emerald-400 via-leaf to-green-300 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(120,184,61,0.35)]"
-                  : "bg-gradient-to-r from-forest via-leaf to-emerald-600 bg-clip-text text-transparent"
-              }`}>
-                13.4K
-              </div>
-              <div className={`text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase mt-2 ${
-                isDark ? "text-ivory/65" : "text-forest/65"
-              }`}>
-                {isAmharic ? "የቲክቶክ ተከታዮች" : "COMMUNITY FOLLOWERS"}
-              </div>
+          {/* Metric 1: TikTok Community */}
+          <div className="flex flex-col text-left">
+            <div className={`font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-none ${
+              isDark ? "text-ivory" : "text-forest"
+            }`}>
+              13.4K
             </div>
-
-            {/* Metric 2: Likes (with divider) */}
-            <div className="flex flex-col items-center text-center px-4 sm:border-l sm:border-leaf/20 relative">
-              <div className={`font-heading font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight ${
-                isDark
-                  ? "bg-gradient-to-r from-emerald-400 via-leaf to-green-300 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(120,184,61,0.35)]"
-                  : "bg-gradient-to-r from-forest via-leaf to-emerald-600 bg-clip-text text-transparent"
-              }`}>
-                81.1K
-              </div>
-              <div className={`text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase mt-2 ${
-                isDark ? "text-ivory/65" : "text-forest/65"
-              }`}>
-                {isAmharic ? "ጠቅላላ መውደዶች" : "TOTAL LIKES"}
-              </div>
+            <div className={`text-xs sm:text-sm font-sans mt-2 font-normal ${
+              isDark ? "text-ivory/70" : "text-forest/70"
+            }`}>
+              {isAmharic ? "የቲክቶክ ማህበረሰብ · 81K+ መውደዶች" : "TikTok community · 81K+ likes"}
             </div>
+          </div>
 
-            {/* Metric 3: Videos (with divider) */}
-            <div className="flex flex-col items-center text-center px-4 sm:border-l sm:border-leaf/20 relative">
-              <div className={`font-heading font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight ${
-                isDark
-                  ? "bg-gradient-to-r from-emerald-400 via-leaf to-green-300 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(120,184,61,0.35)]"
-                  : "bg-gradient-to-r from-forest via-leaf to-emerald-600 bg-clip-text text-transparent"
-              }`}>
-                150+
-              </div>
-              <div className={`text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase mt-2 ${
-                isDark ? "text-ivory/65" : "text-forest/65"
-              }`}>
-                {isAmharic ? "የተክሎች ቪዲዮዎች" : "NURSERY REELS"}
-              </div>
+          {/* Metric 2: Delivered in Addis */}
+          <div className={`flex flex-col text-left sm:border-l sm:pl-8 ${
+            isDark ? "sm:border-ivory/15" : "sm:border-forest/15"
+          }`}>
+            <div className={`font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-none ${
+              isDark ? "text-ivory" : "text-forest"
+            }`}>
+              850+
+            </div>
+            <div className={`text-xs sm:text-sm font-sans mt-2 font-normal ${
+              isDark ? "text-ivory/70" : "text-forest/70"
+            }`}>
+              {isAmharic ? "የተላመዱ የተረከቡ ተክሎች" : "Acclimatized plants delivered"}
+            </div>
+          </div>
+
+          {/* Metric 3: Doorstep delivery speed */}
+          <div className={`flex flex-col text-left sm:border-l sm:pl-8 ${
+            isDark ? "sm:border-ivory/15" : "sm:border-forest/15"
+          }`}>
+            <div className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-none text-leaf">
+              24–48h
+            </div>
+            <div className={`text-xs sm:text-sm font-sans mt-2 font-normal ${
+              isDark ? "text-ivory/70" : "text-forest/70"
+            }`}>
+              {isAmharic ? "በአዲስ አበባ በጥንቃቄ ማድረስ" : "Careful doorstep delivery in Addis"}
             </div>
           </div>
         </div>

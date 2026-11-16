@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useTheme } from "@/context/ThemeContext";
 import {
   Star,
+  Leaf,
   ArrowRight,
   MessageCircle,
   Truck,
@@ -87,7 +88,7 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
                 ? "bg-forest-deep/90 text-ivory border-ivory/20"
                 : "bg-white/95 text-forest border-forest/15 shadow-sm"
             }`}>
-              <Star className="w-3 h-3 text-leaf fill-leaf" />
+              <Leaf className="w-3 h-3 text-leaf" />
               <span>{plant.statusBadge}</span>
             </span>
           </div>

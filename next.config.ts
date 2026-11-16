@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   images: {
-    unoptimized: process.env.NODE_ENV === "development",
+    unoptimized: true,
     qualities: [60, 75, 80, 85],
     formats: ["image/avif", "image/webp"],
     deviceSizes: [360, 480, 640, 750, 828, 1080, 1200, 1920],

@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useEffect, Suspense } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import {
   ArrowLeft,
@@ -129,19 +130,30 @@ export default function PlantsCatalogPage() {
           {/* Center: Evergreen Brand Mark */}
           <Link
             href="/"
-            className={`font-heading font-extrabold text-xl tracking-tight leading-7 transition-all ${
-              isNavSearchOpen ? "hidden md:block" : "block"
+            className={`flex items-center gap-2.5 font-heading font-extrabold text-xl tracking-tight leading-7 transition-all ${
+              isNavSearchOpen ? "hidden md:flex" : "flex"
             } ${isDark ? "text-ivory" : "text-forest"}`}
             aria-label="Evergreen Ethiopia Home"
           >
-            <span>evergreen</span>
-            <span className="font-serif italic font-normal text-leaf px-1">ethiopia</span>
+            <div className="relative w-7 h-7 sm:w-8 sm:h-8 shrink-0 flex items-center justify-center">
+              <Image
+                src="/logo-evergreen.png"
+                alt="Evergreen Ethiopia Logo"
+                width={32}
+                height={32}
+                className="w-full h-full object-contain"
+                priority
+              />
+            </div>
+            <span className="hidden sm:inline">evergreen</span>
+            <span className="hidden sm:inline font-serif italic font-normal text-leaf px-1">ethiopia</span>
           </Link>
 
           {/* Right: Expanding Search + ThemeToggle + WhatsApp CTA */}
           <div className="flex items-center gap-2 sm:gap-3">
             {isNavSearchOpen ? (
-              <div
+              <form
+                onSubmit={(e) => e.preventDefault()}
                 className={`relative flex items-center rounded-full border px-3 py-1 shadow-lg animate-in fade-in zoom-in-95 duration-200 ${
                   isDark ? "bg-forest/80 backdrop-blur-md border-leaf/50" : "bg-white backdrop-blur-md border-leaf/50 shadow-md"
                 }`}
@@ -149,13 +161,13 @@ export default function PlantsCatalogPage() {
               >
                 <Search className="w-4 h-4 text-leaf shrink-0 mr-2" />
                 <input
-                  type="search"
+                  type="text"
                   autoFocus
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search plant name, light..."
                   aria-label="Search catalog plants"
-                  className={`bg-transparent text-xs font-sans focus:outline-none w-36 sm:w-56 md:w-72 leading-4 ${
+                  className={`bg-transparent text-xs font-sans focus:outline-none w-36 sm:w-56 md:w-72 leading-4 border-none outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 shadow-none ${
                     isDark ? "text-ivory placeholder:text-ivory/50" : "text-forest placeholder:text-forest/50"
                   }`}
                 />
@@ -184,7 +196,7 @@ export default function PlantsCatalogPage() {
                 >
                   Close
                 </button>
-              </div>
+              </form>
             ) : (
               <button
                 type="button"

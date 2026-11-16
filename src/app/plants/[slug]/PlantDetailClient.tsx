@@ -17,7 +17,8 @@ import {
   Sun,
   Droplets,
   ShieldAlert,
-  Sparkles,
+  Mountain,
+  Leaf,
   HelpCircle,
   Sprout,
   Flame,
@@ -165,16 +166,26 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
             <span className="hidden sm:inline">All Plants</span>
           </Link>
 
-          {/* Center: Brand Wordmark */}
+          {/* Center: Brand Wordmark with Logo */}
           <Link
             href="/"
-            className={`font-heading font-extrabold text-xl tracking-tight leading-7 transition-all ${
-              isNavSearchOpen ? "hidden md:block" : "block"
+            className={`flex items-center gap-2.5 font-heading font-extrabold text-xl tracking-tight leading-7 transition-all ${
+              isNavSearchOpen ? "hidden md:flex" : "flex"
             } ${isDark ? "text-ivory" : "text-forest"}`}
             aria-label="Evergreen Ethiopia Home"
           >
-            <span>evergreen</span>
-            <span className="font-serif italic font-normal text-leaf px-1">ethiopia</span>
+            <div className="relative w-7 h-7 sm:w-8 sm:h-8 shrink-0 flex items-center justify-center">
+              <Image
+                src="/logo-evergreen.png"
+                alt="Evergreen Ethiopia Logo"
+                width={32}
+                height={32}
+                className="w-full h-full object-contain"
+                priority
+              />
+            </div>
+            <span className="hidden sm:inline">evergreen</span>
+            <span className="hidden sm:inline font-serif italic font-normal text-leaf px-1">ethiopia</span>
           </Link>
 
           {/* Right: Expanding Search + ThemeToggle + WhatsApp CTA */}
@@ -190,13 +201,13 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
               >
                 <Search className="w-4 h-4 text-leaf shrink-0 mr-2" />
                 <input
-                  type="search"
+                  type="text"
                   autoFocus
                   value={navSearchQuery}
                   onChange={(e) => setNavSearchQuery(e.target.value)}
                   placeholder="Search plants..."
                   aria-label="Search catalog"
-                  className={`bg-transparent text-xs font-sans focus:outline-none w-32 sm:w-48 md:w-64 leading-4 ${
+                  className={`bg-transparent text-xs font-sans focus:outline-none w-32 sm:w-48 md:w-64 leading-4 border-none outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 shadow-none ${
                     isDark ? "text-ivory placeholder:text-ivory/50" : "text-forest placeholder:text-forest/50"
                   }`}
                 />
@@ -319,7 +330,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
 
               {/* Status Badge Tag */}
               <div className="absolute top-4 left-4 z-10 px-3 py-2 rounded-full bg-forest-deep/90 backdrop-blur-md text-ivory text-xs font-semibold leading-4 flex items-center gap-2 shadow-md border border-ivory/20">
-                <Star className="w-3 h-3 text-leaf fill-leaf" />
+                <Leaf className="w-3 h-3 text-leaf" />
                 <span>{plant.statusBadge}</span>
               </div>
 
@@ -336,7 +347,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
             {/* Status Badge above plant name */}
             <div className="flex items-center gap-2 mb-2">
               <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-leaf/20 text-leaf border border-leaf/30 text-xs font-bold uppercase tracking-wider leading-4">
-                <Sparkles className="w-3 h-3 text-leaf" />
+                <Mountain className="w-3 h-3 text-leaf" />
                 <span>{plant.statusBadge}</span>
               </span>
               <span className={`text-xs font-mono leading-4 ${
@@ -743,7 +754,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 <div className={`p-2 rounded-xl border text-leaf shrink-0 ${
                   isDark ? "bg-forest/60 border-ivory/15" : "bg-forest/5 border-forest/15"
                 }`}>
-                  <Sparkles className="w-4 h-4" />
+                  <Leaf className="w-4 h-4" />
                 </div>
                 <div>
                   <div className={`text-xs font-bold leading-4 ${isDark ? "text-ivory" : "text-forest"}`}>Acclimatized at 2,100m</div>
@@ -925,7 +936,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                   : "bg-forest/10 hover:bg-forest/15 border-forest/20 text-forest hover:border-leaf/50"
               }`}
             >
-              <Sparkles className="w-4 h-4 text-leaf" />
+              <Leaf className="w-4 h-4 text-leaf" />
               <span>View Full 50+ Plant Catalog →</span>
             </Link>
           </div>

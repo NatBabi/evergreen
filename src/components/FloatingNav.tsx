@@ -77,17 +77,17 @@ export function FloatingNav() {
             className="flex items-center gap-3 group py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf rounded-full"
             aria-label="Evergreen Ethiopia Home"
           >
-            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-ivory flex items-center justify-center p-1 border border-forest/20 shadow-sm transition-transform duration-300 group-hover:scale-105 shrink-0">
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 transition-transform duration-300 group-hover:scale-105 shrink-0 flex items-center justify-center">
               <Image
                 src="/logo-evergreen.png"
                 alt="Evergreen Ethiopia Logo"
                 width={36}
                 height={36}
-                className="w-full h-full object-contain rounded-full"
+                className="w-full h-full object-contain"
                 priority
               />
             </div>
-            <div className="flex flex-col">
+            <div className="hidden sm:flex flex-col">
               <span className="font-heading font-extrabold text-xs sm:text-base tracking-wider uppercase leading-4 sm:leading-6">
                 Evergreen
               </span>
@@ -224,16 +224,6 @@ export function FloatingNav() {
                   Addis Ababa · 2,350m Elevation
                 </span>
               </div>
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`p-2 rounded-full ${
-                  isDark ? "hover:bg-ivory/10 text-ivory" : "hover:bg-forest/10 text-forest"
-                }`}
-                aria-label="Close menu"
-              >
-                <X className="w-6 h-6" />
-              </button>
             </div>
 
             <nav className="flex flex-col gap-2 py-2">

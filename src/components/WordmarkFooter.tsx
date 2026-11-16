@@ -44,13 +44,13 @@ export function WordmarkFooter() {
               className="inline-flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf rounded-full"
               aria-label="Evergreen Ethiopia Home - Scroll to top"
             >
-              <div className="relative w-10 h-10 rounded-full overflow-hidden bg-ivory flex items-center justify-center p-1 border border-ivory/20 shadow-sm transition-transform duration-300 group-hover:scale-105 shrink-0">
+              <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-105 shrink-0 flex items-center justify-center">
                 <Image
                   src="/logo-evergreen.png"
                   alt="Evergreen Ethiopia Logo"
                   width={40}
                   height={40}
-                  className="w-full h-full object-contain rounded-full"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div className="flex flex-col text-left">

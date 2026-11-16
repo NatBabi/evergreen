@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 import { useInquiry } from "@/context/InquiryContext";
 import { useTheme } from "@/context/ThemeContext";
-import { Leaf, Sparkles, MessageCircle } from "lucide-react";
+import { Leaf, MessageCircle } from "lucide-react";
 import { PlantItem } from "@/data/content";
 import { PlantCard } from "@/components/PlantCard";
 import {
@@ -154,7 +154,7 @@ export function PlantFinderSection() {
             href="/plants"
             className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-leaf text-ivory font-semibold text-base leading-6 hover:bg-leaf/90 transition-all duration-200 shadow-lg hover:shadow-2xl active:scale-95 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px]"
           >
-            <Sparkles className="w-4 h-4 text-ivory transition-transform group-hover:rotate-12" />
+            <Leaf className="w-4 h-4 text-ivory transition-transform group-hover:rotate-12" />
             <span>{plantsShowcase.exploreCatalogBtn || "Explore Full Catalog (50+ Plants) →"}</span>
           </Link>
         </div>

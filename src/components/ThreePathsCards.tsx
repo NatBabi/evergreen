@@ -4,7 +4,7 @@ import React from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useInquiry } from "@/context/InquiryContext";
 import { useTheme } from "@/context/ThemeContext";
-import { Check, Sparkles, Home, Building2, Trees, ShieldCheck } from "lucide-react";
+import { Check, Sprout, Home, Building2, Trees, ShieldCheck } from "lucide-react";
 
 export function ThreePathsCards() {
   const { content } = useLanguage();
@@ -21,7 +21,7 @@ export function ThreePathsCards() {
       case "projects":
         return <Trees className="w-5 h-5" />;
       default:
-        return <Sparkles className="w-5 h-5" />;
+        return <Sprout className="w-5 h-5" />;
     }
   };
 

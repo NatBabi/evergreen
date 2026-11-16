@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Home, MessageCircle, Phone, Mail, Sparkles, Sprout } from "lucide-react";
+import { Home, MessageCircle, Phone, Mail, Leaf, Sprout } from "lucide-react";
 
 export default function NotFound() {
   const year = 2026;
@@ -16,13 +16,13 @@ export default function NotFound() {
           className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf rounded-full"
           aria-label="Evergreen Ethiopia Home"
         >
-          <div className="relative w-10 h-10 rounded-full overflow-hidden bg-ivory flex items-center justify-center p-1 border border-forest/20 shadow-sm transition-transform duration-300 group-hover:scale-105 shrink-0">
+          <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-105 shrink-0 flex items-center justify-center">
             <Image
               src="/logo-evergreen.png"
               alt="Evergreen Ethiopia Logo"
               width={40}
               height={40}
-              className="w-full h-full object-contain rounded-full"
+              className="w-full h-full object-contain"
             />
           </div>
           <div className="flex flex-col">
@@ -78,7 +78,7 @@ export default function NotFound() {
             href="/#care"
             className="px-6 py-3 rounded-full bg-sage/50 text-forest border border-forest/15 font-semibold text-base leading-6 tracking-wide hover:bg-sage transition-all flex items-center gap-2 active:scale-95 min-h-[48px]"
           >
-            <Sparkles className="w-4 h-4 text-leaf" />
+            <Leaf className="w-4 h-4 text-leaf" />
             <span>Highland Care Guide</span>
           </Link>
         </div>

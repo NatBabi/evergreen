@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useInquiry } from "@/context/InquiryContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -21,6 +21,28 @@ export function FourStepsProcess() {
   const { isDark } = useTheme();
   const { fourSteps } = content;
   const [activeIdx, setActiveIdx] = useState<number>(0);
+
+  // Scroll-driven active step tracking on mobile
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.getAttribute("data-step-index"));
+            if (!isNaN(index)) {
+              setActiveIdx(index);
+            }
+          }
+        });
+      },
+      { rootMargin: "-25% 0px -35% 0px", threshold: 0.2 }
+    );
+
+    const stepElements = document.querySelectorAll(".step-milestone-item");
+    stepElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   // Metadata for the 4 steps aligning with the reference UI
   const stepsMeta = [
@@ -81,12 +103,8 @@ export function FourStepsProcess() {
       aria-label="Ordering process in four transparent steps"
     >
       <div className="max-w-[1128px] mx-auto">
-        {/* Section Header */}
-        <div className="text-center max-w-[720px] mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-semibold mb-4 border tracking-wide uppercase bg-leaf/10 text-leaf border-leaf/25">
-            <Sprout className="w-3.5 h-3.5" />
-            <span>{fourSteps.eyebrow}</span>
-          </div>
+        {/* Section Header without 04 Eyebrow Badge Pill */}
+        <div className="text-center max-w-[720px] mx-auto mb-12 sm:mb-16 md:mb-20">
           <h2 className={`font-heading font-extrabold text-[32px] sm:text-4xl md:text-5xl tracking-tight leading-[40px] sm:leading-[44px] md:leading-[56px] mb-4 ${
             isDark ? "text-ivory" : "text-forest"
           }`}>
@@ -95,17 +113,17 @@ export function FourStepsProcess() {
               {fourSteps.headlineItalic}
             </span>
           </h2>
-          <p className={`font-sans text-base sm:text-lg leading-relaxed font-normal ${
+          <p className={`font-sans text-base max-w-[600px] mx-auto leading-relaxed ${
             isDark ? "text-ivory/75" : "text-forest/75"
           }`}>
             {fourSteps.subtitle}
           </p>
         </div>
 
-        {/* 2-Column Interactive Stacked Card Deck + Timeline Layout */}
+        {/* 2-Column Desktop Layout / Clean Scrollable Timeline on Mobile */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Stacked 3D Card Deck (5 Cols) */}
-          <div className="lg:col-span-5 flex justify-center">
+          {/* Left Column: Stacked 3D Card Deck (DESKTOP ONLY - hidden on mobile to avoid redundant card boxes) */}
+          <div className="hidden lg:flex lg:col-span-5 justify-center">
             <div className="relative w-full max-w-[360px] sm:max-w-[390px]">
               {/* Stacked Cards Physical Deck Layers beneath active card */}
               <div
@@ -118,142 +136,135 @@ export function FourStepsProcess() {
               <div
                 className={`absolute -bottom-5 inset-x-6 h-6 rounded-b-[22px] border-b border-x transition-colors duration-300 ${
                   isDark
-                    ? "bg-[#143E2C] border-leaf/20 shadow-md shadow-black/30"
-                    : "bg-white/75 border-forest/15 shadow-xs"
+                    ? "bg-[#071E15] border-leaf/20 shadow-md shadow-black/30"
+                    : "bg-white/70 border-forest/10"
                 } -z-20`}
               />
-              <div
-                className={`absolute -bottom-7 inset-x-9 h-6 rounded-b-[20px] border-b border-x transition-colors duration-300 ${
-                  isDark
-                    ? "bg-[#071B14] border-leaf/10 opacity-70"
-                    : "bg-white/50 border-forest/12 opacity-80"
-                } -z-30`}
-              />
 
-              {/* Active Foreground Card */}
-              <div
-                className={`relative w-full min-h-[440px] sm:min-h-[470px] rounded-[30px] p-7 sm:p-9 flex flex-col justify-between border transition-all duration-300 shadow-2xl ${
-                  isDark
-                    ? "bg-[#0A261B] border-leaf/35 text-ivory shadow-black/60"
-                    : "bg-white border-forest/15 text-forest shadow-[0_20px_50px_rgba(7,27,20,0.08)] ring-1 ring-forest/5"
-                }`}
-              >
-                {/* Top Row: Brand pill & Step counter */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
+              {/* Main Active Card */}
+              <div className={`w-full rounded-3xl p-7 sm:p-8 backdrop-blur-md border transition-all duration-300 relative ${
+                isDark
+                  ? "bg-[#0C2B1E] border-leaf/35 text-ivory shadow-2xl shadow-black/50"
+                  : "bg-white border-forest/15 text-forest shadow-xl shadow-forest/5"
+              }`}>
+                {/* Stage Tag and Pagination Controls */}
+                <div className="flex items-center justify-between mb-8">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold bg-leaf/15 text-leaf border border-leaf/25">
                     <span className="w-2 h-2 rounded-full bg-leaf animate-pulse" />
-                    <span className="text-xs font-mono font-semibold tracking-wider text-leaf uppercase">
-                      Evergreen
-                    </span>
-                  </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold tracking-widest border ${
-                    isDark ? "bg-leaf/15 text-leaf border-leaf/30" : "bg-leaf/10 text-forest border-leaf/30"
-                  }`}>
-                    0{activeIdx + 1} / 0{fourSteps.steps.length}
-                  </span>
-                </div>
-
-                {/* Center Content: Glowing Icon aperture, Title, Description */}
-                <div className="flex flex-col items-center text-center my-auto py-6">
-                  <div
-                    className={`w-20 h-20 rounded-full flex items-center justify-center border shadow-inner transition-transform duration-300 hover:scale-105 ${
-                      isDark
-                        ? "bg-[#123D2B] border-leaf/40 text-leaf shadow-leaf/20"
-                        : "bg-leaf/10 border-leaf/30 text-leaf shadow-xs"
-                    }`}
-                  >
-                    <CurrentIcon className="w-9 h-9 text-leaf" />
+                    <span>{currentMeta.stepLabel}</span>
                   </div>
 
-                  <h3 className={`font-heading font-extrabold text-3xl sm:text-4xl tracking-tight mt-6 mb-2 ${
-                    isDark ? "text-ivory" : "text-forest"
-                  }`}>
-                    {currentStep.title}
-                  </h3>
-
-                  <p className={`font-sans text-xs sm:text-sm font-medium leading-relaxed max-w-[260px] ${
-                    isDark ? "text-ivory/70" : "text-forest/70"
-                  }`}>
-                    {currentStep.subtitle || currentStep.description}
-                  </p>
-                </div>
-
-                {/* Bottom Row: Mini navigation pill buttons */}
-                <div className={`flex items-center justify-between pt-4 border-t ${
-                  isDark ? "border-leaf/20" : "border-forest/10"
-                }`}>
-                  <span className={`text-xs font-mono font-medium ${isDark ? "text-ivory/50" : "text-forest/50"}`}>
-                    Interactive Step
-                  </span>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     <button
                       type="button"
                       onClick={handlePrev}
-                      aria-label="Previous step"
-                      className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all active:scale-95 ${
+                      className={`w-8 h-8 rounded-full border flex items-center justify-center transition-colors active:scale-95 ${
                         isDark
-                          ? "bg-forest/60 border-ivory/15 text-ivory hover:bg-forest hover:border-leaf"
-                          : "bg-white border-forest/15 text-forest hover:bg-forest/5 hover:border-leaf shadow-xs"
+                          ? "border-ivory/20 hover:bg-ivory/10 text-ivory"
+                          : "border-forest/20 hover:bg-forest/10 text-forest"
                       }`}
+                      aria-label="Previous step"
                     >
                       <ChevronLeft className="w-4 h-4" />
                     </button>
                     <button
                       type="button"
                       onClick={handleNext}
-                      aria-label="Next step"
-                      className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all active:scale-95 ${
+                      className={`w-8 h-8 rounded-full border flex items-center justify-center transition-colors active:scale-95 ${
                         isDark
-                          ? "bg-forest/60 border-ivory/15 text-ivory hover:bg-forest hover:border-leaf"
-                          : "bg-white border-forest/15 text-forest hover:bg-forest/5 hover:border-leaf shadow-xs"
+                          ? "border-ivory/20 hover:bg-ivory/10 text-ivory"
+                          : "border-forest/20 hover:bg-forest/10 text-forest"
                       }`}
+                      aria-label="Next step"
                     >
                       <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
+
+                {/* Big Metric Display */}
+                <div className="mb-6">
+                  <div className="font-heading font-black text-4xl sm:text-5xl text-leaf tracking-tight leading-none mb-2">
+                    {currentMeta.metric}
+                  </div>
+                  <div className={`text-xs font-mono font-bold tracking-wider uppercase ${
+                    isDark ? "text-ivory/70" : "text-forest/70"
+                  }`}>
+                    {currentMeta.metricLabel}
+                  </div>
+                </div>
+
+                {/* Active Card Content */}
+                <div className="space-y-3 mb-8">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-2xl bg-leaf text-ivory flex items-center justify-center shadow-md shrink-0">
+                      <CurrentIcon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className={`font-heading font-bold text-xl sm:text-2xl tracking-tight leading-tight ${
+                        isDark ? "text-ivory" : "text-forest"
+                      }`}>
+                        {currentStep.title}
+                      </h3>
+                      <p className={`text-xs font-sans ${isDark ? "text-ivory/60" : "text-forest/60"}`}>
+                        {currentStep.subtitle}
+                      </p>
+                    </div>
+                  </div>
+                  <p className={`font-sans text-sm leading-relaxed ${isDark ? "text-ivory/85" : "text-forest/85"}`}>
+                    {currentStep.description}
+                  </p>
+                </div>
+
+                {/* Bottom Step Indicator Dots */}
+                <div className="flex items-center justify-center gap-2 pt-4 border-t border-forest/10 dark:border-ivory/10">
+                  {fourSteps.steps.map((_, dotIdx) => (
+                    <button
+                      key={dotIdx}
+                      type="button"
+                      onClick={() => setActiveIdx(dotIdx)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        activeIdx === dotIdx ? "w-8 bg-leaf" : "w-2 bg-leaf/30 hover:bg-leaf/50"
+                      }`}
+                      aria-label={`Go to step ${dotIdx + 1}`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Vertical Connected Timeline Stepper (7 Cols) */}
+          {/* Right Column: 4 Milestone Steps Vertical Timeline */}
           <div className="lg:col-span-7">
-            <div className="relative pl-7 sm:pl-10 flex flex-col gap-8 sm:gap-10 before:absolute before:left-2.5 sm:before:left-3 before:top-3 before:bottom-6 before:w-0.5 before:bg-gradient-to-b before:from-leaf before:via-leaf/35 before:to-transparent">
+            <div className="relative pl-6 sm:pl-8 border-l-2 border-forest/15 dark:border-ivory/15 space-y-8 sm:space-y-10">
               {fourSteps.steps.map((step, idx) => {
-                const isActive = activeIdx === idx;
                 const meta = stepsMeta[idx];
+                const isActive = activeIdx === idx;
+                const StepIcon = meta.icon;
 
                 return (
                   <div
-                    key={step.number}
-                    role="tab"
-                    tabIndex={0}
-                    aria-selected={isActive}
+                    key={idx}
+                    data-step-index={idx}
                     onClick={() => setActiveIdx(idx)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setActiveIdx(idx);
-                      }
-                    }}
-                    className={`relative cursor-pointer group transition-all duration-300 rounded-2xl p-4 -ml-4 outline-none focus-visible:ring-2 focus-visible:ring-leaf ${
+                    className={`step-milestone-item relative cursor-pointer group transition-all duration-300 p-4 sm:p-5 rounded-2xl border ${
                       isActive
                         ? isDark
-                          ? "bg-forest-deep/50 border border-leaf/30 shadow-md"
-                          : "bg-white border border-forest/15 shadow-lg shadow-forest/5"
-                        : "hover:bg-leaf/5"
+                          ? "bg-[#0A261B]/80 border-leaf/40 shadow-lg shadow-black/25"
+                          : "bg-white border-forest/20 shadow-md shadow-forest/5"
+                        : isDark
+                        ? "bg-transparent border-transparent hover:bg-ivory/5"
+                        : "bg-transparent border-transparent hover:bg-forest/5"
                     }`}
                   >
                     {/* Node on Vertical Timeline */}
                     <div
-                      className={`absolute -left-[27px] sm:-left-[39px] top-5 flex items-center justify-center transition-all duration-300 ${
+                      className={`absolute -left-[31px] sm:-left-[39px] top-4 sm:top-5 flex items-center justify-center transition-all duration-300 ${
                         isActive
-                          ? isDark
-                            ? "w-6 h-6 rounded-full bg-leaf text-forest ring-4 ring-leaf/25 shadow-md shadow-leaf/30"
-                            : "w-6 h-6 rounded-full bg-leaf text-ivory ring-4 ring-leaf/25 shadow-md shadow-leaf/20"
+                          ? "w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-leaf text-ivory scale-110 shadow-md shadow-leaf/30"
                           : isDark
-                          ? "w-5 h-5 rounded-full border-2 border-leaf/30 bg-forest-deep group-hover:border-leaf"
-                          : "w-5 h-5 rounded-full border-2 border-forest/20 bg-white group-hover:border-leaf"
+                          ? "w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-ivory/20 bg-forest-deep group-hover:border-leaf"
+                          : "w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-forest/20 bg-ivory group-hover:border-leaf"
                       }`}
                     >
                       {isActive ? (
@@ -263,50 +274,52 @@ export function FourStepsProcess() {
                       )}
                     </div>
 
-                    {/* Step Eyebrow */}
-                    <div className="text-xs font-mono font-bold tracking-wider text-leaf uppercase mb-1">
-                      {meta.stepLabel}
+                    {/* Step Eyebrow with Stage Label and Icon */}
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-[11px] font-mono font-bold tracking-wider text-leaf uppercase">
+                        {meta.stepLabel}
+                      </span>
+                      <span className={`text-[11px] font-mono opacity-40 ${isDark ? "text-ivory" : "text-forest"}`}>·</span>
+                      <StepIcon className="w-3.5 h-3.5 text-leaf opacity-80" />
                     </div>
 
                     {/* Step Title & Subtitle */}
                     <h3
-                      className={`font-heading font-extrabold text-xl sm:text-2xl tracking-tight transition-colors ${
-                        isActive
-                          ? isDark
-                            ? "text-ivory"
-                            : "text-forest"
-                          : isDark
-                          ? "text-ivory/70 group-hover:text-ivory"
-                          : "text-forest/70 group-hover:text-forest"
+                      className={`font-heading font-bold text-lg sm:text-xl tracking-tight transition-colors ${
+                        isDark
+                          ? isActive ? "text-ivory" : "text-ivory/80 group-hover:text-ivory"
+                          : isActive ? "text-forest" : "text-forest/80 group-hover:text-forest"
                       }`}
                     >
                       {step.title}
-                      <span className="text-xs font-sans font-normal opacity-60 ml-3 hidden sm:inline">
+                      <span className="text-xs font-sans font-normal opacity-60 ml-2.5 hidden sm:inline">
                         — {step.subtitle}
                       </span>
                     </h3>
 
                     {/* Step Detailed Description */}
                     <p
-                      className={`font-sans text-xs sm:text-base leading-relaxed mt-2 transition-opacity ${
-                        isActive
-                          ? isDark
-                            ? "text-ivory/85"
-                            : "text-forest/85"
-                          : isDark
-                          ? "text-ivory/50 group-hover:text-ivory/70"
-                          : "text-forest/50 group-hover:text-forest/70"
+                      className={`font-sans text-xs sm:text-sm leading-relaxed mt-1.5 transition-opacity ${
+                        isDark
+                          ? isActive ? "text-ivory/95" : "text-ivory/65 group-hover:text-ivory/85"
+                          : isActive ? "text-forest/95" : "text-forest/65 group-hover:text-forest/85"
                       }`}
                     >
                       {step.description}
                     </p>
 
-                    {/* Highlight Metric / Key Value Box (Matching Reference Style) */}
-                    <div className="flex items-baseline gap-3 mt-3 pt-3 border-t border-leaf/15">
-                      <span className="font-heading font-black text-xl sm:text-2xl text-leaf tracking-tight">
+                    {/* Highlight Metric / Key Value Box */}
+                    <div className={`flex items-baseline gap-2.5 mt-3 pt-2.5 border-t transition-colors ${
+                      isActive
+                        ? isDark ? "border-leaf/25" : "border-forest/15"
+                        : isDark ? "border-ivory/10" : "border-forest/10"
+                    }`}>
+                      <span className="font-heading font-black text-sm sm:text-base text-leaf tracking-tight">
                         {meta.metric}
                       </span>
-                      <span className={`text-xs font-mono font-medium ${isDark ? "text-ivory/65" : "text-forest/65"}`}>
+                      <span className={`text-[11px] sm:text-xs font-mono font-medium ${
+                        isDark ? "text-ivory/60" : "text-forest/60"
+                      }`}>
                         {meta.metricLabel}
                       </span>
                     </div>
