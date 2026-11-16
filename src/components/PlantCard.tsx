@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "@/context/ThemeContext";
 import {
-  Star,
   Leaf,
   ArrowRight,
   MessageCircle,
@@ -108,10 +107,7 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
         <div className={`flex items-center gap-2 mb-2 text-xs font-sans leading-4 flex-wrap ${
           isDark ? "text-ivory/70" : "text-forest/70"
         }`}>
-          <div className="flex items-center gap-1 text-amber-400">
-            <Star className="w-3 h-3 fill-current" />
-            <span className={`font-bold ${isDark ? "text-ivory" : "text-forest"}`}>{plant.rating}</span>
-          </div>
+          <span className={`font-bold ${isDark ? "text-ivory" : "text-forest"}`}>{plant.rating}</span>
           <span className={`font-mono ${isDark ? "text-ivory/60" : "text-forest/60"}`}>({plant.reviewsCount})</span>
           <span className={isDark ? "text-ivory/30" : "text-forest/30"}>·</span>
           <span className="inline-flex items-center gap-1 font-semibold text-leaf">
