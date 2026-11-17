@@ -36,8 +36,28 @@ export async function POST(request: Request) {
 
     // Check environment fallback if database record wasn't found
     if (!adminRecord) {
-      const fallbackEmail = process.env.INITIAL_ADMIN_EMAIL?.trim().toLowerCase();
-      const fallbackHash = process.env.INITIAL_ADMIN_HASH;
+      let fallbackEmail = process.env.INITIAL_ADMIN_EMAIL?.trim().toLowerCase();
+      let fallbackHash = process.env.INITIAL_ADMIN_HASH;
+
+      // Safely read unexpanded hash from .env.local to avoid dotenv-expand mangling '$'
+      if (!fallbackHash || fallbackHash.length < 50) {
+        try {
+          const fs = await import("fs");
+          const path = await import("path");
+          const envPath = path.join(process.cwd(), ".env.local");
+          if (fs.existsSync(envPath)) {
+            const content = fs.readFileSync(envPath, "utf-8");
+            for (const line of content.split("\n")) {
+              if (line.startsWith("INITIAL_ADMIN_EMAIL=")) {
+                fallbackEmail = line.replace("INITIAL_ADMIN_EMAIL=", "").replace(/["']/g, "").trim().toLowerCase();
+              } else if (line.startsWith("INITIAL_ADMIN_HASH=")) {
+                fallbackHash = line.replace("INITIAL_ADMIN_HASH=", "").replace(/["']/g, "").trim();
+              }
+            }
+          }
+        } catch (_) {}
+      }
+
       if (fallbackEmail && fallbackHash && fallbackEmail === cleanEmail) {
         adminRecord = {
           id: 1,

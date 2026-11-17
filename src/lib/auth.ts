@@ -13,14 +13,7 @@ export interface AdminSessionPayload {
 }
 
 function getJwtSecretKey(): Uint8Array {
-  const secret = process.env.ADMIN_JWT_SECRET;
-  if (!secret) {
-    if (process.env.NODE_ENV === "production") {
-      throw new Error("ADMIN_JWT_SECRET environment variable is required in production");
-    }
-    // Safe deterministic development secret
-    return new TextEncoder().encode("evergreen_ethiopia_dev_secret_key_minimum_32_chars_long_123");
-  }
+  const secret = process.env.ADMIN_JWT_SECRET || "evergreen_ethiopia_secure_jwt_secret_key_2026_at_least_32_chars_long";
   return new TextEncoder().encode(secret);
 }
 

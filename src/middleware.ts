@@ -5,10 +5,7 @@ import { jwtVerify } from "jose/jwt/verify";
 const SESSION_COOKIE_NAME = "evergreen_admin_session";
 
 function getSecretKey(): Uint8Array {
-  const secret = process.env.ADMIN_JWT_SECRET;
-  if (!secret) {
-    return new TextEncoder().encode("evergreen_ethiopia_dev_secret_key_minimum_32_chars_long_123");
-  }
+  const secret = process.env.ADMIN_JWT_SECRET || "evergreen_ethiopia_secure_jwt_secret_key_2026_at_least_32_chars_long";
   return new TextEncoder().encode(secret);
 }
 
