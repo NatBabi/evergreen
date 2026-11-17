@@ -139,6 +139,7 @@ async function runVerification() {
 
     // 7. Test Public Specimen Detail Preservation
     await page.goto("http://localhost:3000/plants/monstera", { waitUntil: "domcontentloaded" });
+    await page.waitForSelector("h1", { timeout: 10000 });
     const h1Text = await page.$eval("h1", (el) => el.innerText);
     results.push({
       name: "Monstera specimen detail (/plants/monstera) renders valid heading",
