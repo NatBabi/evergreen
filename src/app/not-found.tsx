@@ -26,8 +26,8 @@ export default function NotFound() {
             />
           </div>
           <div className="flex items-center font-heading font-extrabold text-xl tracking-tight leading-none">
-            <span className="text-forest">ever</span>
-            <span className="font-serif italic font-normal text-leaf ml-0.5">green</span>
+            <span className="text-forest">evergreen</span>
+            <span className="font-serif italic font-normal text-leaf ml-1">ethiopia</span>
           </div>
         </Link>
 
@@ -35,7 +35,7 @@ export default function NotFound() {
           href="https://wa.me/251942461641?text=Hello%20Evergreen%20Ethiopia%2C%20I%20have%20an%20inquiry%20regarding%20your%20plants."
           target="_blank"
           rel="noopener noreferrer"
-          className="px-4 py-2 rounded-full bg-leaf text-ivory text-xs font-semibold hover:bg-leaf/90 transition-all flex items-center gap-2 shadow-sm leading-4 min-h-[40px]"
+          className="px-4 py-2 rounded-full bg-leaf text-ivory text-xs font-semibold hover:bg-leaf/90 transition-colors duration-200 flex items-center gap-2 shadow-sm leading-4 min-h-[40px]"
         >
           <MessageCircle className="w-4 h-4" />
           <span>Ask on WhatsApp</span>

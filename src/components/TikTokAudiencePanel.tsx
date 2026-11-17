@@ -107,7 +107,7 @@ export function TikTokAudiencePanel() {
             return (
               <div
                 key={video.id}
-                className="group relative rounded-3xl overflow-hidden bg-forest-deep flex flex-col justify-between border border-ivory/15 shadow-sm hover:shadow-2xl transition-all duration-300"
+                className="group relative rounded-3xl overflow-hidden bg-forest-deep flex flex-col justify-between border border-ivory/15 shadow-sm hover:shadow-2xl transition-[box-shadow,border-color] duration-300"
               >
                 {/* Media Click through to TikTok */}
                 <a
@@ -168,7 +168,7 @@ export function TikTokAudiencePanel() {
                     href={whatsAppVideoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3 px-4 rounded-full bg-leaf text-ivory font-semibold text-xs tracking-wide leading-4 hover:bg-leaf/90 transition-all flex items-center justify-center gap-2 active:scale-95 min-h-[44px]"
+                    className="w-full py-3 px-4 rounded-full bg-leaf text-ivory font-semibold text-xs tracking-wide leading-4 hover:bg-leaf/90 transition-colors duration-200 flex items-center justify-center gap-2 active:scale-95 min-h-[44px]"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>Want this plant? Ask on WhatsApp</span>
@@ -247,10 +247,10 @@ export function TikTokAudiencePanel() {
                 return (
                   <div
                     key={sIdx}
-                    className={`w-[320px] sm:w-[380px] shrink-0 rounded-3xl backdrop-blur-md p-6 sm:p-8 flex flex-col justify-between shadow-lg transition-all ${
+                    className={`w-[320px] sm:w-[380px] shrink-0 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-lg transition-colors duration-200 ${
                       isDark
-                        ? "bg-forest/50 border border-ivory/15 text-ivory hover:border-leaf/50 hover:bg-forest/70"
-                        : "bg-white/90 border border-forest/10 text-forest shadow-md hover:border-leaf/50 hover:bg-white"
+                        ? "bg-[#0b241b] border border-ivory/15 text-ivory hover:border-leaf/50 hover:bg-[#0e2c21]"
+                        : "bg-white border border-forest/10 text-forest shadow-md hover:border-leaf/50 hover:bg-forest/5"
                     }`}
                   >
                     <div>
@@ -342,7 +342,7 @@ export function TikTokAudiencePanel() {
             href={brand.tiktokUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 px-6 py-3 rounded-full bg-leaf text-ivory font-semibold text-base leading-6 hover:bg-leaf/90 transition-all shadow-sm flex items-center gap-2 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px]"
+            className="shrink-0 px-6 py-3 rounded-full bg-leaf text-ivory font-semibold text-base leading-6 hover:bg-leaf/90 transition-colors duration-200 shadow-sm flex items-center gap-2 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px]"
           >
             <span>{tiktokPanel.visitTiktokBtn}</span>
             <ArrowUpRight className="w-4 h-4 text-ivory" />

@@ -53,7 +53,7 @@ export function FAQSection() {
             return (
               <div
                 key={idx}
-                className={`rounded-3xl border transition-all duration-300 overflow-hidden ${
+                className={`rounded-3xl border transition-colors duration-200 overflow-hidden ${
                   isOpen
                     ? isDark
                       ? "bg-forest/70 border-leaf/40 shadow-xl ring-1 ring-leaf/30 text-ivory"

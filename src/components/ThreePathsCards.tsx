@@ -60,7 +60,7 @@ export function ThreePathsCards() {
             return (
               <div
                 key={path.id}
-                className={`rounded-[32px] p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 ${
+                className={`rounded-[32px] p-6 sm:p-8 flex flex-col justify-between transition-colors duration-200 ${
                   isHighlighted
                     ? isDark
                       ? "bg-forest/80 backdrop-blur-md text-ivory shadow-2xl scale-[1.01] border-2 border-leaf relative ring-2 ring-leaf/40"
@@ -142,7 +142,7 @@ export function ThreePathsCards() {
                 <button
                   type="button"
                   onClick={() => openInquiry(path.title)}
-                  className={`w-full py-3 px-6 rounded-full font-semibold text-base leading-6 tracking-wide transition-all duration-200 shadow-sm active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px] ${
+                  className={`w-full py-3 px-6 rounded-full font-semibold text-base leading-6 tracking-wide transition-colors duration-200 shadow-sm active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px] ${
                     isHighlighted
                       ? "bg-leaf text-ivory hover:bg-leaf/90 shadow-lg shadow-leaf/20"
                       : isDark

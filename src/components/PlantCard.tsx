@@ -33,7 +33,7 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
 
   return (
     <article
-      className={`group relative backdrop-blur-md rounded-3xl p-4 sm:p-6 border transition-all duration-300 flex flex-col justify-between ${
+      className={`group relative backdrop-blur-md rounded-3xl p-4 sm:p-6 border transition-colors duration-300 flex flex-col justify-between ${
         isDark
           ? "bg-forest/40 border-ivory/12 text-ivory shadow-md hover:shadow-2xl hover:border-leaf/40 hover:bg-forest/60"
           : "bg-white/90 border-forest/10 text-forest shadow-sm hover:shadow-xl hover:border-forest/30 hover:bg-white"
@@ -58,7 +58,7 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
             priority={priorityImage}
             quality={80}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className={`object-cover object-center transition-all duration-500 ease-out ${
+            className={`object-cover object-center transition-[transform,opacity] duration-500 ease-out transform-gpu will-change-[transform,opacity] ${
               lifestyleImage && isHovered
                 ? "opacity-0 scale-105"
                 : "opacity-100 group-hover:scale-105"
@@ -74,7 +74,7 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
               loading="lazy"
               quality={80}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-              className={`object-cover object-center transition-all duration-500 ease-out ${
+              className={`object-cover object-center transition-[transform,opacity] duration-500 ease-out transform-gpu will-change-[transform,opacity] ${
                 isHovered ? "opacity-100 scale-105" : "opacity-0 scale-100"
               }`}
             />
@@ -186,7 +186,7 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
           href={whatsAppUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full py-3 px-4 rounded-full bg-leaf text-ivory font-semibold text-xs tracking-wide leading-4 hover:bg-leaf/90 transition-all duration-200 flex items-center justify-center gap-2 shadow-sm active:scale-95 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf"
+          className="w-full py-3 px-4 rounded-full bg-leaf text-ivory font-semibold text-xs tracking-wide leading-4 hover:bg-leaf/90 transition-colors duration-200 flex items-center justify-center gap-2 shadow-sm active:scale-95 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf"
         >
           <MessageCircle className="w-4 h-4 text-ivory" />
           <span>Inquire Now</span>

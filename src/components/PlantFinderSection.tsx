@@ -117,14 +117,14 @@ export function PlantFinderSection() {
               <button
                 type="button"
                 onClick={() => setActiveFilter("beginner")}
-                className="px-6 py-3 rounded-full bg-leaf text-ivory text-xs font-semibold leading-4 hover:bg-leaf/90 transition-all min-h-[40px]"
+                className="px-6 py-3 rounded-full bg-leaf text-ivory text-xs font-semibold leading-4 hover:bg-leaf/90 transition-colors duration-200 min-h-[40px]"
               >
                 Reset to Beginners
               </button>
               <button
                 type="button"
                 onClick={() => openInquiry("Inquiry about available nursery stock")}
-                className={`px-6 py-3 rounded-full border text-xs font-semibold leading-4 transition-all flex items-center gap-2 min-h-[40px] ${
+                className={`px-6 py-3 rounded-full border text-xs font-semibold leading-4 transition-colors duration-200 flex items-center gap-2 min-h-[40px] ${
                   isDark
                     ? "bg-ivory/10 hover:bg-ivory/20 border-ivory/20 text-ivory"
                     : "bg-forest/10 hover:bg-forest/15 border-forest/20 text-forest"
@@ -152,7 +152,7 @@ export function PlantFinderSection() {
         <div className="text-center pt-4 pb-4">
           <Link
             href="/plants"
-            className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-leaf text-ivory font-semibold text-base leading-6 hover:bg-leaf/90 transition-all duration-200 shadow-lg hover:shadow-2xl active:scale-95 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px]"
+            className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-leaf text-ivory font-semibold text-base leading-6 hover:bg-leaf/90 transition-colors duration-200 shadow-lg hover:shadow-2xl active:scale-95 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[48px]"
           >
             <Leaf className="w-4 h-4 text-ivory transition-transform group-hover:rotate-12" />
             <span>{plantsShowcase.exploreCatalogBtn || "Explore Full Catalog (50+ Plants) →"}</span>

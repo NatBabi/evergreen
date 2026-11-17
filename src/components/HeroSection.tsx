@@ -33,6 +33,7 @@ export function HeroSection() {
         stagger: 0.1,
         ease: "power2.out",
         delay: 0.15,
+        force3D: true,
       });
     }, heroRef);
 
@@ -73,7 +74,7 @@ export function HeroSection() {
             Light Mode: Dimmer white / muted warm ivory veil that gently tones down the bright video and smoothly melts into #F7F5EE
         */}
         <div
-          className="absolute inset-0 z-10 pointer-events-none transition-all duration-500"
+          className="absolute inset-0 z-10 pointer-events-none"
           style={{
             background: isDark
               ? `

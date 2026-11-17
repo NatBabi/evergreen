@@ -340,7 +340,7 @@ export function InquirySheet() {
           <button
             type="button"
             onClick={handleWhatsApp}
-            className="w-full py-3 px-6 rounded-full bg-leaf text-ivory font-semibold text-base leading-6 hover:bg-leaf/90 transition-all flex items-center justify-center gap-2 shadow-md active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest min-h-[48px]"
+            className="w-full py-3 px-6 rounded-full bg-leaf text-ivory font-semibold text-base leading-6 hover:bg-leaf/90 transition-colors duration-200 flex items-center justify-center gap-2 shadow-md active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest min-h-[48px]"
           >
             <Send className="w-4 h-4" />
             <span>{inquiryModal.whatsappDirectBtn}</span>
@@ -350,7 +350,7 @@ export function InquirySheet() {
           <div className="grid grid-cols-2 gap-2">
             <a
               href={`tel:${brand.phonePrimaryRaw}`}
-              className={`py-3 px-3 rounded-full font-semibold text-xs leading-4 transition-all flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[44px] ${
+              className={`py-3 px-3 rounded-full font-semibold text-xs leading-4 transition-colors duration-200 flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[44px] ${
                 isDark
                   ? "bg-forest/80 hover:bg-forest border border-ivory/20 text-ivory shadow-sm"
                   : "bg-white hover:bg-forest/5 border border-forest/20 text-forest shadow-xs"
@@ -362,7 +362,7 @@ export function InquirySheet() {
 
             <a
               href={`tel:${brand.phoneSecondaryRaw}`}
-              className={`py-3 px-3 rounded-full font-semibold text-xs leading-4 transition-all flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[44px] ${
+              className={`py-3 px-3 rounded-full font-semibold text-xs leading-4 transition-colors duration-200 flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[44px] ${
                 isDark
                   ? "bg-forest/80 hover:bg-forest border border-ivory/20 text-ivory shadow-sm"
                   : "bg-white hover:bg-forest/5 border border-forest/20 text-forest shadow-xs"
@@ -377,7 +377,7 @@ export function InquirySheet() {
           <div className="grid grid-cols-2 gap-2">
             <a
               href={`mailto:${brand.email}?subject=${emailSubject}&body=${emailBody}`}
-              className={`py-3 px-3 rounded-full font-semibold text-xs leading-4 transition-all flex items-center justify-center gap-2 text-center min-h-[44px] ${
+              className={`py-3 px-3 rounded-full font-semibold text-xs leading-4 transition-colors duration-200 flex items-center justify-center gap-2 text-center min-h-[44px] ${
                 isDark
                   ? "bg-forest/50 hover:bg-forest/70 text-ivory border border-ivory/15 shadow-sm"
                   : "bg-white hover:bg-forest/5 text-forest border border-forest/15 shadow-xs"
@@ -390,7 +390,7 @@ export function InquirySheet() {
             <button
               type="button"
               onClick={handleCopy}
-              className={`py-3 px-3 rounded-full font-medium text-xs leading-4 transition-all flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[44px] ${
+              className={`py-3 px-3 rounded-full font-medium text-xs leading-4 transition-colors duration-200 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[44px] ${
                 isDark
                   ? "bg-forest/50 hover:bg-forest/70 text-ivory border border-ivory/15 shadow-sm"
                   : "bg-white hover:bg-forest/5 text-forest border border-forest/15 shadow-xs"

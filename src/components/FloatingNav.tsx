@@ -17,11 +17,14 @@ export function FloatingNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 60) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 60);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -74,10 +77,10 @@ export function FloatingNav() {
           {/* Logo & Botanical Brand */}
           <Link
             href="#top"
-            className="flex items-center gap-3 group py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf rounded-full"
+            className="flex items-center gap-2 sm:gap-3 group py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf rounded-full shrink-0"
             aria-label="Evergreen Ethiopia Home"
           >
-            <div className="relative w-8 h-8 sm:w-10 sm:h-10 transition-transform duration-300 group-hover:scale-105 shrink-0 flex items-center justify-center">
+            <div className="relative w-7 h-7 sm:w-9 sm:h-9 transition-transform duration-300 group-hover:scale-105 shrink-0 flex items-center justify-center">
               <Image
                 src="/logo-evergreen.png"
                 alt="Evergreen Ethiopia Logo"
@@ -87,9 +90,9 @@ export function FloatingNav() {
                 priority
               />
             </div>
-            <div className="flex items-center font-heading font-extrabold text-base sm:text-lg tracking-tight leading-none">
-              <span className={isDark ? "text-ivory" : "text-forest"}>ever</span>
-              <span className="font-serif italic font-normal text-leaf ml-0.5">green</span>
+            <div className="flex items-center font-heading font-extrabold text-sm sm:text-base md:text-lg tracking-tight leading-none">
+              <span className={isDark ? "text-ivory" : "text-forest"}>evergreen</span>
+              <span className="font-serif italic font-normal text-leaf ml-1 sm:ml-1.5">ethiopia</span>
             </div>
           </Link>
 

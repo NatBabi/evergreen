@@ -169,7 +169,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
           {/* Center: Brand Wordmark with Logo */}
           <Link
             href="/"
-            className={`flex items-center gap-2 font-heading font-extrabold text-lg sm:text-xl tracking-tight leading-none transition-all ${
+            className={`flex items-center gap-2 font-heading font-extrabold text-base sm:text-xl tracking-tight leading-none transition-colors ${
               isNavSearchOpen ? "hidden md:flex" : "flex"
             }`}
             aria-label="Evergreen Ethiopia Home"
@@ -184,9 +184,9 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 priority
               />
             </div>
-            <div className="flex items-center">
-              <span className={isDark ? "text-ivory" : "text-forest"}>ever</span>
-              <span className="font-serif italic font-normal text-leaf ml-0.5">green</span>
+            <div className="flex items-center font-heading font-extrabold text-sm sm:text-lg tracking-tight leading-none">
+              <span className={isDark ? "text-ivory" : "text-forest"}>evergreen</span>
+              <span className="font-serif italic font-normal text-leaf ml-1">ethiopia</span>
             </div>
           </Link>
 
@@ -240,7 +240,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 type="button"
                 onClick={() => setIsNavSearchOpen(true)}
                 aria-label="Open plant search"
-                className={`inline-flex items-center gap-2 px-3 py-2 rounded-full border text-xs font-medium leading-4 transition-all min-h-[40px] ${
+                className={`inline-flex items-center gap-2 px-3 py-2 rounded-full border text-xs font-medium leading-4 transition-colors duration-200 min-h-[40px] ${
                   isDark ? "bg-forest/60 hover:bg-forest border-ivory/15 text-ivory/80 hover:text-ivory" : "bg-forest/5 hover:bg-forest/10 border-forest/15 text-forest/80 hover:text-forest"
                 }`}
               >
@@ -257,7 +257,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
               href={`https://wa.me/251942461641?text=Hi%20Evergreen%20%F0%9F%91%8B%20I'm%20asking%20about%20${encodeURIComponent(plant.commonName)}.`}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border text-xs font-semibold leading-4 transition-all min-h-[40px] shrink-0 ${
+              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border text-xs font-semibold leading-4 transition-colors duration-200 min-h-[40px] shrink-0 ${
                 isDark ? "bg-forest/80 hover:bg-forest border-ivory/20 text-ivory" : "bg-forest/10 hover:bg-forest/15 border-forest/20 text-forest"
               }`}
             >
@@ -286,7 +286,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
           {/* LEFT COLUMN: Featured Image Plinth (Prominent on mobile & desktop) + Thumbnails Strip */}
           <div className="lg:col-span-6 flex flex-col sm:flex-row gap-4 items-start w-full">
             {/* 1. Featured Image Plinth View: Ordered 1st on mobile, 2nd on sm+ desktop */}
-            <div className={`order-1 sm:order-2 relative w-full h-[360px] sm:h-[480px] md:h-[540px] min-h-[340px] sm:flex-1 rounded-3xl overflow-hidden shadow-2xl border transition-all ${
+            <div className={`order-1 sm:order-2 relative w-full h-[360px] sm:h-[480px] md:h-[540px] min-h-[340px] sm:flex-1 rounded-3xl overflow-hidden shadow-2xl border transition-colors ${
               isDark ? "bg-forest/40 border-ivory/15" : "bg-white border-forest/15"
             }`}>
               <Image
@@ -296,7 +296,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 priority
                 quality={85}
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center transition-all duration-300"
+                className="object-cover object-center transition-opacity duration-300"
               />
 
               {/* Status Badge Tag */}
@@ -321,7 +321,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                     key={idx}
                     type="button"
                     onClick={() => setActiveImageIndex(idx)}
-                    className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 transition-all shrink-0 focus:outline-none ${
+                    className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 transition-[border-color,opacity,box-shadow] shrink-0 focus:outline-none ${
                       isActive
                         ? "border-leaf ring-2 ring-leaf/40 shadow-lg opacity-100"
                         : isDark
@@ -498,7 +498,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 <button
                   type="button"
                   onClick={() => setSelectedSize("tabletop")}
-                  className={`p-3 rounded-2xl border text-left transition-all min-h-[56px] ${
+                  className={`p-3 rounded-2xl border text-left transition-colors duration-200 min-h-[56px] ${
                     selectedSize === "tabletop"
                       ? `border-leaf bg-leaf/20 ring-2 ring-leaf/50 ${isDark ? "text-ivory" : "text-forest"}`
                       : isDark
@@ -513,7 +513,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 <button
                   type="button"
                   onClick={() => setSelectedSize("floor")}
-                  className={`p-3 rounded-2xl border text-left transition-all min-h-[56px] ${
+                  className={`p-3 rounded-2xl border text-left transition-colors duration-200 min-h-[56px] ${
                     selectedSize === "floor"
                       ? `border-leaf bg-leaf/20 ring-2 ring-leaf/50 ${isDark ? "text-ivory" : "text-forest"}`
                       : isDark
@@ -531,7 +531,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 <button
                   type="button"
                   onClick={() => setSelectedSize("statement")}
-                  className={`p-3 rounded-2xl border text-left transition-all min-h-[56px] ${
+                  className={`p-3 rounded-2xl border text-left transition-colors duration-200 min-h-[56px] ${
                     selectedSize === "statement"
                       ? `border-leaf bg-leaf/20 ring-2 ring-leaf/50 ${isDark ? "text-ivory" : "text-forest"}`
                       : isDark
@@ -556,7 +556,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 {/* Card A: Plant only */}
                 <div
                   onClick={() => setSelectedPlan("plant-only")}
-                  className={`relative p-4 rounded-3xl border-2 cursor-pointer transition-all flex flex-col justify-between ${
+                  className={`relative p-4 rounded-3xl border-2 cursor-pointer transition-colors duration-200 flex flex-col justify-between ${
                     selectedPlan === "plant-only"
                       ? isDark
                         ? "border-leaf/70 bg-forest/60 shadow-lg ring-1 ring-leaf/40 text-ivory"
@@ -601,7 +601,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 {/* Card B: Plant + pot + care guide [HIGHLIGHTED: Most Popular] */}
                 <div
                   onClick={() => setSelectedPlan("bundle")}
-                  className={`relative p-4 rounded-3xl border-2 cursor-pointer transition-all flex flex-col justify-between ${
+                  className={`relative p-4 rounded-3xl border-2 cursor-pointer transition-colors duration-200 flex flex-col justify-between ${
                     selectedPlan === "bundle"
                       ? isDark
                         ? "border-leaf bg-forest/70 shadow-2xl ring-2 ring-leaf text-ivory"
@@ -706,7 +706,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 href={whatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 px-6 rounded-full bg-leaf text-ivory font-bold text-base leading-6 hover:bg-leaf/90 transition-all duration-200 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 active:scale-95 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[56px]"
+                className="w-full py-4 px-6 rounded-full bg-leaf text-ivory font-bold text-base leading-6 hover:bg-leaf/90 transition-colors duration-200 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 active:scale-95 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[56px]"
               >
                 <MessageCircle className="w-5 h-5 transition-transform group-hover:scale-110 text-ivory" />
                 <span>
@@ -808,7 +808,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 return (
                   <div
                     key={aIdx}
-                    className={`rounded-2xl border backdrop-blur-md overflow-hidden transition-all ${
+                    className={`rounded-2xl border backdrop-blur-md overflow-hidden transition-colors duration-200 ${
                       isDark ? "bg-forest/40 border-ivory/15" : "bg-white/85 border-forest/15 shadow-sm"
                     }`}
                   >
@@ -916,7 +916,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                 onClick={() => {
                   setExploreFilter("all");
                 }}
-                className="px-6 py-3 rounded-full bg-leaf text-ivory text-xs font-semibold leading-4 hover:bg-leaf/90 transition-all min-h-[40px]"
+                className="px-6 py-3 rounded-full bg-leaf text-ivory text-xs font-semibold leading-4 hover:bg-leaf/90 transition-colors duration-200 min-h-[40px]"
               >
                 Reset Filters
               </button>
@@ -932,7 +932,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
           <div className="text-center pt-4">
             <Link
               href="/plants"
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border text-xs font-semibold leading-4 transition-all min-h-[40px] ${
+              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border text-xs font-semibold leading-4 transition-colors duration-200 min-h-[40px] ${
                 isDark
                   ? "bg-forest/80 hover:bg-forest border-ivory/20 text-ivory hover:border-leaf/50"
                   : "bg-forest/10 hover:bg-forest/15 border-forest/20 text-forest hover:border-leaf/50"

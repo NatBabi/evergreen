@@ -130,7 +130,7 @@ export default function PlantsCatalogPage() {
           {/* Center: Evergreen Brand Mark */}
           <Link
             href="/"
-            className={`flex items-center gap-2 font-heading font-extrabold text-lg sm:text-xl tracking-tight leading-none transition-all ${
+            className={`flex items-center gap-2 font-heading font-extrabold text-base sm:text-xl tracking-tight leading-none transition-colors ${
               isNavSearchOpen ? "hidden md:flex" : "flex"
             }`}
             aria-label="Evergreen Ethiopia Home"
@@ -145,9 +145,9 @@ export default function PlantsCatalogPage() {
                 priority
               />
             </div>
-            <div className="flex items-center">
-              <span className={isDark ? "text-ivory" : "text-forest"}>ever</span>
-              <span className="font-serif italic font-normal text-leaf ml-0.5">green</span>
+            <div className="flex items-center font-heading font-extrabold text-sm sm:text-lg tracking-tight leading-none">
+              <span className={isDark ? "text-ivory" : "text-forest"}>evergreen</span>
+              <span className="font-serif italic font-normal text-leaf ml-1">ethiopia</span>
             </div>
           </Link>
 
@@ -204,7 +204,7 @@ export default function PlantsCatalogPage() {
                 type="button"
                 onClick={() => setIsNavSearchOpen(true)}
                 aria-label="Open plant search bar"
-                className={`inline-flex items-center gap-2 px-3 py-2 rounded-full border text-xs font-medium leading-4 transition-all min-h-[40px] ${
+                className={`inline-flex items-center gap-2 px-3 py-2 rounded-full border text-xs font-medium leading-4 transition-colors duration-200 min-h-[40px] ${
                   isDark
                     ? "bg-forest/60 hover:bg-forest border-ivory/15 text-ivory/80 hover:text-ivory"
                     : "bg-forest/5 hover:bg-forest/10 border-forest/15 text-forest/80 hover:text-forest"
@@ -222,7 +222,7 @@ export default function PlantsCatalogPage() {
               href="https://wa.me/251942461641?text=Hi%20Evergreen%20%F0%9F%91%8B%20I'm%20browsing%20your%20plant%20catalog."
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border text-xs font-semibold leading-4 transition-all min-h-[40px] shrink-0 ${
+              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border text-xs font-semibold leading-4 transition-colors duration-200 min-h-[40px] shrink-0 ${
                 isDark
                   ? "bg-forest/80 hover:bg-forest border-ivory/20 text-ivory"
                   : "bg-forest/10 hover:bg-forest/15 border-forest/20 text-forest"
@@ -277,7 +277,7 @@ export default function PlantsCatalogPage() {
                 setSearchQuery("");
                 setActiveFilter("all");
               }}
-              className="px-6 py-3 rounded-full bg-leaf text-ivory text-xs font-semibold leading-4 hover:bg-leaf/90 transition-all min-h-[40px]"
+              className="px-6 py-3 rounded-full bg-leaf text-ivory text-xs font-semibold leading-4 hover:bg-leaf/90 transition-colors duration-200 min-h-[40px]"
             >
               Reset Filters
             </button>

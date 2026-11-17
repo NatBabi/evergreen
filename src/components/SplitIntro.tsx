@@ -44,7 +44,7 @@ export function SplitIntro() {
 
             {/* Three Highland Pillars */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-4">
-              <div className={`p-6 rounded-2xl border flex flex-col justify-start transition-all shadow-sm ${
+              <div className={`p-6 rounded-2xl border flex flex-col justify-start transition-colors duration-200 shadow-sm ${
                 isDark
                   ? "bg-forest/40 border-ivory/12 text-ivory hover:bg-forest/60 hover:border-ivory/25"
                   : "bg-white/85 border-forest/10 text-forest hover:bg-white hover:border-forest/20 hover:shadow-md"
@@ -66,7 +66,7 @@ export function SplitIntro() {
                 </p>
               </div>
 
-              <div className={`p-6 rounded-2xl border flex flex-col justify-start transition-all shadow-sm ${
+              <div className={`p-6 rounded-2xl border flex flex-col justify-start transition-colors duration-200 shadow-sm ${
                 isDark
                   ? "bg-forest/40 border-ivory/12 text-ivory hover:bg-forest/60 hover:border-ivory/25"
                   : "bg-white/85 border-forest/10 text-forest hover:bg-white hover:border-forest/20 hover:shadow-md"
@@ -88,7 +88,7 @@ export function SplitIntro() {
                 </p>
               </div>
 
-              <div className={`p-6 rounded-2xl border flex flex-col justify-start transition-all shadow-sm ${
+              <div className={`p-6 rounded-2xl border flex flex-col justify-start transition-colors duration-200 shadow-sm ${
                 isDark
                   ? "bg-forest/40 border-ivory/12 text-ivory hover:bg-forest/60 hover:border-ivory/25"
                   : "bg-white/85 border-forest/10 text-forest hover:bg-white hover:border-forest/20 hover:shadow-md"

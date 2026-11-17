@@ -69,7 +69,7 @@ export default function Home() {
                 In Light mode: airy ivory mist fading into #F7F5EE
             */}
             <div
-              className="absolute inset-0 z-10 transition-all duration-300"
+              className="absolute inset-0 z-10"
               style={{
                 background: isDark
                   ? "linear-gradient(180deg, #071B14 0%, rgba(7, 27, 20, 0.70) 15%, rgba(7, 27, 20, 0.76) 50%, rgba(7, 27, 20, 0.88) 85%, #071B14 100%)"

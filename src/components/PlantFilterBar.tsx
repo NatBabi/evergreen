@@ -187,7 +187,7 @@ export function PlantFilterBar({
               role="tab"
               aria-selected={isSelected}
               onClick={() => onFilterChange(cat.id)}
-              className={`shrink-0 px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 flex items-center gap-2 shadow-sm min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf leading-4 ${
+              className={`shrink-0 px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-colors duration-200 flex items-center gap-2 shadow-sm min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf leading-4 ${
                 isSelected
                   ? "bg-leaf text-ivory ring-2 ring-leaf ring-offset-2 shadow-md font-bold"
                   : isDark

@@ -94,7 +94,7 @@ export function CareAccordions() {
             return (
               <div
                 key={card.id}
-                className={`relative aspect-[4/5] sm:aspect-[3/4] md:aspect-[4/5] lg:aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm hover:shadow-2xl transition-all duration-300 group flex flex-col justify-between p-6 sm:p-7 ${
+                className={`relative aspect-[4/5] sm:aspect-[3/4] md:aspect-[4/5] lg:aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm hover:shadow-2xl transition-[box-shadow,border-color] duration-300 group flex flex-col justify-between p-6 sm:p-7 ${
                   isDark ? "border-ivory/15 bg-forest" : "border-forest/15 bg-white"
                 }`}
               >

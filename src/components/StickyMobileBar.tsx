@@ -13,12 +13,15 @@ export function StickyMobileBar() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      // Appear after scrolling past hero (~450px)
-      if (window.scrollY > 450) {
-        setVisible(true);
-      } else {
-        setVisible(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Appear after scrolling past hero (~450px)
+          setVisible(window.scrollY > 450);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
