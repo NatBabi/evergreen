@@ -1,7 +1,5 @@
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
 }
 
 generator client {
@@ -84,11 +82,28 @@ model Plant {
   published     Boolean            @default(false)
   updatedAt     DateTime           @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
   images        PlantImage[]
+  variants      PlantVariant[]
   guides        PlantGuide[]
   orderItems    OrderRequestItem[]
 
   @@index([categoryId, published], name: "plants_cat_pub")
   @@map("plants")
+}
+
+model PlantVariant {
+  id          Int         @id @default(autoincrement())
+  plantId     Int         @map("plant_id")
+  plant       Plant       @relation(fields: [plantId], references: [id], onDelete: Cascade)
+  nameEn      String      @map("name_en")
+  nameAm      String?     @map("name_am")
+  heightRange String?     @map("height_range")
+  priceEtb    Decimal     @map("price_etb") @db.Decimal(10, 2)
+  stockStatus StockStatus @default(in_stock) @map("stock_status")
+  isDefault   Boolean     @default(false) @map("is_default")
+  sortOrder   Int         @default(0) @map("sort_order")
+
+  @@index([plantId, stockStatus], name: "variants_plant_stock")
+  @@map("plant_variants")
 }
 
 model PlantImage {
@@ -195,12 +210,15 @@ model NotificationOutbox {
 }
 
 model AdminUser {
-  id           Int        @id @default(autoincrement())
-  email        String     @unique
-  passwordHash String     @map("password_hash")
-  role         AdminRole
-  active       Boolean    @default(true)
-  auditLogs    AuditLog[]
+  id                 Int        @id @default(autoincrement())
+  email              String     @unique
+  passwordHash       String     @map("password_hash")
+  role               AdminRole
+  active             Boolean    @default(true)
+  mustChangePassword Boolean    @default(true) @map("must_change_password")
+  passwordChangedAt  DateTime?  @map("password_changed_at") @db.Timestamptz
+  lastLoginAt        DateTime?  @map("last_login_at") @db.Timestamptz
+  auditLogs          AuditLog[]
 
   @@map("admin_users")
 }

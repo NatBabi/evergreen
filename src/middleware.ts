@@ -1,0 +1,82 @@
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { jwtVerify } from "jose/jwt/verify";
+
+const SESSION_COOKIE_NAME = "evergreen_admin_session";
+
+function getSecretKey(): Uint8Array {
+  const secret = process.env.ADMIN_JWT_SECRET;
+  if (!secret) {
+    return new TextEncoder().encode("evergreen_ethiopia_dev_secret_key_minimum_32_chars_long_123");
+  }
+  return new TextEncoder().encode(secret);
+}
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // 1. Exclude public admin routes (login page & login api)
+  if (pathname === "/admin/login" || pathname === "/api/admin/auth/login") {
+    return NextResponse.next();
+  }
+
+  // 2. Protect /admin/* frontend pages
+  if (pathname.startsWith("/admin")) {
+    const token = request.cookies.get(SESSION_COOKIE_NAME)?.value;
+
+    if (!token) {
+      const loginUrl = new URL("/admin/login", request.url);
+      loginUrl.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+
+    try {
+      const key = getSecretKey();
+      const { payload } = await jwtVerify(token, key, { algorithms: ["HS256"] });
+
+      // If owner must change temporary password, force redirect to /admin/change-password
+      if (payload.mustChangePassword && pathname !== "/admin/change-password") {
+        return NextResponse.redirect(new URL("/admin/change-password", request.url));
+      }
+
+      return NextResponse.next();
+    } catch {
+      // Invalid/expired token -> clear and redirect
+      const loginUrl = new URL("/admin/login", request.url);
+      const response = NextResponse.redirect(loginUrl);
+      response.cookies.delete(SESSION_COOKIE_NAME);
+      return response;
+    }
+  }
+
+  // 3. Protect /api/admin/* API routes
+  if (pathname.startsWith("/api/admin")) {
+    // change-password API is allowed if session has mustChangePassword
+    const token = request.cookies.get(SESSION_COOKIE_NAME)?.value;
+    if (!token) {
+      return NextResponse.json({ error: "Unauthorized: Missing session token" }, { status: 401 });
+    }
+
+    try {
+      const key = getSecretKey();
+      const { payload } = await jwtVerify(token, key, { algorithms: ["HS256"] });
+
+      if (payload.mustChangePassword && pathname !== "/api/admin/auth/change-password") {
+        return NextResponse.json(
+          { error: "Password change required", code: "PASSWORD_CHANGE_REQUIRED" },
+          { status: 403 }
+        );
+      }
+
+      return NextResponse.next();
+    } catch {
+      return NextResponse.json({ error: "Unauthorized: Invalid or expired token" }, { status: 401 });
+    }
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ["/admin/:path*", "/api/admin/:path*"],
+};

@@ -51,11 +51,23 @@ export default function PlantsCatalogPage() {
   const [activeFilter, setActiveFilter] = useState<FilterId>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [isNavSearchOpen, setIsNavSearchOpen] = useState(false);
+  const [plantList, setPlantList] = useState<PlantItem[]>(starPlantsEN);
+
+  useEffect(() => {
+    fetch("/api/plants")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.plants && data.plants.length > 0) {
+          setPlantList(data.plants);
+        }
+      })
+      .catch((err) => console.warn("Live catalog fetch notice:", err));
+  }, []);
 
   // Precompute category item counts for all star plants
   const categoryCounts = useMemo(() => {
     const counts: Record<FilterId, number> = {
-      all: starPlantsEN.length,
+      all: plantList.length,
       beginner: 0,
       "low-light": 0,
       sunny: 0,
@@ -63,7 +75,7 @@ export default function PlantsCatalogPage() {
       fruit: 0,
       "pet-safe": 0,
     };
-    starPlantsEN.forEach((item) => {
+    plantList.forEach((item) => {
       item.categories?.forEach((cat) => {
         if (cat in counts) {
           counts[cat as FilterId] = (counts[cat as FilterId] || 0) + 1;
@@ -71,10 +83,10 @@ export default function PlantsCatalogPage() {
       });
     });
     return counts;
-  }, []);
+  }, [plantList]);
 
   const filteredPlants = useMemo(() => {
-    let result = starPlantsEN;
+    let result = plantList;
 
     if (activeFilter !== "all") {
       result = result.filter((item) =>
@@ -95,7 +107,7 @@ export default function PlantsCatalogPage() {
     }
 
     return result;
-  }, [activeFilter, searchQuery]);
+  }, [plantList, activeFilter, searchQuery]);
 
   return (
     <div className={`relative min-h-screen flex flex-col selection:bg-leaf selection:text-ivory transition-colors duration-300 ${

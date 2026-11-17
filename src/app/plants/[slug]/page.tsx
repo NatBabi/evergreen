@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { starPlantsEN } from "@/data/content";
+import { getLivePlantBySlug } from "@/lib/plants";
 import { PlantDetailClient } from "./PlantDetailClient";
 
 interface PageProps {
@@ -16,7 +17,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const plant = starPlantsEN.find((p) => p.slug === resolvedParams.slug);
+  const plant = await getLivePlantBySlug(resolvedParams.slug);
 
   if (!plant) {
     return {
@@ -122,7 +123,7 @@ function PlantDetailSkeleton() {
 
 async function PlantContent({ params }: PageProps) {
   const resolvedParams = await params;
-  const plant = starPlantsEN.find((p) => p.slug === resolvedParams.slug);
+  const plant = await getLivePlantBySlug(resolvedParams.slug);
 
   if (!plant) {
     notFound();
