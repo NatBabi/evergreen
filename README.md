@@ -4,10 +4,11 @@
 
 ### Botanical Nursery & Highland Acclimatized Plants in Addis Ababa & Bishoftu
 
-[![Next.js](https://img.shields.io/badge/Next.js-16.4-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.4.2-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.3-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Playwright](https://img.shields.io/badge/Playwright-Automated_Suite-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)](https://playwright.dev/)
 [![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
 [![Neon Postgres](https://img.shields.io/badge/Neon-PostgreSQL-00E599?style=for-the-badge&logo=postgresql&logoColor=white)](https://neon.tech/)
 [![Live Production](https://img.shields.io/badge/Live_Site-evergreen--ethiopia.vercel.app-2F9E66?style=for-the-badge&logo=vercel&logoColor=white)](https://evergreen-ethiopia.vercel.app/)
@@ -82,6 +83,17 @@ The site is built with an **inquiry-first architecture**: rather than enforcing 
 
 ## 🌟 Key Features
 
+- **⚡ Performance & Motion Engineering**
+  - **rAF-Throttled Scroll Handlers**: Navigation bars (`FloatingNav`, `StickyMobileBar`) use `requestAnimationFrame` ticking to decouple DOM state updates from scroll events, preventing frame drops.
+  - **Zero Layout Thrashing**: Removed scroll-linked DOM style mutations in favor of native CSS composited properties.
+  - **Hardware-Accelerated Marquee**: Testimonial ticker uses `translate3d(0, 0, 0)` and `will-change: transform` for smooth 60fps infinite scrolling.
+  - **Targeted CSS Transitions**: Scoped to specific properties (`transition-colors duration-200`, `transition-[box-shadow,border-color]`), eliminating full-tree style recalculations.
+
+- **🌿 Unified Editorial Brand System**
+  - Responsive **`evergreen ethiopia`** dual-typeface wordmark (`evergreen` in bold sans paired with an italic serif `ethiopia` accent) across all navbars, 404 pages, catalog header, and specimen detail page.
+  - Clean, unpolluted plant specimen cards without rating star clutter for an honest, botanical nursery presentation.
+  - Mobile specimen hierarchy on `/plants/[slug]` with explicit order-1 featured plant plinth and touch targets strictly >= 44px for WCAG compliance.
+
 - **🌙 Immersive Botanical Dark & Light Modes**
   - **Forest Deep (`#071B14`)** dark palette inspired by lush Ethiopian cloud forests, accented with glowing leaf emeralds (`#2F9E66`) and soft ivory typography.
   - Organic **Ivory (`#F7F5EE`)** light theme with calibrated daylight mist overlays for soft, glare-free daytime browsing.
@@ -117,6 +129,7 @@ The site is built with an **inquiry-first architecture**: rather than enforcing 
 | **Framework** | [Next.js 16 (App Router)](https://nextjs.org/) |
 | **Frontend UI** | [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) |
 | **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) + PostCSS |
+| **Testing & Automation** | [Playwright](https://playwright.dev/) (24-view automated visual capture & regression suite) |
 | **Icons & Visuals** | [Lucide React](https://lucide.dev/) |
 | **Animations** | [GSAP 3 (GreenSock)](https://gsap.com/) |
 | **Database ORM** | [Prisma](https://www.prisma.io/) with PostgreSQL schema |
@@ -157,8 +170,11 @@ evergreen/
 │   ├── detail-light.png      # Monstera specimen detail page (Light Mode)
 │   └── split-intro-light.png # Philosophy section (Light Mode)
 ├── scripts/
-│   ├── capture-all-screenshots.js # Automated Playwright screenshot suite
-│   └── fourpx_audit.js       # Four-Pixel Rule compliance validator
+│   ├── capture-all-screenshots.js # Automated Playwright 24-screenshot suite with auto-server lifecycle
+│   ├── capture-detail-page.mjs   # Specimen detail viewport & options capture
+│   ├── capture-navbars.mjs       # Cross-viewport navbar and brand mark capture
+│   ├── verify-main-fixes.mjs     # Automated UX & regression verification suite
+│   └── fourpx_audit.js           # Four-Pixel Rule compliance validator
 ├── src/
 │   ├── app/
 │   │   ├── globals.css       # Tailwind v4 configuration, theme variables & utilities
@@ -258,11 +274,21 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-### 6. Automated Screenshots
+### 6. Automated Visual Screenshots & Testing
 
-To capture fresh high-resolution screenshots across all viewports and modes:
+The project includes an automated visual testing and screenshot capture suite powered by Playwright. It automatically detects or manages the local production server lifecycle, launches headless Chrome across 1440px desktop and 390px mobile viewports, and captures 24 high-resolution screenshots covering:
+- **Desktop Landing** (Hero, Frosted Scrolled Nav, Philosophy, Care Accordions, Journey, Paths, Inquiry Sheet Validation/Success, Footer) in both Dark and Light botanical modes
+- **Catalog Page** (`/plants`) in Dark and Light modes
+- **Specimen Detail Page** (`/plants/monstera`) in Dark and Light modes
+- **Mobile Viewports** (Hero, Nav Drawer, Features, Philosophy, Journey, Consultation, Inquiry Sheet, Footer)
+
+Run the suite anytime:
 
 ```bash
+# Build production bundle first
+npm run build
+
+# Capture all screenshots (stores into screenshots/ directory)
 node scripts/capture-all-screenshots.js
 ```
 

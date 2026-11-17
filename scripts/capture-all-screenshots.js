@@ -1,14 +1,85 @@
 const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
+const http = require('http');
+const { spawn, exec } = require('child_process');
+
+function killProcessTree(pid) {
+  if (!pid) return;
+  if (process.platform === 'win32') {
+    try {
+      exec(`taskkill /pid ${pid} /T /F`);
+    } catch (_) {}
+  } else {
+    try {
+      process.kill(-pid);
+    } catch (_) {
+      try { process.kill(pid); } catch (__) {}
+    }
+  }
+}
+
+function isServerRunning(port = 3000) {
+  return new Promise((resolve) => {
+    const req = http.get(`http://localhost:${port}`, (res) => {
+      resolve(true);
+    });
+    req.on('error', () => resolve(false));
+    req.setTimeout(1000, () => {
+      req.destroy();
+      resolve(false);
+    });
+  });
+}
+
+function waitForServer(port = 3000, maxAttempts = 30) {
+  return new Promise((resolve, reject) => {
+    let attempts = 0;
+    const interval = setInterval(async () => {
+      attempts++;
+      const running = await isServerRunning(port);
+      if (running) {
+        clearInterval(interval);
+        resolve();
+      } else if (attempts >= maxAttempts) {
+        clearInterval(interval);
+        reject(new Error(`Server failed to start on port ${port} after ${maxAttempts} attempts`));
+      }
+    }, 500);
+  });
+}
 
 async function captureAllScreenshots() {
-  const outputDir = path.join(__dirname, '..', 'screenshots');
+  const rootDir = path.join(__dirname, '..');
+  const outputDir = path.join(rootDir, 'screenshots');
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  const browser = await chromium.launch({ headless: true });
+  let serverProcess = null;
+  let browser = null;
+  try {
+    const alreadyRunning = await isServerRunning(3000);
+    if (!alreadyRunning) {
+      console.log('Starting local Next.js production server for screenshots on port 3000...');
+      const nextCmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
+      serverProcess = spawn(nextCmd, ['next', 'start', '-p', '3000'], {
+        cwd: rootDir,
+        stdio: 'inherit',
+        shell: true,
+      });
+      await waitForServer(3000);
+      console.log('Next.js server is ready on http://localhost:3000\n');
+    } else {
+      console.log('Using existing Next.js server on http://localhost:3000\n');
+    }
+
+    try {
+      browser = await chromium.launch({ channel: 'chrome', headless: true });
+    } catch (err) {
+      console.log('Falling back to default chromium launcher...');
+      browser = await chromium.launch({ headless: true });
+    }
 
   const hideDevStyles = async (page) => {
     await page.addStyleTag({
@@ -394,10 +465,20 @@ async function captureAllScreenshots() {
     console.log('✓ Captured: 08_mobile_footer.png');
   }
 
-  await mobileContext.close();
-  await browser.close();
+    await mobileContext.close();
+    await browser.close();
+    browser = null;
 
-  console.log('\n🎉 ALL SCREENSHOTS SUCCESSFULLY CAPTURED AND STORED IN screenshots/ DIRECTORY!');
+    console.log('\n🎉 ALL SCREENSHOTS SUCCESSFULLY CAPTURED AND STORED IN screenshots/ DIRECTORY!');
+  } finally {
+    if (browser) {
+      try { await browser.close(); } catch (_) {}
+    }
+    if (serverProcess && serverProcess.pid) {
+      console.log('Shutting down Next.js screenshot server...');
+      killProcessTree(serverProcess.pid);
+    }
+  }
 }
 
 captureAllScreenshots().catch((err) => {
