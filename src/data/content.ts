@@ -128,6 +128,7 @@ export interface SiteContent {
     honestDisclaimer: string;
   };
   nav: {
+    home: string;
     plants: string;
     companion: string;
     care: string;
@@ -804,6 +805,7 @@ export const contentEN: SiteContent = {
     honestDisclaimer: "Verified data · Business details confirmed directly with the nursery owner.",
   },
   nav: {
+    home: "Home",
     plants: "Plants",
     companion: "Companion",
     care: "Care Guide",
@@ -1247,6 +1249,7 @@ export const contentAM: SiteContent = {
     honestDisclaimer: "የተረጋገጠ መረጃ፦ ሁሉም ዝርዝሮች ከባለቤቱ ጋር ከመጨረሻው ትዕዛዝ በፊት ይረጋገጣሉ።",
   },
   nav: {
+    home: "ዋና ገጽ",
     plants: "ተክሎች",
     companion: "ስለ ተክሎቻችን",
     care: "እንክብካቤ",

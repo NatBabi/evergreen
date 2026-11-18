@@ -10,6 +10,8 @@ import {
   Leaf,
   Search,
   X,
+  SlidersHorizontal,
+  RotateCcw,
 } from "lucide-react";
 import { starPlantsEN, PlantItem } from "@/data/content";
 import { useTheme } from "@/context/ThemeContext";
@@ -19,9 +21,14 @@ import { WordmarkFooter } from "@/components/WordmarkFooter";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
 import { PlantCard } from "@/components/PlantCard";
 import {
-  PlantFilterBar,
   FilterId,
+  CATEGORY_OPTIONS,
 } from "@/components/PlantFilterBar";
+import {
+  CatalogFilterSidebar,
+  SortOption,
+  LightOption,
+} from "@/components/CatalogFilterSidebar";
 
 const InquirySheet = dynamic(
   () => import("@/components/InquirySheet").then((mod) => mod.InquirySheet),
@@ -49,8 +56,11 @@ function SearchParamSync({
 export default function PlantsCatalogClient() {
   const { isDark } = useTheme();
   const [activeFilter, setActiveFilter] = useState<FilterId>("all");
+  const [selectedLight, setSelectedLight] = useState<LightOption>("all");
+  const [sortBy, setSortBy] = useState<SortOption>("recommended");
   const [searchQuery, setSearchQuery] = useState("");
   const [isNavSearchOpen, setIsNavSearchOpen] = useState(false);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [plantList, setPlantList] = useState<PlantItem[]>(starPlantsEN);
 
   useEffect(() => {
@@ -64,7 +74,7 @@ export default function PlantsCatalogClient() {
       .catch((err) => console.warn("Live catalog fetch notice:", err));
   }, []);
 
-  // Precompute category item counts for all star plants
+  // Precompute category item counts for all plants
   const categoryCounts = useMemo(() => {
     const counts: Record<FilterId, number> = {
       all: plantList.length,
@@ -85,15 +95,43 @@ export default function PlantsCatalogClient() {
     return counts;
   }, [plantList]);
 
+  // Comprehensive Filtering & Sorting Engine
   const filteredPlants = useMemo(() => {
-    let result = plantList;
+    let result = [...plantList];
 
+    // 1. Category Filter
     if (activeFilter !== "all") {
       result = result.filter((item) =>
         item.categories?.includes(activeFilter as PlantItem["categories"][number])
       );
     }
 
+    // 2. Light Filter
+    if (selectedLight !== "all") {
+      result = result.filter((item) => {
+        const itemLight = (item.chips?.light || item.light || "").toLowerCase();
+        if (selectedLight === "bright") {
+          return itemLight.includes("bright") || itemLight.includes("indirect");
+        }
+        if (selectedLight === "low") {
+          return (
+            itemLight.includes("low") ||
+            itemLight.includes("medium") ||
+            item.categories?.includes("low-light")
+          );
+        }
+        if (selectedLight === "direct") {
+          return (
+            itemLight.includes("direct") ||
+            itemLight.includes("sun") ||
+            item.categories?.includes("sunny")
+          );
+        }
+        return true;
+      });
+    }
+
+    // 3. Search Query
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
       result = result.filter(
@@ -106,13 +144,37 @@ export default function PlantsCatalogClient() {
       );
     }
 
+    // 4. Sorting
+    if (sortBy === "price-asc") {
+      result.sort((a, b) => (a.priceETB || 0) - (b.priceETB || 0));
+    } else if (sortBy === "price-desc") {
+      result.sort((a, b) => (b.priceETB || 0) - (a.priceETB || 0));
+    } else if (sortBy === "name-asc") {
+      result.sort((a, b) => a.commonName.localeCompare(b.commonName));
+    }
+
     return result;
-  }, [plantList, activeFilter, searchQuery]);
+  }, [plantList, activeFilter, selectedLight, searchQuery, sortBy]);
+
+  const handleResetFilters = () => {
+    setActiveFilter("all");
+    setSelectedLight("all");
+    setSortBy("recommended");
+    setSearchQuery("");
+  };
+
+  const isFiltered =
+    activeFilter !== "all" ||
+    selectedLight !== "all" ||
+    sortBy !== "recommended" ||
+    searchQuery.trim().length > 0;
 
   return (
-    <div className={`relative min-h-screen flex flex-col selection:bg-leaf selection:text-ivory transition-colors duration-300 ${
-      isDark ? "bg-forest-deep text-ivory" : "bg-ivory text-forest"
-    }`}>
+    <div
+      className={`relative min-h-screen flex flex-col selection:bg-leaf selection:text-ivory transition-colors duration-300 ${
+        isDark ? "bg-forest-deep text-ivory" : "bg-ivory text-forest"
+      }`}
+    >
       <Suspense fallback={null}>
         <SearchParamSync
           onQuery={setSearchQuery}
@@ -120,14 +182,16 @@ export default function PlantsCatalogClient() {
         />
       </Suspense>
 
-      {/* Top Header Navigation with Left Back Link, Centered Brand & Right Expanding Search + ThemeToggle + WhatsApp */}
-      <header className={`sticky top-0 z-40 w-full backdrop-blur-md border-b py-3 sm:py-4 px-4 sm:px-8 lg:px-12 transition-colors duration-300 ${
-        isDark
-          ? "bg-forest-deep/85 border-ivory/15 text-ivory"
-          : "bg-white/85 border-forest/15 text-forest shadow-sm"
-      }`}>
-        <div className="max-w-[1128px] mx-auto flex items-center justify-between gap-3 sm:gap-4">
-          {/* Left: Back Link */}
+      {/* Top Header Navigation with Left Back Link, Centered Brand & Right Actions */}
+      <header
+        className={`sticky top-0 z-40 w-full backdrop-blur-md border-b py-3 sm:py-4 px-4 sm:px-8 lg:px-12 transition-colors duration-300 ${
+          isDark
+            ? "bg-forest-deep/85 border-ivory/15 text-ivory"
+            : "bg-white/85 border-forest/15 text-forest shadow-sm"
+        }`}
+      >
+        <div className="max-w-[1320px] mx-auto flex items-center justify-between gap-3 sm:gap-4">
+          {/* Left: Back to Home Link */}
           <Link
             href="/"
             className={`inline-flex items-center gap-2 text-xs font-semibold hover:text-leaf transition-colors leading-4 min-h-[44px] shrink-0 ${
@@ -169,7 +233,9 @@ export default function PlantsCatalogClient() {
               <form
                 onSubmit={(e) => e.preventDefault()}
                 className={`relative flex items-center rounded-full border px-3 py-1 shadow-lg animate-in fade-in zoom-in-95 duration-200 ${
-                  isDark ? "bg-forest/80 backdrop-blur-md border-leaf/50" : "bg-white backdrop-blur-md border-leaf/50 shadow-md"
+                  isDark
+                    ? "bg-forest/80 backdrop-blur-md border-leaf/50"
+                    : "bg-white backdrop-blur-md border-leaf/50 shadow-md"
                 }`}
                 role="search"
               >
@@ -181,7 +247,7 @@ export default function PlantsCatalogClient() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search plant name, light..."
                   aria-label="Search catalog plants"
-                  className={`bg-transparent text-xs font-sans focus:outline-none w-36 sm:w-56 md:w-72 leading-4 border-none outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 shadow-none ${
+                  className={`bg-transparent text-xs font-sans focus:outline-none w-36 sm:w-56 md:w-72 leading-4 border-none outline-none focus:ring-0 shadow-none ${
                     isDark ? "text-ivory placeholder:text-ivory/50" : "text-forest placeholder:text-forest/50"
                   }`}
                 />
@@ -191,7 +257,9 @@ export default function PlantsCatalogClient() {
                     onClick={() => setSearchQuery("")}
                     aria-label="Clear search input"
                     className={`w-6 h-6 rounded-full flex items-center justify-center transition-colors shrink-0 mr-1 ${
-                      isDark ? "bg-ivory/10 hover:bg-ivory/20 text-ivory/70 hover:text-ivory" : "bg-forest/10 hover:bg-forest/20 text-forest/70 hover:text-forest"
+                      isDark
+                        ? "bg-ivory/10 hover:bg-ivory/20 text-ivory/70 hover:text-ivory"
+                        : "bg-forest/10 hover:bg-forest/20 text-forest/70 hover:text-forest"
                     }`}
                   >
                     <X className="w-3 h-3" />
@@ -205,7 +273,9 @@ export default function PlantsCatalogClient() {
                   }}
                   aria-label="Close search bar"
                   className={`text-xs font-mono pl-1 border-l ${
-                    isDark ? "text-ivory/60 hover:text-ivory border-ivory/15" : "text-forest/60 hover:text-forest border-forest/15"
+                    isDark
+                      ? "text-ivory/60 hover:text-ivory border-ivory/15"
+                      : "text-forest/60 hover:text-forest border-forest/15"
                   }`}
                 >
                   Close
@@ -230,6 +300,7 @@ export default function PlantsCatalogClient() {
             {/* Dark Mode ↔ Light Mode Switcher */}
             <ThemeToggle />
 
+            {/* Direct WhatsApp Help Button */}
             <a
               href="https://wa.me/251942461641?text=Hi%20Evergreen%20%F0%9F%91%8B%20I'm%20browsing%20your%20plant%20catalog."
               target="_blank"
@@ -247,68 +318,217 @@ export default function PlantsCatalogClient() {
         </div>
       </header>
 
-      {/* Main Catalog Body: Filters & Plant Grid directly beneath Header */}
-      <main className="flex-1 w-full max-w-[1128px] mx-auto px-4 sm:px-8 lg:px-12 pt-6 sm:pt-8 pb-16">
-        {/* Catalog H1 — visible, SEO-relevant, matches the page's intent */}
-        <h1 className={`font-heading font-extrabold text-2xl sm:text-3xl tracking-tight leading-tight mb-6 ${
-          isDark ? "text-ivory" : "text-forest"
-        }`}>
-          Indoor and outdoor plants in Addis Ababa
-        </h1>
-
-        {/* Category Filter Pills & Active Filter Status Bar */}
-        <PlantFilterBar
-          hideSearch={true}
-          showActiveStrip={true}
-          searchQuery={searchQuery}
-          onSearchChange={setSearchQuery}
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
-          totalCount={starPlantsEN.length}
-          filteredCount={filteredPlants.length}
-          categoryCounts={categoryCounts}
-        />
-
-        {/* Empty State */}
-        {filteredPlants.length === 0 ? (
-          <div
-            role="status"
-            className={`py-16 px-6 text-center rounded-3xl border border-dashed max-w-[720px] mx-auto my-8 ${
-              isDark
-                ? "bg-forest/40 border-ivory/20 text-ivory"
-                : "bg-white/80 border-forest/20 text-forest shadow-sm"
+      {/* Main Catalog Body */}
+      <main className="flex-1 w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16">
+        {/* Catalog Banner / Header (Reference style) */}
+        <div className="mb-6 sm:mb-8 text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-2 bg-leaf/15 text-leaf border border-leaf/30 leading-none">
+            <Leaf className="w-3.5 h-3.5" />
+            <span>Addis Ababa Botanical Nursery · 2,350M</span>
+          </div>
+          <h1
+            className={`font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-2 ${
+              isDark ? "text-ivory" : "text-forest"
             }`}
           >
-            <Leaf className="w-10 h-10 text-leaf/40 mx-auto mb-3" />
-            <h3 className={`font-heading font-bold text-xl mb-1 leading-7 ${
-              isDark ? "text-ivory" : "text-forest"
-            }`}>
-              No matching plants in catalog
-            </h3>
-            <p className={`text-xs sm:text-base font-sans mb-6 max-w-sm mx-auto leading-4 sm:leading-6 ${
-              isDark ? "text-ivory/70" : "text-forest/70"
-            }`}>
-              We couldn&apos;t find anything matching &ldquo;{searchQuery}&rdquo;. Check with us on WhatsApp for unlisted nursery stock.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setSearchQuery("");
-                setActiveFilter("all");
-              }}
-              className="px-6 py-3 rounded-full bg-leaf text-ivory text-xs font-semibold leading-4 hover:bg-leaf/90 transition-colors duration-200 min-h-[40px]"
-            >
-              Reset Filters
-            </button>
+            Explore Our Plants
+          </h1>
+          <p
+            className={`font-sans text-sm sm:text-base max-w-2xl leading-relaxed ${
+              isDark ? "text-ivory/80" : "text-forest/80"
+            }`}
+          >
+            Healthy indoor and outdoor plants acclimatized to Ethiopian highland elevation. Available for doorstep delivery across Addis Ababa.
+          </p>
+        </div>
+
+        {/* Mobile Collapsible Filter Button (Reference style for mobile) */}
+        <div className="block lg:hidden mb-6">
+          <button
+            type="button"
+            onClick={() => setMobileFiltersOpen((prev) => !prev)}
+            className={`w-full flex items-center justify-between py-3 px-4 rounded-2xl border text-xs font-semibold leading-none shadow-sm transition-colors min-h-[46px] ${
+              isDark
+                ? "bg-forest/60 border-ivory/15 text-ivory hover:bg-forest/80"
+                : "bg-white border-forest/15 text-forest hover:bg-forest/5"
+            }`}
+            aria-expanded={mobileFiltersOpen}
+            aria-label="Toggle filter plants controls"
+          >
+            <div className="flex items-center gap-2">
+              <SlidersHorizontal className="w-4 h-4 text-leaf" />
+              <span>Filter Plants {isFiltered && "(Active)"}</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs font-mono">
+              <span>{filteredPlants.length} plants</span>
+              <span className="text-leaf">{mobileFiltersOpen ? "▲" : "▼"}</span>
+            </div>
+          </button>
+
+          {mobileFiltersOpen && (
+            <div className="mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
+              <CatalogFilterSidebar
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+                activeCategory={activeFilter}
+                onCategoryChange={setActiveFilter}
+                selectedLight={selectedLight}
+                onLightChange={setSelectedLight}
+                sortBy={sortBy}
+                onSortChange={setSortBy}
+                onReset={handleResetFilters}
+                onApply={() => setMobileFiltersOpen(false)}
+                categoryCounts={categoryCounts}
+                totalCount={plantList.length}
+                filteredCount={filteredPlants.length}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* 2-Column Architecture: Desktop Filter Sidebar + Main Content */}
+        <div className="flex flex-col lg:flex-row items-start gap-8">
+          {/* Left Sidebar on Desktop (Reference layout) */}
+          <div className="hidden lg:block w-72 shrink-0 sticky top-24">
+            <CatalogFilterSidebar
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              activeCategory={activeFilter}
+              onCategoryChange={setActiveFilter}
+              selectedLight={selectedLight}
+              onLightChange={setSelectedLight}
+              sortBy={sortBy}
+              onSortChange={setSortBy}
+              onReset={handleResetFilters}
+              categoryCounts={categoryCounts}
+              totalCount={plantList.length}
+              filteredCount={filteredPlants.length}
+            />
           </div>
-        ) : (
-          /* Responsive 3-Column Catalog Grid */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            {filteredPlants.map((plant: PlantItem) => (
-              <PlantCard key={plant.id} plant={plant} />
-            ))}
+
+          {/* Right Main Grid Area */}
+          <div className="flex-1 w-full min-w-0">
+            {/* Top Quick Category Chips (Fixing the scroll cutting bug!) */}
+            <div className="relative mb-6">
+              <div
+                role="tablist"
+                aria-label="Botanical category filter tabs"
+                className="flex items-center justify-start gap-2 overflow-x-auto pb-2 pt-1 -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-0 scrollbar-none"
+              >
+                {CATEGORY_OPTIONS.map((cat) => {
+                  const isSelected = activeFilter === cat.id;
+                  const count = categoryCounts[cat.id] ?? 0;
+                  const Icon = cat.icon;
+
+                  return (
+                    <button
+                      key={cat.id}
+                      role="tab"
+                      aria-selected={isSelected}
+                      onClick={() => setActiveFilter(cat.id)}
+                      className={`shrink-0 px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-colors duration-200 flex items-center gap-2 shadow-sm min-h-[38px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf leading-none ${
+                        isSelected
+                          ? "bg-leaf text-ivory ring-2 ring-leaf ring-offset-2 shadow-md font-bold"
+                          : isDark
+                            ? "bg-forest/50 border border-ivory/15 text-ivory/85 hover:bg-forest/80 hover:text-ivory"
+                            : "bg-white/90 border border-forest/15 text-forest/85 hover:bg-white hover:text-forest shadow-sm"
+                      }`}
+                    >
+                      <Icon
+                        className={`w-3.5 h-3.5 shrink-0 transition-colors ${
+                          isSelected ? "text-ivory" : "text-leaf"
+                        }`}
+                      />
+                      <span>{cat.label}</span>
+                      <span
+                        className={`text-[11px] px-1.5 py-0.5 rounded-full font-mono font-bold leading-none ${
+                          isSelected
+                            ? isDark
+                              ? "bg-forest-deep text-ivory"
+                              : "bg-white text-forest"
+                            : isDark
+                              ? "bg-ivory/10 text-ivory/80"
+                              : "bg-forest/5 text-forest/80"
+                        }`}
+                      >
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Results Title & Count Header */}
+            <div className="flex items-center justify-between pb-3 mb-6 border-b border-forest/10 dark:border-ivory/10">
+              <div>
+                <h2 className="font-heading font-bold text-xl sm:text-2xl tracking-tight leading-none">
+                  {activeFilter === "all"
+                    ? "Plants"
+                    : CATEGORY_OPTIONS.find((c) => c.id === activeFilter)?.label}
+                </h2>
+                <p className="text-xs font-sans mt-1 text-ivory/70 dark:text-ivory/70 opacity-80 leading-none">
+                  Showing {filteredPlants.length} of {plantList.length} plants
+                </p>
+              </div>
+
+              {isFiltered && (
+                <button
+                  type="button"
+                  onClick={handleResetFilters}
+                  className={`text-xs flex items-center gap-1 font-medium transition-colors ${
+                    isDark ? "text-leaf hover:text-white" : "text-leaf hover:text-forest"
+                  }`}
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  <span className="hidden sm:inline">Reset filters</span>
+                </button>
+              )}
+            </div>
+
+            {/* Empty State when no plants match */}
+            {filteredPlants.length === 0 ? (
+              <div
+                role="status"
+                className={`py-16 px-6 text-center rounded-3xl border border-dashed max-w-[720px] mx-auto my-8 ${
+                  isDark
+                    ? "bg-forest/40 border-ivory/20 text-ivory"
+                    : "bg-white/80 border-forest/20 text-forest shadow-sm"
+                }`}
+              >
+                <Leaf className="w-10 h-10 text-leaf/40 mx-auto mb-3" />
+                <h3
+                  className={`font-heading font-bold text-xl mb-1 leading-7 ${
+                    isDark ? "text-ivory" : "text-forest"
+                  }`}
+                >
+                  No matching plants in catalog
+                </h3>
+                <p
+                  className={`text-xs sm:text-base font-sans mb-6 max-w-sm mx-auto leading-4 sm:leading-6 ${
+                    isDark ? "text-ivory/70" : "text-forest/70"
+                  }`}
+                >
+                  We couldn&apos;t find anything matching your filter criteria. Check with us on WhatsApp for unlisted nursery stock.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleResetFilters}
+                  className="px-6 py-3 rounded-full bg-leaf text-ivory text-xs font-semibold leading-4 hover:bg-leaf/90 transition-colors duration-200 min-h-[40px]"
+                >
+                  Reset Filters
+                </button>
+              </div>
+            ) : (
+              /* Responsive Catalog Grid: Desktop = 3 cards per row, Mobile = 1 card at a time */
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                {filteredPlants.map((plant: PlantItem) => (
+                  <PlantCard key={plant.id} plant={plant} />
+                ))}
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </main>
 
       <WordmarkFooter />

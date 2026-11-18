@@ -54,9 +54,10 @@ export function FloatingNav() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { label: content.nav.plants, href: "#plants" },
-    { label: content.nav.care, href: "#care" },
-    { label: content.nav.fourSteps, href: "#steps" },
+    { label: content.nav.home, href: "/#top" },
+    { label: content.nav.plants, href: "/plants" },
+    { label: content.nav.care, href: "/#care" },
+    { label: content.nav.fourSteps, href: "/#steps" },
   ];
 
   return (
@@ -99,7 +100,7 @@ export function FloatingNav() {
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-4 lg:gap-6">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className={`text-xs font-semibold tracking-wide transition-colors duration-200 hover:text-leaf relative py-1 leading-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf rounded ${
@@ -109,7 +110,7 @@ export function FloatingNav() {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -227,7 +228,7 @@ export function FloatingNav() {
 
             <nav className="flex flex-col gap-2 py-2">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
@@ -239,7 +240,7 @@ export function FloatingNav() {
                 >
                   <span>{link.label}</span>
                   <Leaf className="w-4 h-4 text-leaf opacity-80" />
-                </a>
+                </Link>
               ))}
             </nav>
 
