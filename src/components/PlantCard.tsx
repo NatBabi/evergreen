@@ -206,5 +206,4 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
       </div>
     </article>
   );
-  );
 }

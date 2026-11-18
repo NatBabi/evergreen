@@ -257,7 +257,5 @@ export function CatalogFilterSidebar({
         </div>
       </div>
     </aside>
-      </div>
-    </aside>
   );
 }
