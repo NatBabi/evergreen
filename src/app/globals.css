@@ -183,13 +183,8 @@ body {
 }
 
 /* Selection and focus styling */
-::selection {
-  background: #78B83D;
-  color: #F7F5EE;
-}
-
 :focus-visible {
-  outline: 2px solid #78B83D;
+  outline: 2px solid #198754;
   outline-offset: 3px;
 }
 
@@ -219,4 +214,28 @@ body {
   .animate-marquee {
     animation: none !important;
   }
+}
+
+/* Chaka Plants details: selection & styled scrollbars */
+::selection {
+  background-color: #198754;
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d9e3dc;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a5afa8;
 }
