@@ -245,14 +245,20 @@ export interface SiteContent {
   };
   footer: {
     aboutText: string;
-    navTitle: string;
+    quickLinksTitle: string;
+    servicesTitle: string;
     contactTitle: string;
-    deliveryTitle: string;
-    deliveryBody: string;
-    phonesNotice: string;
-    ownerNotice: string;
+    navTitle?: string;
+    deliveryTitle?: string;
+    deliveryBody?: string;
+    phonesNotice?: string;
+    ownerNotice?: string;
     copyright: string;
     giantWordmark: string;
+    chatOnWhatsAppBtn: string;
+    locationText: string;
+    quickLinks: { label: string; href: string }[];
+    services: { label: string; href?: string; badge?: string }[];
   };
   inquiryModal: {
     title: string;
@@ -1173,8 +1179,26 @@ export const contentEN: SiteContent = {
   footer: {
     aboutText:
       "Growing beautiful spaces with healthy plants, quality plant supply and professional landscaping solutions for homes, businesses and large projects.",
-    navTitle: "Navigation",
-    contactTitle: "Verified Contacts",
+    quickLinksTitle: "Quick Links",
+    servicesTitle: "Our Services",
+    contactTitle: "Get In Touch",
+    locationText: "Addis Ababa & Bishoftu, Ethiopia · 2,350M",
+    chatOnWhatsAppBtn: "Chat on WhatsApp",
+    quickLinks: [
+      { label: "Home", href: "#top" },
+      { label: "Plants", href: "/plants" },
+      { label: "Care Guide", href: "#care" },
+      { label: "How to Order", href: "#steps" },
+      { label: "FAQ", href: "#faq" },
+    ],
+    services: [
+      { label: "Plant Care & Guarantee Plan", href: "#care", badge: "Acclimatized" },
+      { label: "Doorstep Delivery Across Ethiopia", href: "#steps" },
+      { label: "Balcony & Indoor Greenery", href: "/plants" },
+      { label: "Landscape Design & Planting", href: "#paths" },
+      { label: "Commercial Plant Supply", href: "#paths" },
+    ],
+    navTitle: "Quick Links",
     deliveryTitle: "Delivery Across Ethiopia",
     deliveryBody: "Doorstep delivery in Addis Ababa and shipping nationwide. Inquire via phone or WhatsApp.",
     phonesNotice: "Official phones: 0942 461 641 / 0934 234 471",
@@ -1258,6 +1282,25 @@ export const contentAM: SiteContent = {
     ...contentEN.footer,
     aboutText:
       "ውብ ቦታዎችን በጤናማ ተክሎች፣ ጥራት ባለው የእጽዋት አቅርቦት እና ለቤቶች፣ ለንግድ ተቋማት እና ለትላልቅ ፕሮጀክቶች ሙያዊ የመልክዓ-ምድር (landscaping) መፍትሄዎች በማቅረብ እናሳድጋለን።",
+    quickLinksTitle: "ፈጣን ማገናኛዎች",
+    servicesTitle: "አገልግሎቶቻችን",
+    contactTitle: "አግኙን",
+    locationText: "አዲስ አበባ እና ቢሾፍቱ፣ ኢትዮጵያ · 2,350 ሜ",
+    chatOnWhatsAppBtn: "በዋትስአፕ ያውሩን",
+    quickLinks: [
+      { label: "መነሻ", href: "#top" },
+      { label: "ተክሎች", href: "/plants" },
+      { label: "የእንክብካቤ መመሪያ", href: "#care" },
+      { label: "የማዘዣ ቅደም ተከተል", href: "#steps" },
+      { label: "ጥያቄዎች", href: "#faq" },
+    ],
+    services: [
+      { label: "የተክሎች እንክብካቤና ዋስትና", href: "#care", badge: "የተላመደ" },
+      { label: "በመላው ኢትዮጵያ የበር-ለበር አቅርቦት", href: "#steps" },
+      { label: "የበረንዳና የቤት ውስጥ አረንጓዴ ውበት", href: "/plants" },
+      { label: "የመልክዓ-ምድር (landscaping) እና የመትከል ስራ", href: "#paths" },
+      { label: "ለትላልቅ ፕሮጀክቶች የእጽዋት አቅርቦት", href: "#paths" },
+    ],
   },
 };
 
