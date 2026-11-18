@@ -325,21 +325,21 @@ export default function PlantsCatalogClient() {
           <button
             type="button"
             onClick={() => setMobileFiltersOpen((prev) => !prev)}
-            className={`w-full flex items-center justify-between py-3 px-4 rounded-2xl border text-xs font-semibold leading-none shadow-sm transition-colors min-h-[46px] ${
+            className={`w-full flex items-center justify-between py-3 px-4 rounded-[14px] border text-[13px] font-bold leading-none shadow-chaka transition-colors min-h-[44px] ${
               isDark
-                ? "bg-forest/60 border-ivory/15 text-ivory hover:bg-forest/80"
-                : "bg-white border-forest/15 text-forest hover:bg-forest/5"
+                ? "bg-[#1B1D19] border-[#2C2F29] text-ivory hover:bg-[#121311]"
+                : "bg-white border-[#e2e9e4] text-[#333333] hover:bg-[#f4f7f4]"
             }`}
             aria-expanded={mobileFiltersOpen}
             aria-label="Toggle filter plants controls"
           >
             <div className="flex items-center gap-2">
-              <SlidersHorizontal className="w-4 h-4 text-leaf" />
+              <SlidersHorizontal className="w-4 h-4 text-[#198754]" />
               <span>Filter Plants {isFiltered && "(Active)"}</span>
             </div>
             <div className="flex items-center gap-2 text-xs font-mono">
-              <span>{filteredPlants.length} plants</span>
-              <span className="text-leaf">{mobileFiltersOpen ? "▲" : "▼"}</span>
+              <span className={isDark ? "text-ivory/60" : "text-[#78837c]"}>{filteredPlants.length} plants</span>
+              <span className="text-[#198754]">{mobileFiltersOpen ? "▲" : "▼"}</span>
             </div>
           </button>
 
@@ -404,29 +404,27 @@ export default function PlantsCatalogClient() {
                       role="tab"
                       aria-selected={isSelected}
                       onClick={() => setActiveFilter(cat.id)}
-                      className={`shrink-0 px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-colors duration-200 flex items-center gap-2 shadow-sm min-h-[38px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf leading-none ${
+                      className={`shrink-0 px-4 py-2 rounded-full text-[13px] font-bold tracking-wide transition-colors duration-200 flex items-center gap-2 shadow-sm min-h-[38px] focus-chaka leading-none ${
                         isSelected
-                          ? "bg-leaf text-ivory ring-2 ring-leaf ring-offset-2 shadow-md font-bold"
+                          ? "bg-[#198754] text-white shadow-chaka-btn"
                           : isDark
-                            ? "bg-forest/50 border border-ivory/15 text-ivory/85 hover:bg-forest/80 hover:text-ivory"
-                            : "bg-white/90 border border-forest/15 text-forest/85 hover:bg-white hover:text-forest shadow-sm"
+                            ? "bg-[#1B1D19] border border-[#2C2F29] text-ivory/85 hover:bg-[#121311] hover:text-white"
+                            : "bg-white border border-[#e2e9e4] text-[#78837c] hover:bg-[#f4f7f4] hover:text-[#333333]"
                       }`}
                     >
                       <Icon
                         className={`w-3.5 h-3.5 shrink-0 transition-colors ${
-                          isSelected ? "text-ivory" : "text-leaf"
+                          isSelected ? "text-white" : "text-[#198754]"
                         }`}
                       />
                       <span>{cat.label}</span>
                       <span
                         className={`text-[11px] px-1.5 py-0.5 rounded-full font-mono font-bold leading-none ${
                           isSelected
-                            ? isDark
-                              ? "bg-forest-deep text-ivory"
-                              : "bg-white text-forest"
+                            ? "bg-white/20 text-white"
                             : isDark
                               ? "bg-ivory/10 text-ivory/80"
-                              : "bg-forest/5 text-forest/80"
+                              : "bg-[#e8f7ef] text-[#157347]"
                         }`}
                       >
                         {count}
@@ -492,7 +490,7 @@ export default function PlantsCatalogClient() {
                 <button
                   type="button"
                   onClick={handleResetFilters}
-                  className="px-6 py-3 rounded-full bg-leaf text-ivory text-xs font-semibold leading-4 hover:bg-leaf/90 transition-colors duration-200 min-h-[40px]"
+                  className="px-6 py-2.5 rounded-[10px] bg-[#198754] text-white text-[13px] font-bold leading-none hover:bg-[#146c43] transition-colors duration-200 min-h-[40px] shadow-chaka-btn"
                 >
                   Reset Filters
                 </button>
