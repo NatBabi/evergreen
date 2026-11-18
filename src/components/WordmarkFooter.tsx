@@ -6,28 +6,27 @@ import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { useInquiry } from "@/context/InquiryContext";
 import { useTheme } from "@/context/ThemeContext";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MessageCircle, MapPin } from "lucide-react";
 
 export function WordmarkFooter() {
   const { content, toggleLang } = useLanguage();
   const { openInquiry } = useInquiry();
   const { isDark } = useTheme();
   const { footer, brand } = content;
-  const currentYear = 2026;
 
   return (
     <footer
-      className={`relative w-full pt-16 sm:pt-20 pb-12 px-4 sm:px-8 lg:px-12 overflow-hidden transition-colors duration-300 ${
+      className={`relative w-full pt-16 sm:pt-24 pb-12 px-4 sm:px-8 lg:px-12 overflow-hidden transition-colors duration-300 ${
         isDark ? "bg-forest-deep text-ivory" : "bg-[#EDE9DE] text-forest"
       }`}
       aria-label="Site Footer"
     >
       <div className="max-w-[1128px] mx-auto">
-        {/* Main 4-Column Grid: Brand | Quick Links | Our Services | Get In Touch */}
+        {/* Responsive 12-Column Grid on Desktop, 2 on Tablet, Stacked on Mobile */}
         <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b ${
           isDark ? "border-ivory/10" : "border-forest/15"
         }`}>
-          {/* Column 1: Brand Identity & Social Channels (lg:col-span-4) */}
+          {/* Column 1: Brand Identity & Mission Statement (4 cols) */}
           <div className="space-y-4 lg:col-span-4">
             <Link
               href="#top"
@@ -48,13 +47,13 @@ export function WordmarkFooter() {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className="flex items-center font-heading font-extrabold text-2xl sm:text-[28px] tracking-tight leading-none">
+              <div className="flex items-center font-heading font-extrabold text-2xl sm:text-[26px] tracking-tight leading-none">
                 <span className={isDark ? "text-ivory" : "text-forest"}>Evergreen</span>
-                <span className="text-leaf ml-1.5 font-normal">Ethiopia</span>
+                <span className="text-leaf ml-1.5 font-bold">Ethiopia</span>
               </div>
             </Link>
 
-            <p className={`font-sans text-sm sm:text-base leading-relaxed max-w-sm ${
+            <p className={`font-sans text-sm leading-relaxed max-w-sm ${
               isDark ? "text-ivory/80" : "text-forest/80"
             }`}>
               {footer.aboutText}
@@ -111,7 +110,7 @@ export function WordmarkFooter() {
                 }`}
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.66-2.89 8.01-3.46 3.81-1.6 4.6-.1.88 4.67-.1z" />
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.66-2.89 8.01-3.46 3.81-1.6 4.6-.1 4.67-.1z" />
                 </svg>
               </a>
 
@@ -132,57 +131,60 @@ export function WordmarkFooter() {
                 </svg>
               </a>
             </div>
+
+            <div className={`flex items-center gap-2 text-xs font-sans pt-1 leading-4 ${
+              isDark ? "text-ivory/70" : "text-forest/70"
+            }`}>
+              <MapPin className="w-4 h-4 text-leaf shrink-0" />
+              <span>{footer.elevationTag}</span>
+            </div>
           </div>
 
-          {/* Column 2: Quick Links (lg:col-span-2) */}
+          {/* Column 2: Quick Links (2 cols) */}
           <div className="space-y-4 lg:col-span-2">
-            <h4 className={`font-heading font-bold text-base sm:text-lg tracking-tight leading-none ${
+            <h4 className={`font-heading font-bold text-base tracking-tight pb-2 border-b-2 border-leaf w-fit leading-none ${
               isDark ? "text-ivory" : "text-forest"
             }`}>
               {footer.quickLinksTitle}
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5 pt-1 text-sm">
               {footer.quickLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
+                  <a
                     href={link.href}
-                    className={`group inline-flex items-center text-sm sm:text-base transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-leaf rounded ${
-                      isDark ? "text-ivory/80 hover:text-white" : "text-forest/80 hover:text-forest"
+                    className={`group inline-flex items-center gap-1.5 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-leaf rounded ${
+                      isDark ? "text-ivory/80 hover:text-leaf" : "text-forest/80 hover:text-leaf"
                     }`}
                   >
-                    <span className="text-leaf mr-2 text-xs font-bold transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
-                      &gt;
-                    </span>
+                    <span className="text-leaf/60 group-hover:text-leaf group-hover:translate-x-0.5 transition-all">›</span>
                     <span>{link.label}</span>
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3: Our Services (lg:col-span-3) */}
+          {/* Column 3: Our Services (3 cols) */}
           <div className="space-y-4 lg:col-span-3">
-            <h4 className={`font-heading font-bold text-base sm:text-lg tracking-tight leading-none ${
+            <h4 className={`font-heading font-bold text-base tracking-tight pb-2 border-b-2 border-leaf w-fit leading-none ${
               isDark ? "text-ivory" : "text-forest"
             }`}>
               {footer.servicesTitle}
             </h4>
-            <ul className="space-y-3">
-              {footer.services.map((service, idx) => (
-                <li key={idx}>
+            <ul className="space-y-2.5 pt-1 text-sm">
+              {footer.services.map((item) => (
+                <li key={item.label}>
                   <a
-                    href={service.href || "#plants"}
-                    className={`group inline-flex items-center flex-wrap gap-1 text-sm sm:text-base transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-leaf rounded ${
-                      isDark ? "text-ivory/80 hover:text-white" : "text-forest/80 hover:text-forest"
+                    href={item.href}
+                    className={`group inline-flex items-center gap-1.5 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-leaf rounded ${
+                      isDark ? "text-ivory/80 hover:text-leaf" : "text-forest/80 hover:text-leaf"
                     }`}
                   >
-                    <span className="text-leaf mr-1.5 text-xs font-bold transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
-                      &gt;
-                    </span>
-                    <span>{service.label}</span>
-                    {service.badge && (
-                      <span className="ml-1.5 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded-md bg-leaf/20 text-leaf border border-leaf/30 leading-none">
-                        {service.badge}
+                    <span className="text-leaf/60 group-hover:text-leaf group-hover:translate-x-0.5 transition-all">›</span>
+                    <span>{item.label}</span>
+                    {item.badge && (
+                      <span className="ml-1 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded bg-leaf/20 text-leaf border border-leaf/30 leading-none">
+                        {item.badge}
                       </span>
                     )}
                   </a>
@@ -191,38 +193,39 @@ export function WordmarkFooter() {
             </ul>
           </div>
 
-          {/* Column 4: Get In Touch (lg:col-span-3) */}
+          {/* Column 4: Get In Touch (3 cols) */}
           <div className="space-y-4 lg:col-span-3">
-            <h4 className={`font-heading font-bold text-base sm:text-lg tracking-tight leading-none ${
+            <h4 className={`font-heading font-bold text-base tracking-tight pb-2 border-b-2 border-leaf w-fit leading-none ${
               isDark ? "text-ivory" : "text-forest"
             }`}>
               {footer.contactTitle}
             </h4>
 
-            <div className={`space-y-3.5 text-sm sm:text-base ${
-              isDark ? "text-ivory/80" : "text-forest/80"
-            }`}>
+            <div className="space-y-3 pt-1 text-sm">
               {/* Location */}
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-leaf shrink-0 mt-0.5" aria-hidden="true" />
+              <div className={`flex items-start gap-2.5 leading-snug ${
+                isDark ? "text-ivory/85" : "text-forest/85"
+              }`}>
+                <MapPin className="w-4 h-4 text-leaf shrink-0 mt-0.5" />
                 <span>{footer.locationText}</span>
               </div>
 
               {/* Phone Numbers */}
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-leaf shrink-0" aria-hidden="true" />
-                <div className="flex flex-wrap items-center gap-2 font-mono text-sm">
+              <div className={`flex items-start gap-2.5 leading-snug ${
+                isDark ? "text-ivory/85" : "text-forest/85"
+              }`}>
+                <Phone className="w-4 h-4 text-leaf shrink-0 mt-0.5" />
+                <div className="flex flex-col gap-0.5">
                   <a
                     href={`tel:${brand.phonePrimaryRaw}`}
-                    className="hover:text-leaf transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-leaf rounded"
+                    className="hover:text-leaf transition-colors font-medium"
                     aria-label={`Call primary phone ${brand.phonePrimary}`}
                   >
                     {brand.phonePrimary}
                   </a>
-                  <span className="opacity-40">/</span>
                   <a
                     href={`tel:${brand.phoneSecondaryRaw}`}
-                    className="hover:text-leaf transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-leaf rounded"
+                    className="hover:text-leaf transition-colors text-xs opacity-80"
                     aria-label={`Call secondary phone ${brand.phoneSecondary}`}
                   >
                     {brand.phoneSecondary}
@@ -231,60 +234,66 @@ export function WordmarkFooter() {
               </div>
 
               {/* Email */}
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-leaf shrink-0" aria-hidden="true" />
+              <div className={`flex items-center gap-2.5 leading-snug ${
+                isDark ? "text-ivory/85" : "text-forest/85"
+              }`}>
+                <Mail className="w-4 h-4 text-leaf shrink-0" />
                 <a
                   href={`mailto:${brand.email}`}
-                  className="hover:text-leaf transition-colors truncate focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-leaf rounded"
+                  className="hover:text-leaf transition-colors break-all"
                   aria-label={`Send email to ${brand.email}`}
                 >
                   {brand.email}
                 </a>
               </div>
 
-              {/* Chat on WhatsApp Button */}
+              {/* Chat on WhatsApp CTA Button */}
               <div className="pt-2">
                 <a
-                  href="https://wa.me/251942461641?text=Hi%20Evergreen%20Ethiopia%20%F0%9F%8C%BF"
+                  href="https://wa.me/251942461641?text=Hi%20Evergreen%20Ethiopia%2C%20I%20have%20an%20inquiry%20about%20plants%20or%20landscaping."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-leaf text-white font-semibold text-sm sm:text-base shadow-md hover:bg-leaf/90 transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[44px]"
-                  aria-label="Chat with Evergreen Ethiopia on WhatsApp"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-full bg-leaf text-ivory font-semibold text-sm leading-none hover:bg-leaf/90 transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf min-h-[44px] active:scale-95"
+                  aria-label="Chat on WhatsApp"
                 >
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.277-.1-.479-.15-.68.15-.202.301-.78 1.978-.956 1.178-.175.2-.351.226-.652.075-.3-.15-1.267-.467-2.413-1.488-.893-.796-1.496-1.778-1.671-2.079-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.175.201-.3.301-.5.1-.2.05-.376-.025-.526-.075-.15-.68-1.64-.931-2.244-.246-.588-.495-.508-.68-.518-.176-.01-.377-.01-.577-.01-.202 0-.528.076-.804.376-.277.302-1.056 1.033-1.056 2.519 0 1.486 1.082 2.922 1.233 3.123.15.201 2.13 3.253 5.161 4.563.721.312 1.284.498 1.723.638.724.23 1.383.197 1.904.12.58-.087 1.78-.727 2.03-1.43.251-.703.251-1.305.176-1.43-.075-.126-.276-.201-.577-.351zM12.04 21.737h-.005a9.71 9.71 0 0 1-4.954-1.353l-.355-.21-3.682.966.983-3.59-.231-.367a9.718 9.718 0 0 1-1.49-5.148c0-5.368 4.368-9.736 9.741-9.736 2.6 0 5.045 1.013 6.883 2.851a9.68 9.68 0 0 1 2.848 6.882c-.003 5.37-4.372 9.74-9.74 9.74zm7.946-16.586A11.164 11.164 0 0 0 12.04 1.862c-6.186 0-11.22 5.034-11.22 11.222 0 1.978.516 3.909 1.496 5.607L.727 23.336l4.802-1.26a11.19 11.19 0 0 0 5.508 1.442h.005c6.185 0 11.218-5.035 11.22-11.223 0-2.997-1.167-5.814-3.276-7.924z" />
-                  </svg>
-                  <span>{footer.chatOnWhatsAppBtn}</span>
+                  <MessageCircle className="w-4 h-4 shrink-0" />
+                  <span>{footer.chatWhatsAppBtn}</span>
                 </a>
+              </div>
+
+              {/* Language Switcher */}
+              <div className="pt-1">
+                <button
+                  type="button"
+                  onClick={toggleLang}
+                  className={`text-xs underline underline-offset-4 font-sans transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-leaf rounded ${
+                    isDark ? "text-ivory/70 hover:text-ivory" : "text-forest/70 hover:text-forest"
+                  }`}
+                >
+                  Language / ቋንቋ: {content.nav.toggleLangLabel}
+                </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Dynamic Copyright, Secondary Links & Language Toggle */}
-        <div className={`pt-8 flex flex-col sm:flex-row items-center justify-between text-xs font-sans gap-4 text-center sm:text-left ${
-          isDark ? "text-ivory/60" : "text-forest/70"
+        {/* Giant Architectural Wordmark (Preserved as requested) */}
+        <div className="pt-8 sm:pt-12 text-center select-none overflow-hidden w-full flex justify-center items-center">
+          <span className={`font-heading font-extrabold text-[10vw] sm:text-[11vw] lg:text-[11vw] leading-none tracking-tight uppercase block whitespace-nowrap transition-colors ${
+            isDark
+              ? "text-ivory/10 hover:text-ivory/15"
+              : "text-forest/10 hover:text-forest/15"
+          }`}>
+            {footer.giantWordmark}
+          </span>
+        </div>
+
+        {/* Dynamic Copyright & Honesty Disclaimer */}
+        <div className={`pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between text-xs font-sans gap-2 text-center sm:text-left leading-4 ${
+          isDark ? "text-ivory/60" : "text-forest/65"
         }`}>
-          <div>{footer.copyright}</div>
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-            <button
-              type="button"
-              onClick={() => openInquiry()}
-              className="hover:text-leaf transition-colors underline-offset-4 hover:underline"
-            >
-              Direct Inquiry
-            </button>
-            <span>·</span>
-            <span>2,350M Altitude Acclimatized</span>
-            <span>·</span>
-            <button
-              type="button"
-              onClick={toggleLang}
-              className="hover:text-leaf transition-colors font-mono underline underline-offset-4"
-            >
-              Language / ቋንቋ: {content.nav.toggleLangLabel}
-            </button>
-          </div>
+          <span>{footer.copyright}</span>
+          <span>{footer.trustNote}</span>
         </div>
       </div>
     </footer>

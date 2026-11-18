@@ -248,6 +248,12 @@ export interface SiteContent {
     quickLinksTitle: string;
     servicesTitle: string;
     contactTitle: string;
+    locationText: string;
+    elevationTag: string;
+    chatWhatsAppBtn: string;
+    trustNote: string;
+    quickLinks: Array<{ label: string; href: string }>;
+    services: Array<{ label: string; href: string; badge?: string }>;
     navTitle?: string;
     deliveryTitle?: string;
     deliveryBody?: string;
@@ -255,10 +261,6 @@ export interface SiteContent {
     ownerNotice?: string;
     copyright: string;
     giantWordmark: string;
-    chatOnWhatsAppBtn: string;
-    locationText: string;
-    quickLinks: { label: string; href: string }[];
-    services: { label: string; href?: string; badge?: string }[];
   };
   inquiryModal: {
     title: string;
@@ -1182,27 +1184,29 @@ export const contentEN: SiteContent = {
     quickLinksTitle: "Quick Links",
     servicesTitle: "Our Services",
     contactTitle: "Get In Touch",
-    locationText: "Addis Ababa & Bishoftu, Ethiopia · 2,350M",
-    chatOnWhatsAppBtn: "Chat on WhatsApp",
+    locationText: "Addis Ababa & Bishoftu, Ethiopia",
+    elevationTag: "Addis Ababa & Bishoftu · 2,350M",
+    chatWhatsAppBtn: "Chat on WhatsApp",
+    trustNote: "Verified nursery data · Confirmed directly with the nursery owner.",
     quickLinks: [
       { label: "Home", href: "#top" },
-      { label: "Plants", href: "/plants" },
-      { label: "Care Guide", href: "#care" },
+      { label: "Plants Catalog", href: "/plants" },
+      { label: "Highland Care Guide", href: "#care" },
       { label: "How to Order", href: "#steps" },
-      { label: "FAQ", href: "#faq" },
+      { label: "Frequently Asked Questions", href: "#faq" },
     ],
     services: [
-      { label: "Plant Care & Guarantee Plan", href: "#care", badge: "Acclimatized" },
-      { label: "Doorstep Delivery Across Ethiopia", href: "#steps" },
-      { label: "Balcony & Indoor Greenery", href: "/plants" },
+      { label: "Acclimatized Highland Plants", href: "#plants", badge: "Native" },
+      { label: "Interior & Balcony Greenery", href: "#companion" },
       { label: "Landscape Design & Planting", href: "#paths" },
-      { label: "Commercial Plant Supply", href: "#paths" },
+      { label: "Plant Consultation & Care Plan", href: "#care" },
+      { label: "Doorstep Delivery in Addis Ababa", href: "#steps" },
     ],
     navTitle: "Quick Links",
-    deliveryTitle: "Delivery Across Ethiopia",
-    deliveryBody: "Doorstep delivery in Addis Ababa and shipping nationwide. Inquire via phone or WhatsApp.",
+    deliveryTitle: "Our Services",
+    deliveryBody: "Doorstep delivery in Addis Ababa and shipping nationwide.",
     phonesNotice: "Official phones: 0942 461 641 / 0934 234 471",
-    ownerNotice: "Business details marked 'to confirm' are verified with the owner.",
+    ownerNotice: "Verified nursery data · Confirmed directly with the nursery owner.",
     copyright: "© 2026 Evergreen Ethiopia. All rights reserved.",
     giantWordmark: "evergreen",
   },
@@ -1284,22 +1288,24 @@ export const contentAM: SiteContent = {
       "ውብ ቦታዎችን በጤናማ ተክሎች፣ ጥራት ባለው የእጽዋት አቅርቦት እና ለቤቶች፣ ለንግድ ተቋማት እና ለትላልቅ ፕሮጀክቶች ሙያዊ የመልክዓ-ምድር (landscaping) መፍትሄዎች በማቅረብ እናሳድጋለን።",
     quickLinksTitle: "ፈጣን ማገናኛዎች",
     servicesTitle: "አገልግሎቶቻችን",
-    contactTitle: "አግኙን",
-    locationText: "አዲስ አበባ እና ቢሾፍቱ፣ ኢትዮጵያ · 2,350 ሜ",
-    chatOnWhatsAppBtn: "በዋትስአፕ ያውሩን",
+    contactTitle: "ያግኙን",
+    locationText: "አዲስ አበባ እና ቢሾፍቱ፣ ኢትዮጵያ",
+    elevationTag: "አዲስ አበባ እና ቢሾፍቱ · 2,350 ሜትር",
+    chatWhatsAppBtn: "በዋትስአፕ ያግኙን",
+    trustNote: "የተረጋገጠ መረጃ፦ ሁሉም ዝርዝሮች ከባለቤቱ ጋር ከመጨረሻው ትዕዛዝ በፊት ይረጋገጣሉ።",
     quickLinks: [
-      { label: "መነሻ", href: "#top" },
-      { label: "ተክሎች", href: "/plants" },
+      { label: "ዋና ገጽ", href: "#top" },
+      { label: "የተክሎች ካታሎግ", href: "/plants" },
       { label: "የእንክብካቤ መመሪያ", href: "#care" },
       { label: "የማዘዣ ቅደም ተከተል", href: "#steps" },
-      { label: "ጥያቄዎች", href: "#faq" },
+      { label: "ተደጋግመው የሚጠየቁ ጥያቄዎች", href: "#faq" },
     ],
     services: [
-      { label: "የተክሎች እንክብካቤና ዋስትና", href: "#care", badge: "የተላመደ" },
-      { label: "በመላው ኢትዮጵያ የበር-ለበር አቅርቦት", href: "#steps" },
-      { label: "የበረንዳና የቤት ውስጥ አረንጓዴ ውበት", href: "/plants" },
-      { label: "የመልክዓ-ምድር (landscaping) እና የመትከል ስራ", href: "#paths" },
-      { label: "ለትላልቅ ፕሮጀክቶች የእጽዋት አቅርቦት", href: "#paths" },
+      { label: "ለከፍተኛ ቦታ የተላመዱ ተክሎች", href: "#plants", badge: "ሀገር በቀል" },
+      { label: "የቤት ውስጥ እና የበረንዳ አረንጓዴነት", href: "#companion" },
+      { label: "የመልክዓ-ምድር (Landscape) ንድፍ እና ተከላ", href: "#paths" },
+      { label: "የተክል ምክክር እና የእንክብካቤ እቅድ", href: "#care" },
+      { label: "አዲስ አበባ ውስጥ ፈጣን የበር አቅርቦት", href: "#steps" },
     ],
   },
 };
