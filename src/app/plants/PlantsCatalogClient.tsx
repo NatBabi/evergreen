@@ -480,21 +480,21 @@ export default function PlantsCatalogClient() {
                     isDark ? "text-ivory" : "text-[#333333]"
                   }`}
                 >
-                  No matching plants in catalog
+                  No plants found
                 </h3>
                 <p
                   className={`text-xs sm:text-base font-sans mb-6 max-w-sm mx-auto leading-4 sm:leading-6 ${
                     isDark ? "text-ivory/70" : "text-[#78837c]"
                   }`}
                 >
-                  We couldn&apos;t find anything matching your filter criteria. Check with us on WhatsApp for unlisted nursery stock.
+                  No plants match your filters. Ask on WhatsApp for unlisted stock.
                 </p>
                 <button
                   type="button"
                   onClick={handleResetFilters}
                   className="px-6 py-2.5 rounded-[10px] bg-[#198754] text-white text-xs font-bold leading-4 hover:bg-[#146c43] shadow-chaka-accent transition-colors duration-200 min-h-[40px]"
                 >
-                  Reset Filters
+                  Reset filters
                 </button>
               </div>
             ) : (
