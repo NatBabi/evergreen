@@ -171,8 +171,8 @@ export default function PlantsCatalogClient() {
 
   return (
     <div
-      className={`relative min-h-screen flex flex-col selection:bg-leaf selection:text-ivory transition-colors duration-300 ${
-        isDark ? "bg-forest-deep text-ivory" : "bg-ivory text-forest"
+      className={`relative min-h-screen flex flex-col selection:bg-[#198754] selection:text-white transition-colors duration-300 font-chaka ${
+        isDark ? "bg-[#121311] text-ivory" : "bg-[#f4f7f4] text-[#333333]"
       }`}
     >
       <Suspense fallback={null}>
@@ -182,12 +182,12 @@ export default function PlantsCatalogClient() {
         />
       </Suspense>
 
-      {/* Top Header Navigation with Left Back Link, Centered Brand & Right Actions */}
+      {/* Top Header Navigation: Chaka 72px tall sticky header on hairline border */}
       <header
-        className={`sticky top-0 z-40 w-full backdrop-blur-md border-b py-3 sm:py-4 px-4 sm:px-8 lg:px-12 transition-colors duration-300 ${
+        className={`sticky top-0 z-40 w-full min-h-[72px] flex items-center backdrop-blur-md border-b px-4 sm:px-8 lg:px-12 transition-colors duration-300 ${
           isDark
-            ? "bg-forest-deep/85 border-ivory/15 text-ivory"
-            : "bg-white/85 border-forest/15 text-forest shadow-sm"
+            ? "bg-[#1B1D19]/90 border-[#2C2F29] text-ivory"
+            : "bg-white/95 border-[#e2e9e4] text-[#333333] shadow-sm"
         }`}
       >
         <div className="max-w-[1320px] mx-auto flex items-center justify-between gap-3 sm:gap-4">
@@ -300,18 +300,18 @@ export default function PlantsCatalogClient() {
             {/* Dark Mode ↔ Light Mode Switcher */}
             <ThemeToggle />
 
-            {/* Direct WhatsApp Help Button */}
+            {/* Direct WhatsApp Help Button (Chaka secondary button style) */}
             <a
               href="https://wa.me/251942461641?text=Hi%20Evergreen%20%F0%9F%91%8B%20I'm%20browsing%20your%20plant%20catalog."
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border text-xs font-semibold leading-4 transition-colors duration-200 min-h-[40px] shrink-0 ${
+              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-[8px] border text-[13px] font-bold leading-none transition-colors duration-200 min-h-[38px] shrink-0 focus-chaka ${
                 isDark
-                  ? "bg-forest/80 hover:bg-forest border-ivory/20 text-ivory"
-                  : "bg-forest/10 hover:bg-forest/15 border-forest/20 text-forest"
+                  ? "bg-[#121311] hover:bg-[#1B1D19] border-[#2C2F29] text-ivory"
+                  : "bg-white hover:bg-[#e8f6ee] border-[#e2e9e4] text-[#198754] shadow-sm"
               }`}
             >
-              <MessageCircle className="w-4 h-4 text-leaf shrink-0" />
+              <MessageCircle className="w-3.5 h-3.5 text-[#198754] shrink-0" />
               <span className="hidden sm:inline">WhatsApp Help</span>
             </a>
           </div>
