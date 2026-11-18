@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getLivePlants } from "@/lib/plants";
 import { starPlantsEN } from "@/data/content";
 
-const SITE_URL = "https://evergreen-natbabi.vercel.app";
+const SITE_URL = "https://evergreen-ethiopia.vercel.app";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "trees delivered Addis Ababa",
   ],
   authors: [{ name: "Evergreen Ethiopia" }],
-  metadataBase: new URL("https://evergreen-natbabi.vercel.app"),
+  metadataBase: new URL("https://evergreen-ethiopia.vercel.app"),
   alternates: {
     canonical: "/",
   },
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Evergreen Ethiopia · Botanical Nursery & Plants in Addis Ababa",
     description:
       "Indoor and outdoor plants, native and ornamental trees acclimatized to Ethiopian highland conditions. Order requests via phone and WhatsApp with doorstep delivery.",
-    url: "https://evergreen-natbabi.vercel.app",
+    url: "https://evergreen-ethiopia.vercel.app",
     siteName: "Evergreen Ethiopia",
     locale: "en_US",
     alternateLocale: ["am_ET"],

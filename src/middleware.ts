@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest) {
   const hostname = request.headers.get("host") || "";
 
   // Redirect alternate hostnames to the canonical origin in production
-  const CANONICAL_HOST = "evergreen-natbabi.vercel.app";
+  const CANONICAL_HOST = "evergreen-ethiopia.vercel.app";
   const isPreview = process.env.VERCEL_ENV === "preview";
   if (
     !isPreview &&

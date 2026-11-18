@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Plant catalog · Evergreen Ethiopia",
     description:
       "Indoor and outdoor plants acclimatized to Addis Ababa's highland conditions. Browse our catalog with prices and delivery details.",
-    url: "https://evergreen-natbabi.vercel.app/plants",
+    url: "https://evergreen-ethiopia.vercel.app/plants",
     images: [
       {
         url: "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1200&q=85",

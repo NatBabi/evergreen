@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `${plant.commonName} · Evergreen Ethiopia`,
       description: plant.outcomeLine,
-      url: `https://evergreen-natbabi.vercel.app/plants/${resolvedParams.slug}`,
+      url: `https://evergreen-ethiopia.vercel.app/plants/${resolvedParams.slug}`,
       images: [{ url: plant.image, alt: plant.imageAlt }],
     },
     twitter: {
