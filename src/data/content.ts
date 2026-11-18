@@ -1172,7 +1172,7 @@ export const contentEN: SiteContent = {
   },
   footer: {
     aboutText:
-      "Evergreen Ethiopia · Quietly alive. Easy to ask. A calm botanical boutique connecting video lovers with acclimatized plants, trees, and project landscaping across Ethiopia.",
+      "Growing beautiful spaces with healthy plants, quality plant supply and professional landscaping solutions for homes, businesses and large projects.",
     navTitle: "Navigation",
     contactTitle: "Verified Contacts",
     deliveryTitle: "Delivery Across Ethiopia",
@@ -1253,6 +1253,11 @@ export const contentAM: SiteContent = {
     headlineItalic: "ተክሎች",
     askCardBtn: "ተክሉን ይዘዙ",
     exploreCatalogBtn: "ሙሉውን ካታሎግ ይመልከቱ →",
+  },
+  footer: {
+    ...contentEN.footer,
+    aboutText:
+      "ውብ ቦታዎችን በጤናማ ተክሎች፣ ጥራት ባለው የእጽዋት አቅርቦት እና ለቤቶች፣ ለንግድ ተቋማት እና ለትላልቅ ፕሮጀክቶች ሙያዊ የመልክዓ-ምድር (landscaping) መፍትሄዎች በማቅረብ እናሳድጋለን።",
   },
 };
 
