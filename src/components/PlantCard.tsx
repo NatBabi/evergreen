@@ -33,20 +33,20 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
 
   return (
     <article
-      className={`group relative backdrop-blur-md rounded-[14px] p-[18px] border transition-colors duration-300 flex flex-col justify-between ${
+      className={`group relative rounded-[14px] p-[18px] border transition-all duration-300 flex flex-col justify-between ${
         isDark
-          ? "bg-forest/40 border-ivory/12 text-ivory shadow-md hover:shadow-2xl hover:border-leaf/40 hover:bg-forest/60"
-          : "bg-white/90 border-forest/10 text-forest shadow-sm hover:shadow-xl hover:border-forest/30 hover:bg-white"
+          ? "bg-forest/50 border-ivory/15 text-ivory shadow-md hover:shadow-xl hover:border-leaf/40 hover:bg-forest/70"
+          : "bg-white border-[#e2e9e4] text-[#333333] shadow-chaka-card hover:shadow-lg hover:border-[#198754]/40"
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div>
-        {/* 1. In-Context Imagery (Dual-State Crossfade on Hover: Specimen -> Lifestyle Context) */}
+        {/* 1. In-Context Imagery */}
         <Link
           href={`/plants/${plant.slug}`}
-          className={`block relative w-full h-60 rounded-[10px] overflow-hidden mb-4 focus:outline-none focus:ring-2 focus:ring-leaf border ${
-            isDark ? "bg-forest-deep/60 border-ivory/10" : "bg-forest/5 border-forest/10"
+          className={`block relative w-full h-60 rounded-[10px] overflow-hidden mb-4 focus:outline-none focus:ring-2 focus:ring-[#198754] border ${
+            isDark ? "bg-forest-deep/60 border-ivory/10" : "bg-[#f4f7f4] border-[#e2e9e4]"
           }`}
           aria-label={`View full details for ${plant.commonName}`}
         >
@@ -65,7 +65,7 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
             }`}
           />
 
-          {/* Secondary In-Context Lifestyle Photo (Zero-click imagination) */}
+          {/* Secondary In-Context Lifestyle Photo */}
           {lifestyleImage && (
             <Image
               src={lifestyleImage}
@@ -80,130 +80,131 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
             />
           )}
 
-          {/* Top Status Anchor (Halo Effect) - Positioned with zero collision risk */}
+          {/* Top Status Anchor (Chaka Badge: #e8f7ef background, #157347 text, 20px corners) */}
           <div className="absolute top-3 left-3 z-10">
-            <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-[20px] backdrop-blur-md text-xs font-semibold leading-4 shadow-md border ${
+            <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[20px] text-[11px] font-bold leading-4 shadow-sm ${
               isDark
-                ? "bg-forest-deep/90 text-ivory border-ivory/20"
-                : "bg-white/95 text-forest border-forest/15 shadow-sm"
+                ? "bg-forest-deep/90 text-[#78B83D] border border-ivory/20"
+                : "bg-[#e8f7ef] text-[#157347] border border-[#157347]/20"
             }`}>
-              <Leaf className="w-3 h-3 text-leaf" />
+              <Leaf className="w-3 h-3 text-[#157347] dark:text-[#78B83D]" />
               <span>{plant.statusBadge}</span>
             </span>
           </div>
 
-          {/* Delivery & Acclimatized Proof (Bottom-Left) */}
-          <div className={`absolute bottom-3 left-3 z-10 px-3 py-1 rounded-[20px] backdrop-blur-md text-xs font-mono font-medium leading-4 shadow-md flex items-center gap-2 border ${
-              isDark
-                ? "bg-forest-deep/90 text-ivory border-ivory/20"
-                : "bg-white/95 text-forest border-forest/15 shadow-sm"
-            }`}>
-            <Truck className="w-4 h-4 text-leaf shrink-0" />
-            <span>24–48h Addis Delivery</span>
+          {/* Delivery Proof (Bottom-Left) */}
+          <div className={`absolute bottom-3 left-3 z-10 px-2.5 py-1 rounded-[20px] backdrop-blur-md text-[11px] font-medium leading-4 shadow-sm flex items-center gap-1.5 border ${
+            isDark
+              ? "bg-forest-deep/90 text-ivory border-ivory/20"
+              : "bg-white/95 text-[#333333] border-[#e2e9e4]"
+          }`}>
+            <Truck className="w-3.5 h-3.5 text-[#198754] shrink-0" />
+            <span>24–48h Delivery</span>
           </div>
         </Link>
 
-        {/* 2. Specific Social Proof & Velocity Strip (Authenticity Anchor) */}
-        <div className={`flex items-center gap-2 mb-2 text-xs font-sans leading-4 flex-wrap ${
-          isDark ? "text-ivory/70" : "text-forest/70"
+        {/* 2. Specific Social Proof */}
+        <div className={`flex items-center gap-2 mb-2 text-xs leading-4 flex-wrap ${
+          isDark ? "text-ivory/70" : "text-[#78837c]"
         }`}>
-          <span className={`font-bold ${isDark ? "text-ivory" : "text-forest"}`}>{plant.rating}</span>
-          <span className={`font-mono ${isDark ? "text-ivory/60" : "text-forest/60"}`}>({plant.reviewsCount})</span>
-          <span className={isDark ? "text-ivory/30" : "text-forest/30"}>·</span>
-          <span className="inline-flex items-center gap-1 font-semibold text-leaf">
-            <Flame className="w-3 h-3 text-leaf shrink-0" />
+          <span className={`font-bold ${isDark ? "text-ivory" : "text-[#333333]"}`}>{plant.rating}</span>
+          <span className={isDark ? "text-ivory/60" : "text-[#a5afa8]"}>({plant.reviewsCount})</span>
+          <span className={isDark ? "text-ivory/30" : "text-[#e2e9e4]"}>·</span>
+          <span className="inline-flex items-center gap-1 font-semibold text-[#198754] dark:text-[#78B83D]">
+            <Flame className="w-3 h-3 text-[#198754] dark:text-[#78B83D] shrink-0" />
             <span>{plant.deliveryMetric}</span>
           </span>
         </div>
 
-        {/* 3. Name & Botanical Hierarchy (Zero Amharic overflow) */}
+        {/* 3. Name & Botanical Hierarchy */}
         <div className="mb-3">
           <div className="flex items-baseline justify-between gap-2 flex-wrap">
             <Link
               href={`/plants/${plant.slug}`}
-              className={`font-heading font-extrabold text-xl tracking-tight leading-7 hover:text-leaf transition-colors ${
-                isDark ? "text-ivory" : "text-forest"
+              className={`font-heading font-extrabold text-xl tracking-tight leading-7 transition-colors hover:text-[#198754] ${
+                isDark ? "text-ivory" : "text-[#333333]"
               }`}
             >
               {plant.commonName}
             </Link>
-            <span className={`text-xs font-semibold px-2 py-1 rounded-full shrink-0 border leading-4 ${
+            <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-[20px] shrink-0 border leading-4 ${
               isDark
                 ? "bg-ivory/10 text-ivory border-ivory/15"
-                : "bg-forest/5 text-forest border-forest/10"
+                : "bg-[#f4f7f4] text-[#157347] border-[#e2e9e4]"
             }`}>
               {plant.amharicName}
             </span>
           </div>
 
           <p className={`font-serif italic text-xs mt-1 leading-4 ${
-            isDark ? "text-ivory/60" : "text-forest/60"
+            isDark ? "text-ivory/60" : "text-[#78837c]"
           }`}>
             {plant.botanicalName}
           </p>
         </div>
 
-        {/* 4. Value & Price Clarity (Loss Aversion & Incentive) */}
+        {/* 4. Value & Price Clarity */}
         <div className={`flex items-baseline justify-between gap-2 py-2 mb-3 border-y ${
-          isDark ? "border-ivory/10" : "border-forest/10"
+          isDark ? "border-ivory/10" : "border-[#e2e9e4]"
         }`}>
           <div>
-            <span className={`text-xs font-mono block leading-4 ${
-              isDark ? "text-ivory/60" : "text-forest/60"
+            <span className={`text-[11px] block leading-4 uppercase tracking-wider ${
+              isDark ? "text-ivory/60" : "text-[#a5afa8]"
             }`}>Plant only</span>
             <span className={`font-heading font-extrabold text-xl tracking-tight leading-7 ${
-              isDark ? "text-ivory" : "text-forest"
+              isDark ? "text-[#78B83D]" : "text-[#198754]"
             }`}>
               {plant.bundleCardA?.price || plant.price || `${plant.priceETB} ETB`}
             </span>
           </div>
           <div className="text-right">
-            <span className={`text-xs font-mono block leading-4 ${
-              isDark ? "text-ivory/60" : "text-forest/60"
+            <span className={`text-[11px] block leading-4 uppercase tracking-wider ${
+              isDark ? "text-ivory/60" : "text-[#a5afa8]"
             }`}>Pot + Guide</span>
-            <span className="text-xs font-semibold text-leaf font-mono leading-4">
+            <span className="text-xs font-semibold text-[#198754] dark:text-[#78B83D] leading-4">
               {plant.bundleCardB?.price || "from 1,350 birr"}
             </span>
           </div>
         </div>
 
-        {/* 5. Persona Trust Micro-Tag (Anxiety Removal) */}
-        <div className={`flex items-center gap-2 mb-4 text-xs font-mono leading-4 ${
-          isDark ? "text-ivory/70" : "text-forest/70"
+        {/* 5. Acclimatized Proof */}
+        <div className={`flex items-center gap-2 mb-4 text-xs leading-4 ${
+          isDark ? "text-ivory/70" : "text-[#78837c]"
         }`}>
-          <span className="inline-flex items-center gap-1">
-            <Check className="w-3 h-3 text-leaf shrink-0" />
+          <span className="inline-flex items-center gap-1.5">
+            <Check className="w-3.5 h-3.5 text-[#198754] dark:text-[#78B83D] shrink-0" />
             <span>Addis Acclimatized (2,350m)</span>
           </span>
         </div>
       </div>
 
-      {/* 6. Direct-Action Quick CTA & Pot Bundle Link */}
+      {/* 6. Direct-Action Quick CTA Buttons (Chaka Button Recipes) */}
       <div className={`pt-3 border-t flex flex-col gap-2 ${
-        isDark ? "border-ivory/10" : "border-forest/10"
+        isDark ? "border-ivory/10" : "border-[#e2e9e4]"
       }`}>
         <a
           href={whatsAppUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full py-3 px-4 rounded-[10px] bg-leaf text-ivory font-semibold text-xs tracking-wide leading-4 hover:bg-leaf/90 transition-colors duration-200 flex items-center justify-center gap-2 shadow-sm active:scale-95 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf"
+          className="w-full py-2.5 px-4 rounded-[10px] bg-[#198754] hover:bg-[#146c43] text-white font-bold text-[13px] tracking-wide leading-4 transition-all duration-200 flex items-center justify-center gap-2 shadow-chaka-accent hover:shadow-chaka-accent-hover active:scale-95 min-h-[42px] focus-visible:outline-none focus-chaka-ring"
         >
-          <MessageCircle className="w-4 h-4 text-ivory" />
+          <MessageCircle className="w-4 h-4 text-white" />
           <span>Inquire Now</span>
-          <ArrowRight className="w-3 h-3" />
+          <ArrowRight className="w-3.5 h-3.5" />
         </a>
 
         <Link
           href={`/plants/${plant.slug}`}
-          className={`w-full py-2 px-4 rounded-[8px] font-semibold text-xs leading-4 transition-colors flex items-center justify-center gap-1 min-h-[36px] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-leaf text-center border ${
+          className={`w-full py-2 px-4 rounded-[8px] font-bold text-[13px] leading-4 transition-colors flex items-center justify-center gap-1 min-h-[38px] focus-visible:outline-none focus-chaka-ring text-center border ${
             isDark
               ? "bg-ivory/10 hover:bg-ivory/20 text-ivory border-ivory/15"
-              : "bg-forest/5 hover:bg-forest/10 text-forest border-forest/10"
+              : "bg-white hover:bg-[#e8f6ee] text-[#198754] border-[#e2e9e4] hover:text-[#157347]"
           }`}
         >
           <span>Plant Details</span>
         </Link>
       </div>
     </article>
+  );
   );
 }
