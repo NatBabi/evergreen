@@ -164,15 +164,34 @@ body {
   }
 }
 
-/* Selection and focus styling */
+/* Selection and focus styling (chakaplants.com details) */
 ::selection {
-  background: #78B83D;
-  color: #F7F5EE;
+  background: #198754;
+  color: #ffffff;
 }
 
 :focus-visible {
-  outline: 2px solid #78B83D;
+  outline: 2px solid #198754;
   outline-offset: 3px;
+}
+
+/* Chaka styled scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f7f4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d9e3dc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a5afa8;
 }
 
 /* Infinite horizontal marquee animation for community testimonials */
