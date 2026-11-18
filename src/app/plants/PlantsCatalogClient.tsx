@@ -474,25 +474,25 @@ export default function PlantsCatalogClient() {
               >
                 <Leaf className="w-10 h-10 text-leaf/40 mx-auto mb-3" />
                 <h3
-                  className={`font-heading font-bold text-xl mb-1 leading-7 ${
-                    isDark ? "text-ivory" : "text-forest"
+                  className={`font-heading font-bold text-xl mb-1 leading-snug ${
+                    isDark ? "text-ivory" : "text-[#333333]"
                   }`}
                 >
-                  No matching plants in catalog
+                  No plants found
                 </h3>
                 <p
-                  className={`text-xs sm:text-base font-sans mb-6 max-w-sm mx-auto leading-4 sm:leading-6 ${
-                    isDark ? "text-ivory/70" : "text-forest/70"
+                  className={`text-[13px] font-sans mb-5 max-w-sm mx-auto leading-normal ${
+                    isDark ? "text-ivory/70" : "text-[#78837c]"
                   }`}
                 >
-                  We couldn&apos;t find anything matching your filter criteria. Check with us on WhatsApp for unlisted nursery stock.
+                  Nothing matches your filters. Ask us on WhatsApp for unlisted nursery stock.
                 </p>
                 <button
                   type="button"
                   onClick={handleResetFilters}
-                  className="px-6 py-2.5 rounded-[10px] bg-[#198754] text-white text-[13px] font-bold leading-none hover:bg-[#146c43] transition-colors duration-200 min-h-[40px] shadow-chaka-btn"
+                  className="px-6 py-2.5 rounded-[10px] bg-[#198754] text-white text-[13px] font-bold leading-none hover:bg-[#146c43] transition-colors duration-200 min-h-[40px] shadow-chaka-btn focus-chaka"
                 >
-                  Reset Filters
+                  Reset filters
                 </button>
               </div>
             ) : (
