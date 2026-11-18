@@ -11,10 +11,42 @@
   --color-ivory-dark: #ECE7DA;
   --color-charcoal: #17201A;
 
+  /* chakaplants.com Livery Design Kit Tokens (v1) */
+  --color-chaka-bg: #ffffff;
+  --color-chaka-surface: #f4f7f4;
+  --color-chaka-accent: #198754;
+  --color-chaka-accent-hover: #146c43;
+  --color-chaka-text: #78837c;
+  --color-chaka-text-dark: #333333;
+  --color-chaka-text-muted: #a5afa8;
+  --color-chaka-border: #e2e9e4;
+  --color-chaka-badge-bg: #e8f7ef;
+  --color-chaka-badge-text: #157347;
+  --color-chaka-input-bg: #fbfcfb;
+  --color-chaka-input-border: #d9e3dc;
+
   --font-sans: "Plus Jakarta Sans", "DM Sans", "Noto Sans Ethiopic", system-ui, -apple-system, sans-serif;
   --font-heading: "Plus Jakarta Sans", "Outfit", "Noto Sans Ethiopic", system-ui, sans-serif;
+  --font-poppins: "Poppins", system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", "Noto Serif Ethiopic", Georgia, serif;
   --font-mono: "IBM Plex Mono", "Plus Jakarta Sans", monospace;
+}
+
+/* Chaka Plants component helpers */
+.shadow-chaka-card {
+  box-shadow: 0px 4px 16px 0px rgba(20, 60, 40, 0.043);
+}
+
+.shadow-chaka-accent {
+  box-shadow: 0px 4px 12px 0px rgba(25, 135, 84, 0.18);
+}
+
+.shadow-chaka-accent-hover {
+  box-shadow: 0px 6px 16px 0px rgba(25, 135, 84, 0.26);
+}
+
+.focus-chaka-ring {
+  outline: 3px solid rgba(25, 135, 84, 0.45);
 }
 
 :root {
