@@ -171,8 +171,8 @@ export default function PlantsCatalogClient() {
 
   return (
     <div
-      className={`relative min-h-screen flex flex-col selection:bg-[#198754] selection:text-white transition-colors duration-300 font-chaka ${
-        isDark ? "bg-[#121311] text-ivory" : "bg-[#f4f7f4] text-[#333333]"
+      className={`relative min-h-screen flex flex-col selection:bg-leaf selection:text-ivory transition-colors duration-300 ${
+        isDark ? "bg-forest-deep text-ivory" : "bg-ivory text-forest"
       }`}
     >
       <Suspense fallback={null}>
@@ -182,12 +182,12 @@ export default function PlantsCatalogClient() {
         />
       </Suspense>
 
-      {/* Top Header Navigation: Chaka 72px tall sticky header on hairline border */}
+      {/* Top Header Navigation with Left Back Link, Centered Brand & Right Actions */}
       <header
-        className={`sticky top-0 z-40 w-full min-h-[72px] flex items-center backdrop-blur-md border-b px-4 sm:px-8 lg:px-12 transition-colors duration-300 ${
+        className={`sticky top-0 z-40 w-full backdrop-blur-md border-b py-3 sm:py-4 px-4 sm:px-8 lg:px-12 transition-colors duration-300 ${
           isDark
-            ? "bg-[#1B1D19]/90 border-[#2C2F29] text-ivory"
-            : "bg-white/95 border-[#e2e9e4] text-[#333333] shadow-sm"
+            ? "bg-forest-deep/85 border-ivory/15 text-ivory"
+            : "bg-white/85 border-forest/15 text-forest shadow-sm"
         }`}
       >
         <div className="max-w-[1320px] mx-auto flex items-center justify-between gap-3 sm:gap-4">
@@ -300,18 +300,18 @@ export default function PlantsCatalogClient() {
             {/* Dark Mode ↔ Light Mode Switcher */}
             <ThemeToggle />
 
-            {/* Direct WhatsApp Help Button (Chaka secondary button style) */}
+            {/* Direct WhatsApp Help Button */}
             <a
               href="https://wa.me/251942461641?text=Hi%20Evergreen%20%F0%9F%91%8B%20I'm%20browsing%20your%20plant%20catalog."
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-[8px] border text-[13px] font-bold leading-none transition-colors duration-200 min-h-[38px] shrink-0 focus-chaka ${
+              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border text-xs font-semibold leading-4 transition-colors duration-200 min-h-[40px] shrink-0 ${
                 isDark
-                  ? "bg-[#121311] hover:bg-[#1B1D19] border-[#2C2F29] text-ivory"
-                  : "bg-white hover:bg-[#e8f6ee] border-[#e2e9e4] text-[#198754] shadow-sm"
+                  ? "bg-forest/80 hover:bg-forest border-ivory/20 text-ivory"
+                  : "bg-forest/10 hover:bg-forest/15 border-forest/20 text-forest"
               }`}
             >
-              <MessageCircle className="w-3.5 h-3.5 text-[#198754] shrink-0" />
+              <MessageCircle className="w-4 h-4 text-leaf shrink-0" />
               <span className="hidden sm:inline">WhatsApp Help</span>
             </a>
           </div>
@@ -325,21 +325,21 @@ export default function PlantsCatalogClient() {
           <button
             type="button"
             onClick={() => setMobileFiltersOpen((prev) => !prev)}
-            className={`w-full flex items-center justify-between py-3 px-4 rounded-[14px] border text-[13px] font-bold leading-none shadow-chaka transition-colors min-h-[44px] ${
+            className={`w-full flex items-center justify-between py-3 px-4 rounded-[10px] border text-xs font-semibold leading-none shadow-sm transition-colors min-h-[46px] ${
               isDark
-                ? "bg-[#1B1D19] border-[#2C2F29] text-ivory hover:bg-[#121311]"
-                : "bg-white border-[#e2e9e4] text-[#333333] hover:bg-[#f4f7f4]"
+                ? "bg-forest/60 border-ivory/15 text-ivory hover:bg-forest/80"
+                : "bg-white border-forest/15 text-forest hover:bg-forest/5"
             }`}
             aria-expanded={mobileFiltersOpen}
             aria-label="Toggle filter plants controls"
           >
             <div className="flex items-center gap-2">
-              <SlidersHorizontal className="w-4 h-4 text-[#198754]" />
+              <SlidersHorizontal className="w-4 h-4 text-leaf" />
               <span>Filter Plants {isFiltered && "(Active)"}</span>
             </div>
             <div className="flex items-center gap-2 text-xs font-mono">
-              <span className={isDark ? "text-ivory/60" : "text-[#78837c]"}>{filteredPlants.length} plants</span>
-              <span className="text-[#198754]">{mobileFiltersOpen ? "▲" : "▼"}</span>
+              <span>{filteredPlants.length} plants</span>
+              <span className="text-leaf">{mobileFiltersOpen ? "▲" : "▼"}</span>
             </div>
           </button>
 
@@ -404,27 +404,29 @@ export default function PlantsCatalogClient() {
                       role="tab"
                       aria-selected={isSelected}
                       onClick={() => setActiveFilter(cat.id)}
-                      className={`shrink-0 px-4 py-2 rounded-full text-[13px] font-bold tracking-wide transition-colors duration-200 flex items-center gap-2 shadow-sm min-h-[38px] focus-chaka leading-none ${
+                      className={`shrink-0 px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-colors duration-200 flex items-center gap-2 shadow-sm min-h-[38px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf leading-none ${
                         isSelected
-                          ? "bg-[#198754] text-white shadow-chaka-btn"
+                          ? "bg-leaf text-ivory ring-2 ring-leaf ring-offset-2 shadow-md font-bold"
                           : isDark
-                            ? "bg-[#1B1D19] border border-[#2C2F29] text-ivory/85 hover:bg-[#121311] hover:text-white"
-                            : "bg-white border border-[#e2e9e4] text-[#78837c] hover:bg-[#f4f7f4] hover:text-[#333333]"
+                            ? "bg-forest/50 border border-ivory/15 text-ivory/85 hover:bg-forest/80 hover:text-ivory"
+                            : "bg-white/90 border border-forest/15 text-forest/85 hover:bg-white hover:text-forest shadow-sm"
                       }`}
                     >
                       <Icon
                         className={`w-3.5 h-3.5 shrink-0 transition-colors ${
-                          isSelected ? "text-white" : "text-[#198754]"
+                          isSelected ? "text-ivory" : "text-leaf"
                         }`}
                       />
                       <span>{cat.label}</span>
                       <span
                         className={`text-[11px] px-1.5 py-0.5 rounded-full font-mono font-bold leading-none ${
                           isSelected
-                            ? "bg-white/20 text-white"
+                            ? isDark
+                              ? "bg-forest-deep text-ivory"
+                              : "bg-white text-forest"
                             : isDark
                               ? "bg-ivory/10 text-ivory/80"
-                              : "bg-[#e8f7ef] text-[#157347]"
+                              : "bg-forest/5 text-forest/80"
                         }`}
                       >
                         {count}
@@ -466,7 +468,7 @@ export default function PlantsCatalogClient() {
             {filteredPlants.length === 0 ? (
               <div
                 role="status"
-                className={`py-16 px-6 text-center rounded-3xl border border-dashed max-w-[720px] mx-auto my-8 ${
+                className={`py-16 px-6 text-center rounded-[14px] border border-dashed max-w-[720px] mx-auto my-8 ${
                   isDark
                     ? "bg-forest/40 border-ivory/20 text-ivory"
                     : "bg-white/80 border-forest/20 text-forest shadow-sm"
@@ -474,25 +476,25 @@ export default function PlantsCatalogClient() {
               >
                 <Leaf className="w-10 h-10 text-leaf/40 mx-auto mb-3" />
                 <h3
-                  className={`font-heading font-bold text-xl mb-1 leading-snug ${
-                    isDark ? "text-ivory" : "text-[#333333]"
+                  className={`font-heading font-bold text-xl mb-1 leading-7 ${
+                    isDark ? "text-ivory" : "text-forest"
                   }`}
                 >
-                  No plants found
+                  No matching plants in catalog
                 </h3>
                 <p
-                  className={`text-[13px] font-sans mb-5 max-w-sm mx-auto leading-normal ${
-                    isDark ? "text-ivory/70" : "text-[#78837c]"
+                  className={`text-xs sm:text-base font-sans mb-6 max-w-sm mx-auto leading-4 sm:leading-6 ${
+                    isDark ? "text-ivory/70" : "text-forest/70"
                   }`}
                 >
-                  Nothing matches your filters. Ask us on WhatsApp for unlisted nursery stock.
+                  We couldn&apos;t find anything matching your filter criteria. Check with us on WhatsApp for unlisted nursery stock.
                 </p>
                 <button
                   type="button"
                   onClick={handleResetFilters}
-                  className="px-6 py-2.5 rounded-[10px] bg-[#198754] text-white text-[13px] font-bold leading-none hover:bg-[#146c43] transition-colors duration-200 min-h-[40px] shadow-chaka-btn focus-chaka"
+                  className="px-6 py-3 rounded-[10px] bg-leaf text-ivory text-xs font-semibold leading-4 hover:bg-leaf/90 transition-colors duration-200 min-h-[40px]"
                 >
-                  Reset filters
+                  Reset Filters
                 </button>
               </div>
             ) : (

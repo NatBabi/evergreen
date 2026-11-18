@@ -11,25 +11,10 @@
   --color-ivory-dark: #ECE7DA;
   --color-charcoal: #17201A;
 
-  /* Chaka Plants (chakaplants.com) Tokens */
-  --color-chaka-bg: #ffffff;
-  --color-chaka-surface: #f4f7f4;
-  --color-chaka-surface-card: #ffffff;
-  --color-chaka-text: #78837c;
-  --color-chaka-text-dark: #333333;
-  --color-chaka-text-muted: #a5afa8;
-  --color-chaka-border: #e2e9e4;
-  --color-chaka-border-input: #d9e3dc;
-  --color-chaka-accent: #198754;
-  --color-chaka-accent-hover: #146c43;
-  --color-chaka-badge-bg: #e8f7ef;
-  --color-chaka-badge-text: #157347;
-
-  --font-sans: "Poppins", "Plus Jakarta Sans", "DM Sans", "Noto Sans Ethiopic", system-ui, -apple-system, sans-serif;
-  --font-heading: "Poppins", "Plus Jakarta Sans", "Outfit", "Noto Sans Ethiopic", system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "DM Sans", "Noto Sans Ethiopic", system-ui, -apple-system, sans-serif;
+  --font-heading: "Plus Jakarta Sans", "Outfit", "Noto Sans Ethiopic", system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", "Noto Serif Ethiopic", Georgia, serif;
   --font-mono: "IBM Plex Mono", "Plus Jakarta Sans", monospace;
-  --font-chaka: "Poppins", system-ui, sans-serif;
 }
 
 :root {
@@ -99,41 +84,6 @@ body {
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Chaka Plants measured shadows and focus states */
-.shadow-chaka {
-  box-shadow: rgba(20, 60, 40, 0.043) 0px 4px 16px 0px;
-  transition: box-shadow 200ms ease, border-color 200ms ease, transform 200ms ease;
-}
-
-.shadow-chaka-hover {
-  box-shadow: rgba(20, 60, 40, 0.08) 0px 6px 24px 0px;
-}
-
-.shadow-chaka-btn {
-  box-shadow: rgba(25, 135, 84, 0.18) 0px 4px 12px 0px;
-  transition: background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
-}
-
-.shadow-chaka-btn:hover {
-  box-shadow: rgba(25, 135, 84, 0.26) 0px 6px 16px 0px;
-}
-
-.focus-chaka:focus-visible {
-  outline: 3px solid rgba(25, 135, 84, 0.45);
-  outline-offset: 1px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .shadow-chaka,
-  .shadow-chaka-btn,
-  .plant-card-image,
-  .chip-spring {
-    transition: none !important;
-    animation: none !important;
-    transform: none !important;
-  }
-}
-
 .group:hover .plant-card-image {
   transform: scale(1.04);
 }
@@ -183,8 +133,13 @@ body {
 }
 
 /* Selection and focus styling */
+::selection {
+  background: #78B83D;
+  color: #F7F5EE;
+}
+
 :focus-visible {
-  outline: 2px solid #198754;
+  outline: 2px solid #78B83D;
   outline-offset: 3px;
 }
 
@@ -214,28 +169,4 @@ body {
   .animate-marquee {
     animation: none !important;
   }
-}
-
-/* Chaka Plants details: selection & styled scrollbars */
-::selection {
-  background-color: #198754;
-  color: #ffffff;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #d9e3dc;
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a5afa8;
 }
