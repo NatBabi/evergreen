@@ -78,13 +78,13 @@ export function HeroSection() {
           style={{
             background: isDark
               ? `
-                linear-gradient(90deg, rgba(7, 27, 20, 0.88) 0%, rgba(7, 27, 20, 0.72) 48%, rgba(7, 27, 20, 0.38) 78%, rgba(7, 27, 20, 0.60) 100%),
-                linear-gradient(180deg, rgba(7, 27, 20, 0.65) 0%, rgba(7, 27, 20, 0.15) 20%, rgba(7, 27, 20, 0.40) 55%, rgba(7, 27, 20, 0.70) 70%, rgba(7, 27, 20, 0.90) 85%, #071B14 100%),
+                linear-gradient(90deg, rgba(7, 27, 20, 0.78) 0%, rgba(7, 27, 20, 0.58) 48%, rgba(7, 27, 20, 0.28) 78%, rgba(7, 27, 20, 0.50) 100%),
+                linear-gradient(180deg, rgba(7, 27, 20, 0.55) 0%, rgba(7, 27, 20, 0.10) 20%, rgba(7, 27, 20, 0.30) 55%, rgba(7, 27, 20, 0.60) 70%, rgba(7, 27, 20, 0.85) 85%, #071B14 100%),
                 radial-gradient(circle at 75% 25%, rgba(250, 204, 21, 0.16) 0%, transparent 60%)
               `
               : `
-                linear-gradient(90deg, rgba(247, 245, 238, 0.88) 0%, rgba(247, 245, 238, 0.72) 48%, rgba(247, 245, 238, 0.35) 78%, rgba(247, 245, 238, 0.55) 100%),
-                linear-gradient(180deg, rgba(235, 231, 222, 0.55) 0%, rgba(240, 237, 228, 0.40) 20%, rgba(247, 245, 238, 0.55) 55%, rgba(247, 245, 238, 0.82) 75%, #F7F5EE 100%),
+                linear-gradient(90deg, rgba(247, 245, 238, 0.82) 0%, rgba(247, 245, 238, 0.65) 48%, rgba(247, 245, 238, 0.28) 78%, rgba(247, 245, 238, 0.48) 100%),
+                linear-gradient(180deg, rgba(235, 231, 222, 0.48) 0%, rgba(240, 237, 228, 0.32) 20%, rgba(247, 245, 238, 0.48) 55%, rgba(247, 245, 238, 0.76) 75%, #F7F5EE 100%),
                 radial-gradient(circle at 75% 25%, rgba(250, 204, 21, 0.12) 0%, transparent 60%)
               `,
           }}

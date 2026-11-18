@@ -830,7 +830,7 @@ export const contentEN: SiteContent = {
   trustStrip: [
     {
       icon: "altitude",
-      title: "Acclimatized at 2,100m",
+      title: "Acclimatized at 2,350m",
       subtext: "Raised for Addis weather, not imported shock",
     },
     {
@@ -944,7 +944,7 @@ export const contentEN: SiteContent = {
     askPriceBtn: "Ask on WhatsApp",
     illustrativeFooterNote:
       "Transparent nursery policy: Pot diameter, foliage height, and current branch growth are verified directly with the nursery owner before dispatch.",
-    exploreCatalogBtn: "Explore Full Catalog (50+ Plants) →",
+    exploreCatalogBtn: "Explore full catalog →",
   },
   careSection: {
     eyebrow: "03 · Care in Three Steps",
@@ -1252,7 +1252,7 @@ export const contentAM: SiteContent = {
     headlineSans: "በቲክቶክ በብዛት የተጠየቁ ",
     headlineItalic: "ተክሎች",
     askCardBtn: "ተክሉን ይዘዙ",
-    exploreCatalogBtn: "ሙሉውን ካታሎግ ይመልከቱ (50+ ተክሎች) →",
+    exploreCatalogBtn: "ሙሉውን ካታሎግ ይመልከቱ →",
   },
 };
 

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | Evergreen Ethiopia",
   },
   description:
-    "Addis Ababa's trusted highland botanical nursery. Indoor and outdoor plants, potted Monstera, Bougainvillea, fruit trees, and native greenery acclimatized to 2,350m elevation. Order requests via WhatsApp and phone with careful door delivery across Ethiopia (@evergreen_ethiopia).",
+    "Addis Ababa's trusted highland botanical nursery. Indoor and outdoor plants, potted Monstera, Bougainvillea, fruit trees, and native greenery acclimatized to 2,350 m elevation. Order requests via WhatsApp and phone with careful door delivery across Ethiopia (@evergreen_ethiopia).",
   keywords: [
     "Evergreen Ethiopia",
     "Ethiopian plant nursery",
@@ -23,12 +23,15 @@ export const metadata: Metadata = {
     "trees delivered Addis Ababa",
   ],
   authors: [{ name: "Evergreen Ethiopia" }],
-  metadataBase: new URL("https://evergreen-ethiopia.vercel.app"),
+  metadataBase: new URL("https://evergreen-natbabi.vercel.app"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Evergreen Ethiopia · Botanical Nursery & Plants in Addis Ababa",
     description:
       "Indoor and outdoor plants, native and ornamental trees acclimatized to Ethiopian highland conditions. Order requests via phone and WhatsApp with doorstep delivery.",
-    url: "https://evergreen-ethiopia.vercel.app",
+    url: "https://evergreen-natbabi.vercel.app",
     siteName: "Evergreen Ethiopia",
     locale: "en_US",
     alternateLocale: ["am_ET"],
@@ -47,6 +50,9 @@ export const metadata: Metadata = {
     title: "Evergreen Ethiopia · Botanical Nursery & Plants in Addis Ababa",
     description:
       "Indoor and outdoor plants, native and ornamental trees delivered across Ethiopia. Follow @evergreen_ethiopia.",
+    images: [
+      "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1200&q=85",
+    ],
   },
   icons: {
     icon: [
@@ -91,7 +97,7 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,600&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Noto+Serif+Ethiopic:wght@400;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
         />
       </head>
       <body className="min-h-screen bg-forest-deep text-ivory font-sans antialiased selection:bg-leaf selection:text-ivory transition-colors duration-300" suppressHydrationWarning>

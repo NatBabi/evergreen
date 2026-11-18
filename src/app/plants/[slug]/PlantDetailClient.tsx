@@ -308,7 +308,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
               {/* Highland Acclimatized Watermark */}
               <div className="absolute bottom-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-forest-deep/90 backdrop-blur-xl text-ivory text-xs font-mono font-medium leading-4 border border-ivory/20 shadow-sm flex items-center gap-2">
                 <Sprout className="w-3.5 h-3.5 text-leaf shrink-0" />
-                <span>Acclimatized to Addis (2,100m)</span>
+                <span>Acclimatized to Addis (2,350m)</span>
               </div>
             </div>
 
@@ -759,7 +759,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
                   <Leaf className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className={`text-xs font-bold leading-4 ${isDark ? "text-ivory" : "text-forest"}`}>Acclimatized at 2,100m</div>
+                  <div className={`text-xs font-bold leading-4 ${isDark ? "text-ivory" : "text-forest"}`}>Acclimatized at 2,350m</div>
                   <div className={`text-xs font-sans leading-4 ${isDark ? "text-ivory/60" : "text-forest/60"}`}>Not imported shock</div>
                 </div>
               </div>
@@ -881,7 +881,7 @@ export function PlantDetailClient({ plant }: PlantDetailClientProps) {
             <p className={`text-xs sm:text-base font-sans mt-2 leading-4 sm:leading-6 ${
               isDark ? "text-ivory/75" : "text-forest/75"
             }`}>
-              Acclimatized to 2,100m highland conditions, delivered upright to your doorstep.
+              Acclimatized to 2,350m highland conditions, delivered upright to your doorstep.
             </p>
           </div>
 

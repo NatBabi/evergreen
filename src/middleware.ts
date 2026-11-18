@@ -10,7 +10,22 @@ function getSecretKey(): Uint8Array {
 }
 
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
+  const hostname = request.headers.get("host") || "";
+
+  // Redirect alternate hostnames to the canonical origin in production
+  const CANONICAL_HOST = "evergreen-natbabi.vercel.app";
+  const isPreview = process.env.VERCEL_ENV === "preview";
+  if (
+    !isPreview &&
+    hostname !== CANONICAL_HOST &&
+    hostname !== "localhost" &&
+    !hostname.startsWith("localhost:") &&
+    !hostname.startsWith("127.0.0.1")
+  ) {
+    const canonicalUrl = new URL(`https://${CANONICAL_HOST}${pathname}${search}`);
+    return NextResponse.redirect(canonicalUrl, 308);
+  }
 
   // 1. Exclude public admin routes (login page & login api)
   if (pathname === "/admin/login" || pathname === "/api/admin/auth/login") {
@@ -75,5 +90,12 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/admin/:path*"],
+  matcher: [
+    /*
+     * Match all paths except Next.js internals and static assets.
+     * The hostname redirect needs to run on every public route,
+     * and admin auth protection runs on /admin/* and /api/admin/*.
+     */
+    "/((?!_next/static|_next/image|favicon\\.ico|icon\\.png|logo-evergreen\\.png|apple-touch-icon\\.png|icon-192\\.png|icon-512\\.png|icon\\.svg|vercel\\.svg|file\\.svg|globe\\.svg|next\\.svg|window\\.svg|video/).*)",
+  ],
 };

@@ -21,14 +21,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!plant) {
     return {
-      title: "Plant Not Found · Evergreen Ethiopia",
+      title: "Plant not found · Evergreen Ethiopia",
+      description:
+        "The botanical specimen or plant page you are looking for is unavailable or has moved. Explore our live highland plant catalog.",
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
   return {
-    title: `${plant.commonName} (${plant.amharicName}) · Acclimatized Plants in Addis Ababa · Evergreen Ethiopia`,
-    description: `${plant.outcomeLine} Acclimatized to Addis Ababa (2,100m) with 24–48h doorstep delivery and ongoing WhatsApp care support.`,
+    title: `${plant.commonName} · Acclimatized plant in Addis Ababa`,
+    description: `${plant.outcomeLine} Acclimatized to Addis Ababa's highland elevation with 24–48 h doorstep delivery and ongoing WhatsApp care support.`,
+    alternates: {
+      canonical: `/plants/${resolvedParams.slug}`,
+    },
     openGraph: {
+      title: `${plant.commonName} · Evergreen Ethiopia`,
+      description: plant.outcomeLine,
+      url: `https://evergreen-natbabi.vercel.app/plants/${resolvedParams.slug}`,
+      images: [{ url: plant.image, alt: plant.imageAlt }],
+    },
+    twitter: {
+      card: "summary_large_image",
       title: `${plant.commonName} · Evergreen Ethiopia`,
       description: plant.outcomeLine,
       images: [{ url: plant.image, alt: plant.imageAlt }],

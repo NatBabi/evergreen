@@ -173,7 +173,7 @@ export function PlantCard({ plant, priorityImage = false }: PlantCardProps) {
         }`}>
           <span className="inline-flex items-center gap-1">
             <Check className="w-3 h-3 text-leaf shrink-0" />
-            <span>Addis Acclimatized (2,100m)</span>
+            <span>Addis Acclimatized (2,350m)</span>
           </span>
         </div>
       </div>
