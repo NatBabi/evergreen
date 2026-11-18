@@ -319,29 +319,7 @@ export default function PlantsCatalogClient() {
       </header>
 
       {/* Main Catalog Body */}
-      <main className="flex-1 w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16">
-        {/* Catalog Banner / Header (Reference style) */}
-        <div className="mb-6 sm:mb-8 text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-2 bg-leaf/15 text-leaf border border-leaf/30 leading-none">
-            <Leaf className="w-3.5 h-3.5" />
-            <span>Addis Ababa Botanical Nursery · 2,350M</span>
-          </div>
-          <h1
-            className={`font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-2 ${
-              isDark ? "text-ivory" : "text-forest"
-            }`}
-          >
-            Explore Our Plants
-          </h1>
-          <p
-            className={`font-sans text-sm sm:text-base max-w-2xl leading-relaxed ${
-              isDark ? "text-ivory/80" : "text-forest/80"
-            }`}
-          >
-            Healthy indoor and outdoor plants acclimatized to Ethiopian highland elevation. Available for doorstep delivery across Addis Ababa.
-          </p>
-        </div>
-
+      <main className="flex-1 w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-16">
         {/* Mobile Collapsible Filter Button (Reference style for mobile) */}
         <div className="block lg:hidden mb-6">
           <button
@@ -462,11 +440,11 @@ export default function PlantsCatalogClient() {
             {/* Results Title & Count Header */}
             <div className="flex items-center justify-between pb-3 mb-6 border-b border-forest/10 dark:border-ivory/10">
               <div>
-                <h2 className="font-heading font-bold text-xl sm:text-2xl tracking-tight leading-none">
+                <h1 className="font-heading font-bold text-xl sm:text-2xl tracking-tight leading-none">
                   {activeFilter === "all"
                     ? "Plants"
                     : CATEGORY_OPTIONS.find((c) => c.id === activeFilter)?.label}
-                </h2>
+                </h1>
                 <p className="text-xs font-sans mt-1 text-ivory/70 dark:text-ivory/70 opacity-80 leading-none">
                   Showing {filteredPlants.length} of {plantList.length} plants
                 </p>
