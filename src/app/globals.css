@@ -102,6 +102,7 @@ body {
 /* Chaka Plants measured shadows and focus states */
 .shadow-chaka {
   box-shadow: rgba(20, 60, 40, 0.043) 0px 4px 16px 0px;
+  transition: box-shadow 200ms ease, border-color 200ms ease, transform 200ms ease;
 }
 
 .shadow-chaka-hover {
@@ -110,6 +111,7 @@ body {
 
 .shadow-chaka-btn {
   box-shadow: rgba(25, 135, 84, 0.18) 0px 4px 12px 0px;
+  transition: background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 
 .shadow-chaka-btn:hover {
@@ -119,6 +121,17 @@ body {
 .focus-chaka:focus-visible {
   outline: 3px solid rgba(25, 135, 84, 0.45);
   outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shadow-chaka,
+  .shadow-chaka-btn,
+  .plant-card-image,
+  .chip-spring {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
 }
 
 .group:hover .plant-card-image {
