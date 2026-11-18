@@ -171,8 +171,8 @@ export default function PlantsCatalogClient() {
 
   return (
     <div
-      className={`relative min-h-screen flex flex-col selection:bg-leaf selection:text-ivory transition-colors duration-300 ${
-        isDark ? "bg-forest-deep text-ivory" : "bg-ivory text-forest"
+      className={`relative min-h-screen flex flex-col selection:bg-[#198754] selection:text-white transition-colors duration-300 font-sans ${
+        isDark ? "bg-forest-deep text-ivory" : "bg-[#f4f7f4] text-[#333333]"
       }`}
     >
       <Suspense fallback={null}>
@@ -182,24 +182,24 @@ export default function PlantsCatalogClient() {
         />
       </Suspense>
 
-      {/* Top Header Navigation with Left Back Link, Centered Brand & Right Actions */}
+      {/* Top Header Navigation with Left Back Link, Centered Brand & Right Actions (72px profile) */}
       <header
         className={`sticky top-0 z-40 w-full backdrop-blur-md border-b py-3 sm:py-4 px-4 sm:px-8 lg:px-12 transition-colors duration-300 ${
           isDark
             ? "bg-forest-deep/85 border-ivory/15 text-ivory"
-            : "bg-white/85 border-forest/15 text-forest shadow-sm"
+            : "bg-white/95 border-[#e2e9e4] text-[#333333] shadow-sm"
         }`}
       >
         <div className="max-w-[1320px] mx-auto flex items-center justify-between gap-3 sm:gap-4">
           {/* Left: Back to Home Link */}
           <Link
             href="/"
-            className={`inline-flex items-center gap-2 text-xs font-semibold hover:text-leaf transition-colors leading-4 min-h-[44px] shrink-0 ${
-              isDark ? "text-ivory/80" : "text-forest/80"
+            className={`inline-flex items-center gap-2 text-xs font-semibold hover:text-[#198754] transition-colors leading-4 min-h-[44px] shrink-0 ${
+              isDark ? "text-ivory/80" : "text-[#78837c] hover:text-[#198754]"
             }`}
             aria-label="Back to home page"
           >
-            <ArrowLeft className="w-4 h-4 text-leaf" />
+            <ArrowLeft className="w-4 h-4 text-[#198754]" />
             <span className="hidden sm:inline">Back to Home</span>
           </Link>
 
@@ -222,8 +222,8 @@ export default function PlantsCatalogClient() {
               />
             </div>
             <div className="flex items-center font-heading font-extrabold text-sm sm:text-lg tracking-tight leading-none">
-              <span className={isDark ? "text-ivory" : "text-forest"}>evergreen</span>
-              <span className="font-serif italic font-normal text-leaf ml-1">ethiopia</span>
+              <span className={isDark ? "text-ivory" : "text-[#333333]"}>evergreen</span>
+              <span className="font-serif italic font-normal text-[#198754] ml-1">ethiopia</span>
             </div>
           </Link>
 
@@ -286,13 +286,13 @@ export default function PlantsCatalogClient() {
                 type="button"
                 onClick={() => setIsNavSearchOpen(true)}
                 aria-label="Open plant search bar"
-                className={`inline-flex items-center gap-2 px-3 py-2 rounded-full border text-xs font-medium leading-4 transition-colors duration-200 min-h-[40px] ${
+                className={`inline-flex items-center gap-2 px-3 py-2 rounded-[8px] border text-xs font-semibold leading-4 transition-colors duration-200 min-h-[38px] ${
                   isDark
                     ? "bg-forest/60 hover:bg-forest border-ivory/15 text-ivory/80 hover:text-ivory"
-                    : "bg-forest/5 hover:bg-forest/10 border-forest/15 text-forest/80 hover:text-forest"
+                    : "bg-white hover:bg-[#f4f7f4] border-[#e2e9e4] text-[#78837c] hover:text-[#333333]"
                 }`}
               >
-                <Search className="w-4 h-4 text-leaf" />
+                <Search className="w-4 h-4 text-[#198754]" />
                 <span className="hidden sm:inline">Search plants...</span>
               </button>
             )}
@@ -305,13 +305,13 @@ export default function PlantsCatalogClient() {
               href="https://wa.me/251942461641?text=Hi%20Evergreen%20%F0%9F%91%8B%20I'm%20browsing%20your%20plant%20catalog."
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border text-xs font-semibold leading-4 transition-colors duration-200 min-h-[40px] shrink-0 ${
+              className={`inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-[8px] border text-xs font-bold leading-4 transition-colors duration-200 min-h-[38px] shrink-0 ${
                 isDark
                   ? "bg-forest/80 hover:bg-forest border-ivory/20 text-ivory"
-                  : "bg-forest/10 hover:bg-forest/15 border-forest/20 text-forest"
+                  : "bg-white hover:bg-[#e8f6ee] border-[#e2e9e4] text-[#198754]"
               }`}
             >
-              <MessageCircle className="w-4 h-4 text-leaf shrink-0" />
+              <MessageCircle className="w-4 h-4 text-[#198754] shrink-0" />
               <span className="hidden sm:inline">WhatsApp Help</span>
             </a>
           </div>
@@ -319,7 +319,7 @@ export default function PlantsCatalogClient() {
       </header>
 
       {/* Main Catalog Body */}
-      <main className="flex-1 w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-16">
+      <main className="flex-1 w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16">
         {/* Mobile Collapsible Filter Button (Reference style for mobile) */}
         <div className="block lg:hidden mb-6">
           <button
@@ -328,18 +328,18 @@ export default function PlantsCatalogClient() {
             className={`w-full flex items-center justify-between py-3 px-4 rounded-[10px] border text-xs font-semibold leading-none shadow-sm transition-colors min-h-[46px] ${
               isDark
                 ? "bg-forest/60 border-ivory/15 text-ivory hover:bg-forest/80"
-                : "bg-white border-forest/15 text-forest hover:bg-forest/5"
+                : "bg-white border-[#e2e9e4] text-[#333333] hover:border-[#198754]/40"
             }`}
             aria-expanded={mobileFiltersOpen}
             aria-label="Toggle filter plants controls"
           >
             <div className="flex items-center gap-2">
-              <SlidersHorizontal className="w-4 h-4 text-leaf" />
+              <SlidersHorizontal className="w-4 h-4 text-[#198754]" />
               <span>Filter Plants {isFiltered && "(Active)"}</span>
             </div>
             <div className="flex items-center gap-2 text-xs font-mono">
               <span>{filteredPlants.length} plants</span>
-              <span className="text-leaf">{mobileFiltersOpen ? "▲" : "▼"}</span>
+              <span className="text-[#198754]">{mobileFiltersOpen ? "▲" : "▼"}</span>
             </div>
           </button>
 
@@ -386,7 +386,7 @@ export default function PlantsCatalogClient() {
 
           {/* Right Main Grid Area */}
           <div className="flex-1 w-full min-w-0">
-            {/* Top Quick Category Chips (Fixing the scroll cutting bug!) */}
+            {/* Top Quick Category Chips */}
             <div className="relative mb-6">
               <div
                 role="tablist"
@@ -404,17 +404,17 @@ export default function PlantsCatalogClient() {
                       role="tab"
                       aria-selected={isSelected}
                       onClick={() => setActiveFilter(cat.id)}
-                      className={`shrink-0 px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-colors duration-200 flex items-center gap-2 shadow-sm min-h-[38px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf leading-none ${
+                      className={`shrink-0 px-4 py-2 rounded-[20px] text-xs font-semibold tracking-wide transition-colors duration-200 flex items-center gap-2 min-h-[38px] focus-visible:outline-none focus-chaka-ring leading-none ${
                         isSelected
-                          ? "bg-leaf text-ivory ring-2 ring-leaf ring-offset-2 shadow-md font-bold"
+                          ? "bg-[#198754] text-white shadow-sm font-bold ring-2 ring-[#198754] ring-offset-2"
                           : isDark
                             ? "bg-forest/50 border border-ivory/15 text-ivory/85 hover:bg-forest/80 hover:text-ivory"
-                            : "bg-white/90 border border-forest/15 text-forest/85 hover:bg-white hover:text-forest shadow-sm"
+                            : "bg-white border border-[#e2e9e4] text-[#333333] hover:border-[#198754]/40 hover:text-[#198754] shadow-sm"
                       }`}
                     >
                       <Icon
                         className={`w-3.5 h-3.5 shrink-0 transition-colors ${
-                          isSelected ? "text-ivory" : "text-leaf"
+                          isSelected ? "text-white" : "text-[#198754]"
                         }`}
                       />
                       <span>{cat.label}</span>
@@ -423,10 +423,10 @@ export default function PlantsCatalogClient() {
                           isSelected
                             ? isDark
                               ? "bg-forest-deep text-ivory"
-                              : "bg-white text-forest"
+                              : "bg-white/20 text-white"
                             : isDark
                               ? "bg-ivory/10 text-ivory/80"
-                              : "bg-forest/5 text-forest/80"
+                              : "bg-[#f4f7f4] text-[#78837c]"
                         }`}
                       >
                         {count}
@@ -438,14 +438,14 @@ export default function PlantsCatalogClient() {
             </div>
 
             {/* Results Title & Count Header */}
-            <div className="flex items-center justify-between pb-3 mb-6 border-b border-forest/10 dark:border-ivory/10">
+            <div className="flex items-center justify-between pb-3 mb-6 border-b border-[#e2e9e4] dark:border-ivory/10">
               <div>
-                <h1 className="font-heading font-bold text-xl sm:text-2xl tracking-tight leading-none">
+                <h1 className="font-heading font-extrabold text-xl sm:text-2xl tracking-tight leading-none text-[#333333] dark:text-ivory">
                   {activeFilter === "all"
                     ? "Plants"
                     : CATEGORY_OPTIONS.find((c) => c.id === activeFilter)?.label}
                 </h1>
-                <p className="text-xs font-sans mt-1 text-ivory/70 dark:text-ivory/70 opacity-80 leading-none">
+                <p className="text-xs font-sans mt-1 text-[#78837c] dark:text-ivory/70 leading-none">
                   Showing {filteredPlants.length} of {plantList.length} plants
                 </p>
               </div>
@@ -454,12 +454,12 @@ export default function PlantsCatalogClient() {
                 <button
                   type="button"
                   onClick={handleResetFilters}
-                  className={`text-xs flex items-center gap-1 font-medium transition-colors ${
-                    isDark ? "text-leaf hover:text-white" : "text-leaf hover:text-forest"
+                  className={`text-xs flex items-center gap-1 font-semibold transition-colors ${
+                    isDark ? "text-[#78B83D] hover:text-white" : "text-[#198754] hover:text-[#146c43]"
                   }`}
                 >
                   <RotateCcw className="w-3 h-3" />
-                  <span className="hidden sm:inline">Reset filters</span>
+                  <span className="hidden sm:inline">Reset All</span>
                 </button>
               )}
             </div>
@@ -471,20 +471,20 @@ export default function PlantsCatalogClient() {
                 className={`py-16 px-6 text-center rounded-[14px] border border-dashed max-w-[720px] mx-auto my-8 ${
                   isDark
                     ? "bg-forest/40 border-ivory/20 text-ivory"
-                    : "bg-white/80 border-forest/20 text-forest shadow-sm"
+                    : "bg-white border-[#e2e9e4] text-[#333333] shadow-chaka-card"
                 }`}
               >
-                <Leaf className="w-10 h-10 text-leaf/40 mx-auto mb-3" />
+                <Leaf className="w-10 h-10 text-[#198754]/40 mx-auto mb-3" />
                 <h3
                   className={`font-heading font-bold text-xl mb-1 leading-7 ${
-                    isDark ? "text-ivory" : "text-forest"
+                    isDark ? "text-ivory" : "text-[#333333]"
                   }`}
                 >
                   No matching plants in catalog
                 </h3>
                 <p
                   className={`text-xs sm:text-base font-sans mb-6 max-w-sm mx-auto leading-4 sm:leading-6 ${
-                    isDark ? "text-ivory/70" : "text-forest/70"
+                    isDark ? "text-ivory/70" : "text-[#78837c]"
                   }`}
                 >
                   We couldn&apos;t find anything matching your filter criteria. Check with us on WhatsApp for unlisted nursery stock.
@@ -492,7 +492,7 @@ export default function PlantsCatalogClient() {
                 <button
                   type="button"
                   onClick={handleResetFilters}
-                  className="px-6 py-3 rounded-[10px] bg-leaf text-ivory text-xs font-semibold leading-4 hover:bg-leaf/90 transition-colors duration-200 min-h-[40px]"
+                  className="px-6 py-2.5 rounded-[10px] bg-[#198754] text-white text-xs font-bold leading-4 hover:bg-[#146c43] shadow-chaka-accent transition-colors duration-200 min-h-[40px]"
                 >
                   Reset Filters
                 </button>
