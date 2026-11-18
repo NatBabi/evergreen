@@ -31,8 +31,7 @@ export const prisma: PrismaClient = new Proxy({} as PrismaClient, {
         _client = globalThis.prismaGlobal;
       } else {
         const connectionString = process.env.DATABASE_URL || "";
-        const pool = new Pool({ connectionString });
-        const adapter = new PrismaPg(pool);
+        const adapter = new PrismaPg({ connectionString });
         _client = new PrismaClient({
           adapter,
           log: process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
